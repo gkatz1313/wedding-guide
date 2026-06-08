@@ -1,0 +1,8 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:www.georginaanddavid.com)",
+      "WebFetch(domain:www.zola.com)"
+    ]
+  }
+}
