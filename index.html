@@ -3,33 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>South Africa Travel Guide · Georgina & David</title>
+  <title>Georgina & David · October 2026</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* Matched to Zola site palette: warm cream bg, sage green accents,
-         terracotta highlights, soft botanical feel */
-      --sage:        #7A8C6E;
-      --sage-mid:    #9AAD8A;
-      --sage-light:  #D6E4CC;
-      --sage-faint:  #F0F5EC;
-      --terra:       #B8704A;
-      --terra-light: #F0DDD0;
-      --terra-faint: #FAF3EE;
-      --cream:       #FAF8F3;
-      --parchment:   #F3EFE5;
-      --ink:         #2C2820;
-      --ink-mid:     #4A4035;
-      --ink-soft:    #7A7065;
-      --border:      #E0D8CC;
+      /* ── Palette from muzli-colors ── */
+      /* #f3e3d3 blush · #680a29 burgundy · #ac747c dusty rose · #b48484 mauve · #be9196 rose-grey */
+
+      --sage:        #ac747c;   /* dusty rose — replaces sage for accents */
+      --sage-mid:    #b48484;   /* mauve */
+      --sage-light:  #e8cece;   /* light mauve tint */
+      --sage-faint:  #f9f1f1;   /* very pale blush */
+      --terra:       #680a29;   /* deep burgundy — replaces terracotta for CTAs */
+      --terra-light: #f0dada;   /* light burgundy tint */
+      --terra-faint: #fdf5f5;   /* near-white blush */
+      --cream:       #fdf8f5;   /* warm off-white background */
+      --parchment:   #f3e3d3;   /* blush linen — from palette */
+      --ink:         #2a1520;   /* very dark burgundy-black */
+      --ink-mid:     #4a2f38;   /* dark rose-brown */
+      --ink-soft:    #8a6068;   /* muted rose-grey */
+      --border:      #e8d4d4;   /* soft blush border */
       --white:       #FFFFFF;
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans:  'Jost', system-ui, sans-serif;
-      --max: 860px;
     }
 
     html { scroll-behavior: smooth; }
@@ -40,803 +40,1173 @@
       font-size: 15px;
       line-height: 1.7;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
-    /* ── FLORAL SVG DECORATIONS ── */
-    /* These replicate the botanical illustrated style of the Zola theme */
-    .floral-divider {
+    /* ── HERO PHOTO ── */
+    .hero-photo-pair {
       display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      margin: 2.5rem 0;
-      color: var(--sage-mid);
-    }
-    .floral-divider::before,
-    .floral-divider::after {
-      content: '';
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-    .floral-divider svg { flex-shrink: 0; }
-    .floral-divider::before,
-    .floral-divider::after { display: none; }
-
-    /* Botanical corner / header illustration using inline SVG */
-    .botanical-header {
-      position: relative;
-      text-align: center;
-      padding: 3.5rem 2rem 2.5rem;
-      background: var(--white);
-      border-bottom: 1px solid var(--border);
+      width: 100%;
+      height: 60vh;
+      min-height: 320px;
+      max-height: 560px;
+      gap: 0;
       overflow: hidden;
     }
-    .botanical-header .branch-left,
-    .botanical-header .branch-right {
-      position: absolute;
-      top: 0;
-      pointer-events: none;
-      opacity: 0.85;
+    .hero-photo-pair img:first-child {
+      flex: 0 0 58%;
+      width: 58%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
     }
-    .botanical-header .branch-left  { left: -10px; }
-    .botanical-header .branch-right { right: -10px; transform: scaleX(-1); }
+    .hero-photo-pair img:last-child {
+      flex: 0 0 42%;
+      width: 42%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+    @media (max-width: 600px) {
+      .hero-photo-pair { height: 55vw; min-height: 220px; }
+    }
 
+    /* ── HERO TEXT ── */
+    .hero-text {
+      background: var(--cream);
+      text-align: center;
+      padding: 2.5rem 1.5rem 2rem;
+    }
     .hero-eyebrow {
-      font-size: 11px;
-      letter-spacing: 0.2em;
+      font-size: 10px;
+      letter-spacing: 0.25em;
       text-transform: uppercase;
-      color: var(--sage);
       font-weight: 500;
-      margin-bottom: 0.75rem;
-      font-family: var(--sans);
+      color: var(--sage);
+      margin-bottom: 0.6rem;
     }
-    .hero h1 {
+    .hero-text h1 {
       font-family: var(--serif);
-      font-size: clamp(36px, 7vw, 56px);
-      font-weight: 400;
+      font-size: clamp(44px, 7vw, 80px);
+      font-weight: 600;
       font-style: italic;
+      line-height: 1.05;
       color: var(--ink);
-      line-height: 1.1;
-      margin-bottom: 0.75rem;
+      margin-bottom: 0.6rem;
     }
-    .hero-sub {
+    .hero-tagline {
       font-size: 14px;
-      color: var(--ink-soft);
       font-weight: 300;
-      max-width: 440px;
-      margin: 0 auto 1.5rem;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      max-width: 480px;
+      margin: 0 auto;
     }
 
-    /* Zola link banner */
-    .zola-banner {
+    /* ── NAV — below hero, sticky on scroll ── */
+    .nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      box-shadow: 0 1px 8px rgba(0,0,0,0.06);
+    }
+    .nav-inner {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
-      background: var(--sage-faint);
-      border: 1px solid var(--sage-light);
-      border-radius: 40px;
-      padding: 0.6rem 1.4rem;
-      font-size: 13px;
-      color: var(--sage);
-      font-weight: 500;
-      text-decoration: none;
-      width: fit-content;
-      margin: 0 auto;
-      transition: background 0.2s;
-    }
-    .zola-banner:hover { background: var(--sage-light); }
-    .zola-banner .dot { width: 6px; height: 6px; background: var(--sage); border-radius: 50%; flex-shrink: 0; }
-
-    /* ── STICKY NAV ── */
-    .nav {
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      background: rgba(250,248,243,0.97);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
       scrollbar-width: none;
-    }
-    .nav::-webkit-scrollbar { display: none; }
-    .nav-inner {
-      display: flex;
-      justify-content: center;
       white-space: nowrap;
+      max-width: 1100px;
+      margin: 0 auto;
     }
-    .nav a {
+    .nav-inner::-webkit-scrollbar { display: none; }
+    .nav-inner a {
       display: inline-block;
-      padding: 0.9rem 1rem;
-      font-size: 11.5px;
+      padding: 1rem 1.1rem;
+      font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.1em;
       text-transform: uppercase;
-      color: var(--ink-soft);
+      color: var(--ink);
       text-decoration: none;
       border-bottom: 2px solid transparent;
       transition: color 0.2s, border-color 0.2s;
+      flex-shrink: 0;
     }
-    .nav a:hover { color: var(--sage); border-bottom-color: var(--sage); }
-    .nav a.zola-link {
-      color: var(--terra);
-      border-bottom-color: transparent;
+    .nav-inner a:hover { color: var(--sage); border-bottom-color: var(--sage); }
+    .nav-rsvp-link {
+      margin-left: 0.5rem;
+      background: var(--terra) !important;
+      color: var(--white) !important;
+
+      border-radius: 40px !important;
+      border-bottom: none !important;
+      padding: 0.5rem 1.3rem !important;
+      font-size: 11px !important;
+      margin-top: 0.15rem;
     }
-    .nav a.zola-link:hover { color: var(--terra); border-bottom-color: var(--terra); }
+    .nav-rsvp-link:hover { background: #4a0619 !important; }
+
+    /* ── SITE INTRO ── */
+    .site-intro {
+      text-align: center;
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--ink-mid);
+      line-height: 1.8;
+      padding: 2rem 1rem 0;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── FADE IN ── */
+    .fade-up {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .fade-up.visible { opacity: 1; transform: translateY(0); }
+    .fade-up.d1 { transition-delay: 0.1s; }
+    .fade-up.d2 { transition-delay: 0.2s; }
+    .fade-up.d3 { transition-delay: 0.3s; }
 
     /* ── PAGE LAYOUT ── */
-    .page { max-width: var(--max); margin: 0 auto; padding: 0 1.5rem 5rem; }
-    .section { padding-top: 4.5rem; }
+    .page { max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 5rem; }
+    @media (max-width: 600px) { .page { padding: 0 1rem 4rem; } }
 
-    .section-header {
-      text-align: center;
-      margin-bottom: 2.5rem;
-    }
+    .section { padding: 5.5rem 0; }
+    @media (max-width: 600px) { .section { padding: 3.5rem 0; } }
+
+    .section-header { text-align: center; margin-bottom: 3rem; }
     .section-label {
-      font-size: 11px;
-      letter-spacing: 0.15em;
+      font-size: 10px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: var(--sage);
       font-weight: 500;
-      margin-bottom: 0.4rem;
       display: block;
+      margin-bottom: 0.5rem;
     }
     .section-title {
       font-family: var(--serif);
-      font-size: 30px;
-      font-weight: 400;
+      font-size: clamp(32px, 5vw, 50px);
+      font-weight: 300;
+      font-style: italic;
       color: var(--ink);
+      line-height: 1.1;
     }
 
-    /* ── ZOLA POINTER CARDS ── */
-    /* Used to redirect guests back to Zola for things it handles better */
-    .zola-pointer {
-      background: var(--terra-faint);
-      border: 1px solid var(--terra-light);
-      border-radius: 12px;
-      padding: 1.25rem 1.5rem;
+    /* ── SPLIT LAYOUT ── */
+    .split {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      align-items: stretch;
+      min-height: 480px;
+    }
+    .split.reverse { direction: rtl; }
+    .split.reverse > * { direction: ltr; }
+    .split-img { width: 100%; height: 100%; min-height: 380px; object-fit: cover; display: block; }
+    .split-content {
+      padding: 3.5rem 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--white);
+    }
+    .split-content .section-label { text-align: left; }
+    .split-content .section-title { text-align: left; font-size: clamp(26px, 3vw, 38px); margin-bottom: 1.25rem; }
+    .split-content p { font-size: 14px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 0.85rem; }
+    @media (max-width: 700px) {
+      .split { grid-template-columns: 1fr; direction: ltr !important; }
+      .split.reverse { direction: ltr; }
+      .split-img { min-height: 260px; max-height: 320px; }
+      .split-content { padding: 2rem 1.25rem; }
+    }
+
+    /* ── FULL-WIDTH PHOTO BREAK ── */
+    .photo-break { width: 100%; height: 50vh; min-height: 260px; max-height: 500px; object-fit: cover; display: block; }
+    .photo-break-caption {
+      text-align: center;
+      font-size: 10px;
+      color: var(--ink-soft);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.65rem 0;
+      background: var(--parchment);
+      border-bottom: 1px solid var(--border);
+    }
+
+    /* ── PHOTO GRID ── */
+    .photo-grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+    .photo-grid-3 img { width: 100%; height: 260px; object-fit: cover; display: block; }
+    @media (max-width: 600px) {
+      .photo-grid-3 { grid-template-columns: 1fr; }
+      .photo-grid-3 img { height: 200px; }
+    }
+
+    /* ── FLORAL DIVIDER ── */
+    .floral-divider { display: flex; align-items: center; justify-content: center; padding: 0.5rem 0; }
+    .floral-divider img { width: 80px; opacity: 0.82; }
+
+    /* ── EVENTS — NUMBERED BANDS (Option B) ── */
+    .event-bands { border-top: 1px solid var(--ink); }
+    .event-band {
+      display: grid;
+      grid-template-columns: 80px 1fr auto;
+      align-items: center;
+      gap: 2rem;
+      padding: 2.2rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    @media (max-width: 700px) {
+      .event-band { grid-template-columns: 52px 1fr; gap: 1rem; }
+      .event-band-photo { display: none; }
+    }
+    .event-band-num {
+      font-family: var(--serif);
+      font-size: clamp(52px, 7vw, 80px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--sage-light);
+      line-height: 1;
+    }
+    .event-band-body { display: flex; flex-direction: column; gap: 5px; }
+    .event-band-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: var(--sage);
+      font-weight: 500;
+    }
+    .event-band-name {
+      font-family: var(--serif);
+      font-size: clamp(28px, 4vw, 44px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink);
+      line-height: 1.1;
+    }
+    .event-band-meta {
+      font-size: 12px;
+      color: var(--ink-soft);
+      line-height: 1.6;
+      margin-top: 2px;
+    }
+    .event-band-photo {
+      width: 140px;
+      height: 105px;
+      object-fit: cover;
+      display: block;
+      flex-shrink: 0;
+    }
+    @media (max-width: 900px) {
+      .event-band-photo { width: 100px; height: 78px; }
+    }
+
+    /* ── EDITORIAL SECTION HEADINGS ── */
+    .ed-heading {
+      text-align: center;
+      margin-bottom: 2.5rem;
+    }
+    .ed-heading-title {
+      font-size: clamp(36px, 6vw, 68px);
+      line-height: 1;
+      color: var(--ink);
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+    }
+    .ed-heading-title em {
+      font-family: var(--serif);
+      font-style: italic;
+      font-weight: 300;
+    }
+    .ed-heading-title strong {
+      font-family: var(--sans);
+      font-weight: 500;
+      letter-spacing: 0.04em;
+    }
+    .ed-heading-sub {
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      font-weight: 400;
+    }
+
+    /* Event columns — flex so widths can animate on desktop */
+    .event-cols {
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    .event-col {
+      flex: 1 1 0;
+      min-width: 0;
+      transition: flex 0.5s cubic-bezier(0.4,0,0.2,1), opacity 0.4s ease;
+      overflow: hidden;
+    }
+    /* Desktop: when a col is expanded, shrink siblings */
+    .event-cols.has-expanded .event-col:not(.expanded) {
+      flex: 0.45 1 0;
+      opacity: 0.45;
+    }
+    .event-cols.has-expanded .event-col.expanded {
+      flex: 2 1 0;
+    }
+
+    /* Mobile: stack vertically, no push/fade, each expands in place */
+    @media (max-width: 700px) {
+      .event-cols {
+        flex-direction: column;
+        gap: 0;
+      }
+      .event-col {
+        width: 100%;
+        flex: none;
+        padding-bottom: 1.75rem;
+        border-bottom: 1px solid var(--border);
+        margin-bottom: 1.75rem;
+        overflow: visible;
+      }
+      .event-col:last-child { border-bottom: none; margin-bottom: 0; }
+      .event-cols.has-expanded .event-col:not(.expanded) {
+        flex: none;
+        opacity: 1;
+      }
+      .event-cols.has-expanded .event-col.expanded {
+        flex: none;
+      }
+    }
+
+    .event-col-photo {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 1.25rem;
+      transition: aspect-ratio 0.5s ease;
+      border-radius: 4px;
+    }
+    /* On desktop: shrink photo when expanded to make room */
+    @media (min-width: 701px) {
+      .event-col.expanded .event-col-photo {
+        aspect-ratio: 16 / 9;
+      }
+    }
+    /* On mobile: photo stays portrait, full width */
+    @media (max-width: 700px) {
+      .event-col-photo { aspect-ratio: 4 / 3; }
+    }
+    .event-col-num {
+      font-family: var(--serif);
+      font-size: 52px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--sage-light);
+      line-height: 1;
+      margin: 1rem 0 0.1rem;
+    }
+    .event-col-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--ink);
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+    }
+    .event-col-name {
+      font-family: var(--serif);
+      font-size: 24px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 0.3rem;
+      line-height: 1.15;
+    }
+    .event-col-meta {
+      font-size: 11px;
+      color: var(--ink-soft);
+      margin-bottom: 1rem;
+      letter-spacing: 0.04em;
+    }
+    .event-col-detail {
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.75;
+      margin-bottom: 6px;
+    }
+
+    /* Full details trigger */
+    .event-col-trigger {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 0.85rem;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink);
+      cursor: pointer;
+      background: none;
+      border: none;
+      border-bottom: 2px solid var(--ink);
+      padding: 0 0 3px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .event-col-trigger:hover { color: var(--sage); border-color: var(--sage); }
+    .event-col-trigger .trigger-arrow {
+      display: inline-block;
+      font-style: normal;
+    }
+    .event-col.expanded .event-col-trigger { color: var(--ink-soft); border-color: var(--ink-soft); }
+
+    /* Expandable detail panel */
+    .event-col-expand {
+      display: grid;
+      grid-template-rows: 0fr;
+      transition: grid-template-rows 0.45s cubic-bezier(0.4,0,0.2,1);
+    }
+    .event-col-expand-inner {
+      overflow: hidden;
+    }
+    .event-col.expanded .event-col-expand {
+      grid-template-rows: 1fr;
+    }
+    .event-col-expand-content {
+      padding-top: 1.25rem;
+      border-top: 1px solid var(--border);
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .event-col-expand-row { display: flex; flex-direction: column; gap: 3px; }
+    .event-col-expand-label {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--sage);
+      font-weight: 500;
+    }
+    .event-col-expand-val {
+      font-size: 13px;
+      color: var(--ink-mid);
+      line-height: 1.65;
+    }
+    .dress-code {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .dress-code-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--terra);
+      font-weight: 500;
+      margin-bottom: 6px;
+    }
+    .dress-code-items { display: flex; flex-direction: column; gap: 4px; }
+    .dress-code-item { font-size: 13px; color: var(--ink-mid); line-height: 1.55; }
+    .dress-code-item strong { color: var(--ink); font-weight: 500; }
+
+    /* ── EVENT ACCORDION ── */
+    .event-accordion {
+      margin-top: 2.5rem;
+      border-top: 1px solid var(--ink);
+    }
+    .event-acc-item { border-bottom: 1px solid var(--border); }
+    .event-acc-summary {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      margin-bottom: 1rem;
-      text-decoration: none;
+      gap: 1.2rem;
+      padding: 1rem 0;
+      cursor: pointer;
+      list-style: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: opacity 0.15s;
     }
-    .zola-pointer-text .label {
-      font-size: 11px;
+    .event-acc-summary:hover { opacity: 0.72; }
+    .event-acc-summary::-webkit-details-marker { display: none; }
+    .event-acc-num {
+      font-family: var(--serif);
+      font-size: 28px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--sage-light);
+      line-height: 1;
+      flex-shrink: 0;
+      width: 36px;
+    }
+    .event-acc-title {
+      flex: 1;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--terra);
+      color: var(--ink);
+    }
+    .event-acc-icon {
+      font-size: 22px;
+      font-weight: 300;
+      color: var(--sage);
+      flex-shrink: 0;
+      transition: transform 0.2s;
+      line-height: 1;
+    }
+    .event-acc-item[open] .event-acc-icon { transform: rotate(45deg); }
+    .event-acc-body {
+      padding: 0.25rem 0 1.75rem 3rem;
+    }
+    @media (max-width: 600px) { .event-acc-body { padding-left: 0; } }
+    .event-acc-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.85rem 2rem;
+    }
+    @media (max-width: 600px) { .event-acc-grid { grid-template-columns: 1fr; } }
+    .event-acc-label {
+      display: block;
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--sage);
       font-weight: 500;
       margin-bottom: 3px;
     }
-    .zola-pointer-text .title {
-      font-family: var(--serif);
-      font-size: 18px;
-      color: var(--ink);
-      font-weight: 500;
-    }
-    .zola-pointer-text .desc {
-      font-size: 13px;
-      color: var(--ink-soft);
-      margin-top: 2px;
-    }
-    .zola-arrow {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      background: var(--terra-light);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--terra);
-      font-size: 16px;
-      transition: background 0.2s;
-    }
-    .zola-pointer:hover .zola-arrow { background: var(--terra); color: white; }
-
-    /* ── EVENT CARDS ── */
-    .event-stack { display: flex; flex-direction: column; gap: 14px; }
-    .event-card {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 1.5rem;
-      border-left: 3px solid var(--sage);
-    }
-    .event-card.featured { background: var(--sage-faint); border-color: var(--sage); }
-    .event-date { font-size: 11px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage); font-weight: 500; margin-bottom: 3px; }
-    .event-name { font-family: var(--serif); font-size: 22px; font-weight: 500; color: var(--ink); margin-bottom: 5px; }
-    .event-location { font-size: 13px; color: var(--ink-soft); margin-bottom: 10px; }
-    .event-time { display: inline-block; background: var(--sage-light); color: #3A5030; font-size: 12px; font-weight: 500; padding: 3px 12px; border-radius: 20px; margin-bottom: 10px; }
-    .event-body { font-size: 14px; color: var(--ink-mid); line-height: 1.7; }
-    .event-body p + p { margin-top: 0.5em; }
-    .event-body strong { color: var(--ink); font-weight: 500; }
-    .event-zola-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 10px;
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--terra);
-      text-decoration: none;
-      letter-spacing: 0.04em;
-    }
-    .event-zola-link:hover { text-decoration: underline; }
-
-    /* Dress code highlight */
-    .dress-code-box {
-      background: var(--terra-faint);
-      border: 1px solid var(--terra-light);
-      border-radius: 10px;
-      padding: 0.9rem 1.1rem;
-      margin-top: 12px;
+    .event-acc-grid > div {
       font-size: 13.5px;
       color: var(--ink-mid);
-      line-height: 1.6;
+      line-height: 1.65;
     }
-    .dress-code-box strong { color: var(--terra); font-weight: 500; }
 
-    /* ── FLIGHT ROWS ── */
-    .flight-list { display: flex; flex-direction: column; gap: 10px; }
-    .flight-row {
-      background: var(--white);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem 1.25rem;
+    /* ── FORM CARDS — editorial style ── */
+    .form-cards {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0;
+      max-width: 820px;
+      margin: 3rem auto 0;
+      border: 1px solid var(--ink);
+    }
+    @media (max-width: 600px) { .form-cards { grid-template-columns: 1fr; } }
+    .form-card {
+      text-decoration: none;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 2rem 2rem 1.75rem;
+      border-right: 1px solid var(--ink);
+      transition: background 0.2s;
+      gap: 0;
+    }
+    .form-card:last-child { border-right: none; }
+    @media (max-width: 600px) {
+      .form-card { border-right: none; border-bottom: 1px solid var(--ink); }
+      .form-card:last-child { border-bottom: none; }
+    }
+    .form-card:hover { background: var(--sage-faint); }
+    .form-card-num {
+      font-family: var(--serif);
+      font-size: 48px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--sage-light);
+      line-height: 1;
+      margin-bottom: 1.25rem;
+    }
+    .form-card-title {
+      font-family: var(--serif);
+      font-size: 22px;
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink);
+      margin-bottom: 0.5rem;
+      line-height: 1.2;
+    }
+    .form-card-desc {
+      font-size: 13px;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .form-card-cta {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--ink);
+      padding-bottom: 2px;
+      align-self: flex-start;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .form-card:hover .form-card-cta { color: var(--sage); border-color: var(--sage); }
+
+    /* ── FAQ ── */
+    .faq-list { display: flex; flex-direction: column; max-width: 820px; margin: 0 auto; border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+    details.faq-item { background: var(--white); }
+    details.faq-item + details.faq-item { border-top: 1px solid var(--border); }
+    details.faq-item summary {
+      padding: 1.05rem 1.4rem;
+      font-size: 14px;
+      font-weight: 400;
+      color: var(--ink);
+      cursor: pointer;
+      list-style: none;
       display: flex;
       justify-content: space-between;
-      align-items: flex-start;
+      align-items: center;
       gap: 12px;
+      transition: background 0.15s;
+      -webkit-tap-highlight-color: transparent;
     }
-    .flight-from { font-size: 12px; color: var(--ink-soft); margin-bottom: 2px; }
-    .flight-option { font-size: 14px; font-weight: 500; color: var(--ink); }
+    details.faq-item summary:hover { background: var(--cream); }
+    details.faq-item summary::-webkit-details-marker { display: none; }
+    details.faq-item summary::after { content: '+'; font-size: 20px; color: var(--sage); flex-shrink: 0; transition: transform 0.2s; font-weight: 300; }
+    details.faq-item[open] summary::after { transform: rotate(45deg); }
+    .faq-body { padding: 0 1.4rem 1rem; font-size: 13.5px; color: var(--ink-mid); line-height: 1.75; }
+
+    /* ── SUBSECTION HEADING ── */
+    .subsection-heading {
+      font-family: var(--serif);
+      font-size: clamp(22px, 3vw, 28px);
+      font-style: italic;
+      font-weight: 300;
+      color: var(--ink);
+      margin: 3rem 0 1.25rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--sage-light);
+    }
+
+    /* ── HOTEL GRID ── */
+    .hotel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; }
+    @media (max-width: 600px) { .hotel-grid { grid-template-columns: 1fr 1fr; gap: 8px; } }
+    @media (max-width: 400px) { .hotel-grid { grid-template-columns: 1fr; } }
+    .hotel-card { background: var(--white); border: 1px solid var(--border); border-radius: 2px; padding: 1.3rem 1.4rem; }
+    .hotel-name { font-family: var(--serif); font-size: 17px; font-style: italic; font-weight: 300; color: var(--ink); margin-bottom: 3px; }
+    .hotel-location { font-size: 11px; color: var(--ink-soft); margin-bottom: 7px; }
+    .hotel-desc { font-size: 12.5px; color: var(--ink-mid); line-height: 1.55; }
+    .hotel-badge { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 9px; border-radius: 20px; margin-bottom: 8px; background: var(--terra-light); color: #7A3A1A; letter-spacing: 0.04em; text-transform: uppercase; }
+    .hotel-badge.stay { background: var(--sage-light); color: #2A4A20; }
+    .btn-hotel {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 0.85rem;
+      background: var(--ink);
+      color: var(--white);
+      font-family: var(--sans);
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 0.45rem 1rem;
+      border-radius: 40px;
+      transition: background 0.2s;
+    }
+    .btn-hotel:hover { background: var(--ink-mid); }
+
+    /* ── FLIGHTS ── */
+    .flight-list { display: flex; flex-direction: column; gap: 8px; }
+    .flight-row { background: var(--white); border: 1px solid var(--border); border-radius: 2px; padding: 1rem 1.25rem; display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+    @media (max-width: 500px) { .flight-row { flex-direction: column; gap: 6px; } }
+    .flight-from { font-size: 10px; color: var(--ink-soft); margin-bottom: 3px; text-transform: uppercase; letter-spacing: 0.08em; }
+    .flight-option { font-size: 14px; font-weight: 400; color: var(--ink); }
     .flight-note { font-size: 12px; color: var(--ink-soft); margin-top: 2px; }
-    .flight-price { color: var(--terra); font-weight: 500; font-size: 14px; white-space: nowrap; text-align: right; flex-shrink: 0; }
+    .flight-price { color: var(--terra); font-weight: 500; font-size: 14px; white-space: nowrap; flex-shrink: 0; }
 
-    .tip-box {
-      background: var(--sage-faint);
-      border: 1px solid var(--sage-light);
-      border-radius: 10px;
-      padding: 0.85rem 1.1rem;
-      font-size: 13px;
-      color: var(--ink-mid);
-      margin-top: 12px;
-      display: flex;
-      gap: 8px;
-      align-items: flex-start;
-      line-height: 1.6;
-    }
-    .tip-icon { flex-shrink: 0; }
-
-    /* ── STAY ZONES ── */
-    .zone-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .zone-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
-    .zone-name { font-family: var(--serif); font-size: 18px; font-weight: 500; color: var(--ink); margin-bottom: 5px; }
-    .zone-badge { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 9px; border-radius: 20px; margin-bottom: 8px; }
-    .badge-night { background: var(--terra-light); color: #7A3A1A; }
-    .badge-wine  { background: var(--sage-light); color: #2A4A20; }
-    .badge-city  { background: var(--parchment); color: var(--ink-mid); }
-    .zone-desc { font-size: 13px; color: var(--ink-soft); line-height: 1.6; }
-
-    /* ── ITINERARY ── */
-    .itin-row { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
-    .itin-block { padding: 1.25rem; background: var(--white); border-right: 1px solid var(--border); }
+    /* ── BLUEPRINT ── */
+    .itin-row { display: grid; grid-template-columns: repeat(3, 1fr); border: 1px solid var(--border); border-radius: 2px; overflow: hidden; }
+    @media (max-width: 600px) { .itin-row { grid-template-columns: 1fr; } }
+    .itin-block { padding: 1.4rem 1.5rem; background: var(--white); border-right: 1px solid var(--border); }
     .itin-block:last-child { border-right: none; }
-    .itin-nights { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sage); font-weight: 500; margin-bottom: 3px; }
-    .itin-dest { font-family: var(--serif); font-size: 19px; font-weight: 500; color: var(--ink); margin-bottom: 5px; }
-    .itin-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.55; }
+    @media (max-width: 600px) { .itin-block { border-right: none; border-bottom: 1px solid var(--border); } .itin-block:last-child { border-bottom: none; } }
+    .itin-nights { font-size: 10px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--sage); font-weight: 500; margin-bottom: 4px; }
+    .itin-dest { font-family: var(--serif); font-size: 21px; font-style: italic; font-weight: 300; color: var(--ink); margin-bottom: 6px; }
+    .itin-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
 
     /* ── INFO GRID ── */
-    .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
-    .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 12px; padding: 1.25rem; }
-    .info-card-title { font-size: 12px; text-transform: uppercase; letter-spacing: 0.08em; color: var(--ink-soft); font-weight: 500; margin-bottom: 10px; }
-    .info-row { font-size: 13px; color: var(--ink); line-height: 1.6; padding: 5px 0; border-bottom: 1px solid var(--border); }
+    .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
+    @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } }
+    .info-card { background: var(--white); border: 1px solid var(--border); border-radius: 2px; padding: 1.3rem 1.4rem; }
+    .info-card-title { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 12px; }
+    .info-row { font-size: 13px; color: var(--ink); padding: 5px 0; border-bottom: 1px solid var(--border); line-height: 1.5; }
     .info-row:last-child { border-bottom: none; }
-    .info-label { color: var(--ink-soft); font-size: 11px; display: block; margin-bottom: 1px; }
+    .info-label { color: var(--ink-soft); font-size: 10px; display: block; margin-bottom: 1px; text-transform: uppercase; letter-spacing: 0.05em; }
 
-    /* ── TIPS LIST ── */
-    .tips-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-    .tips-list li { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 0.85rem 1.1rem; font-size: 14px; color: var(--ink-mid); display: flex; gap: 10px; line-height: 1.55; align-items: flex-start; }
-    .tips-list li span:first-child { flex-shrink: 0; margin-top: 1px; }
-    .tips-list li strong { color: var(--ink); font-weight: 500; }
-
-    /* ── WINE REGIONS ── */
+    /* ── REGION ── */
     .region { padding: 1.25rem 0; border-bottom: 1px solid var(--border); }
     .region:last-child { border-bottom: none; }
-    .region-name { font-family: var(--serif); font-size: 20px; font-weight: 500; color: var(--ink); margin-bottom: 5px; }
-    .region-desc { font-size: 14px; color: var(--ink-mid); margin-bottom: 7px; line-height: 1.6; }
-    .region-picks { font-size: 13px; color: var(--ink-soft); }
+    .region-name { font-family: var(--serif); font-size: 20px; font-style: italic; font-weight: 300; color: var(--ink); margin-bottom: 4px; }
+    .region-desc { font-size: 13.5px; color: var(--ink-mid); margin-bottom: 6px; line-height: 1.65; }
+    .region-picks { font-size: 12.5px; color: var(--ink-soft); }
     .region-picks strong { color: var(--ink-mid); font-weight: 500; }
 
-    /* ── FOOD TIERS ── */
-    .food-tier { margin-top: 1.5rem; }
-    .food-tier-label { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--sage); font-weight: 500; margin-bottom: 10px; }
-    .food-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(195px, 1fr)); gap: 10px; }
-    .food-card { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1rem; }
-    .price-pill { display: inline-block; font-size: 11px; font-weight: 500; padding: 2px 9px; border-radius: 20px; margin-bottom: 6px; }
+    /* ── TIPS LIST ── */
+    .tips-list { list-style: none; display: flex; flex-direction: column; gap: 7px; }
+    .tips-list li { background: var(--white); border: 1px solid var(--border); border-radius: 2px; padding: 0.8rem 1rem; font-size: 13.5px; color: var(--ink-mid); display: flex; gap: 10px; line-height: 1.55; align-items: flex-start; }
+    .tips-list li span:first-child { flex-shrink: 0; }
+    .tips-list li strong { color: var(--ink); font-weight: 500; }
+
+    /* ── FOOD ── */
+    .food-tier { margin-top: 2rem; }
+    .food-tier-label { font-size: 10px; text-transform: uppercase; letter-spacing: 0.14em; color: var(--sage); font-weight: 500; margin-bottom: 10px; }
+    .food-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+    @media (max-width: 500px) { .food-grid { grid-template-columns: 1fr 1fr; } }
+    .food-card { background: var(--white); border: 1px solid var(--border); border-radius: 2px; padding: 1rem 1.1rem; }
+    .price-pill { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; margin-bottom: 6px; }
     .pill-budget  { background: var(--sage-light); color: #2A4A20; }
     .pill-mid     { background: var(--parchment); color: var(--ink-mid); }
     .pill-special { background: var(--terra-light); color: #6A2A0A; }
-    .food-name { font-weight: 500; font-size: 14px; color: var(--ink); margin-bottom: 3px; }
+    .food-name { font-weight: 500; font-size: 13.5px; color: var(--ink); margin-bottom: 3px; }
     .food-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
 
-    /* ── BOTANICAL FOOTER ── */
-    .site-footer {
-      text-align: center;
-      padding: 3rem 1.5rem;
-      border-top: 1px solid var(--border);
-      margin-top: 3rem;
-      position: relative;
-      overflow: hidden;
-    }
-    .footer-names { font-family: var(--serif); font-size: 26px; font-style: italic; color: var(--ink); margin-bottom: 0.4rem; }
-    .footer-date { font-size: 13px; color: var(--ink-soft); margin-bottom: 1.5rem; }
-    .footer-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--terra);
-      font-size: 13px;
-      font-weight: 500;
-      text-decoration: none;
-      letter-spacing: 0.04em;
-    }
-    .footer-link:hover { text-decoration: underline; }
+    /* ── TIP BOX ── */
+    .tip-box { background: var(--sage-faint); border: 1px solid var(--sage-light); border-radius: 2px; padding: 0.85rem 1.1rem; font-size: 13px; color: var(--ink-mid); margin-top: 12px; display: flex; gap: 8px; align-items: flex-start; line-height: 1.6; }
 
-    /* ── MOBILE ── */
-    @media (max-width: 600px) {
-      .itin-row { grid-template-columns: 1fr; }
-      .itin-block { border-right: none; border-bottom: 1px solid var(--border); }
-      .itin-block:last-child { border-bottom: none; }
-      .flight-row { flex-direction: column; gap: 4px; }
-      .flight-price { text-align: left; }
-      .botanical-header .branch-left,
-      .botanical-header .branch-right { display: none; }
-      .page { padding: 0 1rem 4rem; }
+    /* ── REGISTRY ── */
+    .registry-content { text-align: left; max-width: 100%; }
+    .registry-content p { font-size: 14px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.75rem; font-weight: 300; }
+    .registry-btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      border: 1px solid var(--ink);
+      color: var(--ink);
+      font-size: 11px; font-weight: 500; letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; padding: 0.9rem 2rem; border-radius: 40px;
+      transition: background 0.2s, color 0.2s;
     }
+    .registry-btn:hover { background: var(--ink); color: var(--white); }
+
+    /* ── FOOTER ── */
+    .site-footer {
+      background: var(--ink);
+      color: rgba(255,255,255,0.55);
+      text-align: center;
+      padding: 4rem 2rem;
+    }
+    .footer-names { font-family: var(--serif); font-size: clamp(28px, 5vw, 38px); font-style: italic; font-weight: 300; color: var(--white); margin-bottom: 0.5rem; }
+    .footer-date { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 2rem; }
+    .footer-divider { width: 36px; height: 1px; background: rgba(255,255,255,0.2); margin: 0 auto 2rem; }
+    .footer-link { color: rgba(255,255,255,0.5); font-size: 11px; text-decoration: none; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+    .footer-link:hover { color: var(--white); }
   </style>
 </head>
 <body>
 
-<!-- ── HERO / HEADER ── -->
-<header class="botanical-header hero">
-
-  <p class="hero-eyebrow">South Africa Travel Guide</p>
+<!-- ── HERO TEXT ── -->
+<div class="hero-text">
   <h1>Georgina &amp; David</h1>
-  <p class="hero-sub">Everything you need for your trip to the Cape — flights, wine farms, safari, food &amp; more</p>
+  <p class="hero-eyebrow">29 October 2026 · Brookdale Estate, Paarl</p>
+</div>
 
-  <a class="zola-banner" href="https://www.zola.com/wedding/georginaanddavid2026" target="_blank" rel="noopener">
-    <span class="dot"></span>
-    Visit our wedding website for RSVP, registry &amp; more
-    <span class="dot"></span>
-  </a>
-</header>
+<!-- ── HERO PHOTOS ── -->
+<div class="hero-photo-pair">
+  <img src="hero-photo-1.jpg" alt="Georgina and David">
+  <img src="hero-photo-2.jpg" alt="Georgina and David">
+</div>
 
-<!-- ── STICKY NAV ── -->
-<nav class="nav" aria-label="Page sections">
+<!-- ── NAV — below hero ── -->
+<nav class="nav">
   <div class="nav-inner">
     <a href="#events">Events</a>
-    <a href="#flights">Flights</a>
-    <a href="#blueprint">Suggested Blueprint</a>
-    <a href="#stay">Where to Stay</a>
-    <a href="#practicalities">Practicalities</a>
-    <a href="#safari">Safari</a>
-    <a href="#western-cape">Western Cape Region</a>
-    <a class="zola-link" href="https://www.zola.com/wedding/georginaanddavid2026/rsvp" target="_blank" rel="noopener">↗ RSVP</a>
+    <a href="#accommodation">Accommodation</a>
+    <a href="#travel">Travel Guide</a>
+    <a href="#explore">Explore</a>
+    <a href="#registry">Registry</a>
+    <a class="nav-rsvp-link" href="https://tally.so/#placeholder-rsvp" target="_blank" rel="noopener">RSVP ↗</a>
   </div>
 </nav>
 
+
 <div class="page">
 
-  <!-- ── EVENTS ── -->
+  <p class="site-intro fade-up">This site has everything you need — from the wedding events to planning your trip through the Cape.</p>
+
+  <!-- ══ EVENTS ══ -->
   <section class="section" id="events">
-    <div class="section-header">
-      <span class="section-label">The celebrations</span>
-      <h2 class="section-title">Event Details</h2>
+    <div class="ed-heading fade-up">
+      <div class="ed-heading-title"><em>The</em> <strong>CELEBRATIONS</strong></div>
+      <div class="ed-heading-sub">Three days of celebration in the Western Cape</div>
     </div>
 
-    <div class="event-stack">
+    <div class="event-cols" id="event-cols">
 
-      <div class="event-card">
-        <div class="event-date">Tuesday · 28 October 2026</div>
-        <div class="event-name">Pre-Wedding Lunch</div>
-        <div class="event-location">📍 The Table at De Meye, Stellenbosch · 12:00–17:00</div>
-        <div class="event-body">
-          <p>A relaxed, family-style lunch for everyone to meet before the big day — great food, games, and a beautiful outdoor setting. Children are welcome!</p>
+      <!-- Col 1: Pre-Wedding Lunch -->
+      <div class="event-col fade-up">
+        <img class="event-col-photo" src="event-01-prewedding.jpg" alt="Pre-wedding lunch">
+        <div class="event-col-label">28 October · Wednesday</div>
+        <div class="event-col-name">Pre-Wedding Lunch</div>
+        <div class="event-col-meta">📍 The Table at De Meye, Stellenbosch · 12:00–17:00</div>
+        <p class="event-col-detail">A relaxed family lunch — children welcome 👶</p>
+        <button class="event-col-trigger" onclick="toggleEvent(this)">
+          Full details <span class="trigger-arrow">↗</span>
+        </button>
+        <div class="event-col-expand">
+          <div class="event-col-expand-inner">
+            <div class="event-col-expand-content">
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Time</span><span class="event-col-expand-val">12:00–17:00</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Venue</span><span class="event-col-expand-val">The Table at De Meye, Stellenbosch</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Children</span><span class="event-col-expand-val">Very welcome 👶</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Vibe</span><span class="event-col-expand-val">Relaxed, family-style lunch with great food, lawn games and a beautiful outdoor setting. A chance for everyone to meet before the big day.</span></div>
+            </div>
+          </div>
         </div>
-        <a class="event-zola-link" href="https://www.zola.com/wedding/georginaanddavid2026/event" target="_blank" rel="noopener">Add to calendar on our wedding website ↗</a>
       </div>
 
-      <div class="event-card featured">
-        <div class="event-date">Wednesday · 29 October 2026</div>
-        <div class="event-name">The Wedding</div>
-        <div class="event-location">📍 Brookdale Estate, Paarl, Western Cape · 14:00</div>
-        <div class="event-body">
-          <p>An intimate manor house surrounded by vineyards and mountains, about 45–60 minutes from Cape Town.</p>
-          <p><strong>Shuttle:</strong> Provided for guests staying in Paarl on the wedding night. Let us know your accommodation so we can add you to the pick-up list.</p>
-          <p><strong>Weather:</strong> Around 24°C for the ceremony, dropping to ~10°C once the sun sets. Ladies, please bring a wrap or light jacket.</p>
+      <!-- Col 2: The Wedding -->
+      <div class="event-col fade-up d1">
+        <img class="event-col-photo" src="event-02-wedding.jpg" alt="The wedding">
+        <div class="event-col-label">29 October · Thursday</div>
+        <div class="event-col-name">The Wedding</div>
+        <div class="event-col-meta">📍 Brookdale Estate, Paarl · 14:00 · Adults only</div>
+        <p class="event-col-detail">Dress code: Elevated Garden Party</p>
+        <button class="event-col-trigger" onclick="toggleEvent(this)">
+          Full details <span class="trigger-arrow">↗</span>
+        </button>
+        <div class="event-col-expand">
+          <div class="event-col-expand-inner">
+            <div class="event-col-expand-content">
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Ceremony</span><span class="event-col-expand-val">14:00 at Brookdale Estate, Paarl</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Children</span><span class="event-col-expand-val">Adults only at ceremony &amp; reception</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Shuttle</span><span class="event-col-expand-val">Provided for guests staying in Paarl — let us know your accommodation 🚌</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Weather</span><span class="event-col-expand-val">~24°C for the ceremony, dropping to ~10°C after sunset — bring a warm layer 🌙</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Dress code</span><span class="event-col-expand-val">Elevated Garden Party — vibrant, colourful dresses; smart trousers &amp; collared shirt for men. Beware grass &amp; stilettos!</span></div>
+            </div>
+          </div>
         </div>
-        <div class="dress-code-box">
-          <strong>Dress code: Elevated Garden Party</strong><br>
-          Women: Vibrant, colourful dresses (stiletto-wearers beware — lots of grass!)<br>
-          Men: Smart trousers and a collared shirt; jackets and ties optional<br>
-          Evening: Bring a warm layer — Paarl evenings get chilly
-        </div>
-        <a class="event-zola-link" href="https://www.zola.com/wedding/georginaanddavid2026/event" target="_blank" rel="noopener">Add to calendar on our wedding website ↗</a>
       </div>
 
-      <div class="event-card">
-        <div class="event-date">Thursday · 30 October 2026</div>
-        <div class="event-name">Farewell Sunset Picnic <span style="font-size:13px;font-family:var(--sans);font-weight:300;color:var(--ink-soft)">(optional)</span></div>
-        <div class="event-location">📍 Boschendal Wine Estate, Franschhoek · 18:00–22:00</div>
-        <div class="event-body">
-          <p>The Friday Night Market at Boschendal — a relaxed sunset picnic under the stars, one last evening together before you head off. Children welcome! No pressure to attend, but we'd love to see you.</p>
+      <!-- Col 3: Farewell Picnic -->
+      <div class="event-col fade-up d2">
+        <img class="event-col-photo" src="event-03-farewell.jpg" alt="Farewell picnic">
+        <div class="event-col-label">30 October · Friday</div>
+        <div class="event-col-name">Farewell Sunset Picnic <span style="font-size:14px;font-style:normal;font-weight:300;color:var(--ink-soft);">(optional)</span></div>
+        <div class="event-col-meta">📍 Boschendal Wine Estate, Franschhoek · 18:00–22:00</div>
+        <p class="event-col-detail">Children welcome 👶</p>
+        <button class="event-col-trigger" onclick="toggleEvent(this)">
+          Full details <span class="trigger-arrow">↗</span>
+        </button>
+        <div class="event-col-expand">
+          <div class="event-col-expand-inner">
+            <div class="event-col-expand-content">
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Time</span><span class="event-col-expand-val">18:00–22:00</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Venue</span><span class="event-col-expand-val">Boschendal Wine Estate, Franschhoek</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Children</span><span class="event-col-expand-val">Very welcome 👶</span></div>
+              <div class="event-col-expand-row"><span class="event-col-expand-label">Vibe</span><span class="event-col-expand-val">The Friday Night Market at Boschendal — a relaxed sunset picnic under the stars. One last evening together before everyone heads off. No pressure to attend, but we'd love to see you. Entirely optional!</span></div>
+            </div>
+          </div>
         </div>
-        <a class="event-zola-link" href="https://www.zola.com/wedding/georginaanddavid2026/event" target="_blank" rel="noopener">Add to calendar on our wedding website ↗</a>
       </div>
 
+    </div><!-- /event-cols -->
+
+    <!--
+    ════ REVERT: accordion-style below columns ════
+    <div class="event-accordion fade-up">
+      <details class="event-acc-item">
+        <summary class="event-acc-summary"><span class="event-acc-num">01</span><span class="event-acc-title">Pre-Wedding Lunch — full details</span><span class="event-acc-icon">+</span></summary>
+        <div class="event-acc-body">...</div>
+      </details>
+      <details class="event-acc-item">
+        <summary class="event-acc-summary"><span class="event-acc-num">02</span><span class="event-acc-title">The Wedding — full details</span><span class="event-acc-icon">+</span></summary>
+        <div class="event-acc-body">...</div>
+      </details>
+      <details class="event-acc-item">
+        <summary class="event-acc-summary"><span class="event-acc-num">03</span><span class="event-acc-title">Farewell Sunset Picnic — full details</span><span class="event-acc-icon">+</span></summary>
+        <div class="event-acc-body">...</div>
+      </details>
+    </div>
+    ════ END REVERT ════
+    -->
+
+    <!-- Guest info forms -->
+    <div class="form-cards fade-up">
+      <a class="form-card" href="https://tally.so/#placeholder-dietary" target="_blank" rel="noopener">
+        <div class="form-card-num">01</div>
+        <div class="form-card-title">Dietary Requirements</div>
+        <div class="form-card-desc">Let us know of any allergies or dietary needs so we can make sure you're well looked after on the day.</div>
+        <span class="form-card-cta">Fill in form ↗</span>
+      </a>
+      <a class="form-card" href="https://tally.so/#placeholder-kids" target="_blank" rel="noopener">
+        <div class="form-card-num">02</div>
+        <div class="form-card-title">Bringing Kids?</div>
+        <div class="form-card-desc">Children are welcome at the pre-wedding lunch and farewell picnic. Let us know so we can plan ahead.</div>
+        <span class="form-card-cta">Fill in form ↗</span>
+      </a>
     </div>
 
-    <!-- RSVP & other Zola links -->
-    <div style="margin-top:1.5rem; display:flex; flex-direction:column; gap:10px;">
-      <a class="zola-pointer" href="https://www.zola.com/wedding/georginaanddavid2026/rsvp" target="_blank" rel="noopener">
-        <div class="zola-pointer-text">
-          <div class="label">On our wedding website</div>
-          <div class="title">RSVP</div>
-          <div class="desc">Let us know you're coming</div>
-        </div>
-        <div class="zola-arrow">↗</div>
-      </a>
-      <a class="zola-pointer" href="https://www.zola.com/wedding/georginaanddavid2026/faq" target="_blank" rel="noopener">
-        <div class="zola-pointer-text">
-          <div class="label">On our wedding website</div>
-          <div class="title">FAQs</div>
-          <div class="desc">Children, plus ones, childcare &amp; more</div>
-        </div>
-        <div class="zola-arrow">↗</div>
-      </a>
-      <a class="zola-pointer" href="https://www.zola.com/wedding/georginaanddavid2026/registry" target="_blank" rel="noopener">
-        <div class="zola-pointer-text">
-          <div class="label">On our wedding website</div>
-          <div class="title">Registry</div>
-          <div class="desc">Gifts, if you'd like to</div>
-        </div>
-        <div class="zola-arrow">↗</div>
-      </a>
+    <!-- FAQs -->
+    <h3 class="subsection-heading fade-up" style="max-width:820px;margin-left:auto;margin-right:auto;">FAQs</h3>
+    <div class="faq-list fade-up">
+      <details class="faq-item">
+        <summary>Can I bring a plus one?</summary>
+        <div class="faq-body">Due to space, we're only able to accommodate the guests named on your invitation.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Are children welcome at the wedding?</summary>
+        <div class="faq-body">The ceremony and reception are adults-only. Children are warmly welcome at the pre-wedding lunch (28th) and farewell picnic (30th). We recommend <strong>Wineland Nannies</strong> for childcare at your accommodation.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Is there a shuttle to the venue?</summary>
+        <div class="faq-body">Yes — a shuttle will be provided for guests staying in Paarl on the wedding night. Please let us know your accommodation so we can add you to the pick-up list.</div>
+      </details>
+      <details class="faq-item">
+        <summary>Do I need a visa for South Africa?</summary>
+        <div class="faq-body">EU, UK, USA and Swedish passport holders are visa-exempt for up to 90 days. Check the South African Home Affairs website if you're unsure about your nationality.</div>
+      </details>
     </div>
   </section>
 
-  <!-- BOTANICAL DIVIDER -->
-  <div class="floral-divider" aria-hidden="true">
-    <img src="FloralUI.svg" alt="" style="width:100px;max-width:100%;opacity:0.8;">
-  </div>
+</div><!-- /page -->
 
-  <!-- ── FLIGHTS ── -->
-  <section class="section" id="flights">
-    <div class="section-header">
-      <span class="section-label">Getting here</span>
-      <h2 class="section-title">Flights</h2>
+<!-- ── PHOTO BREAK ── -->
+<!-- Replace src with your own photo -->
+<img class="photo-break" src="winelands-paarl.jpg" alt="Winelands landscape">
+<p class="photo-break-caption">The Winelands · Paarl, Western Cape</p>
+
+<div class="page">
+
+  <!-- ══ ACCOMMODATION ══ -->
+  <section class="section" id="accommodation">
+    <div class="ed-heading fade-up">
+      <div class="ed-heading-title"><em>Where</em> <strong>TO STAY</strong></div>
+      <div class="ed-heading-sub">Paarl & the Winelands — accommodation for every style</div>
     </div>
+
+    <div class="tip-box fade-up" style="max-width:820px;margin:0 auto 2rem;">
+      🚌 Guests staying in Paarl on the night of 29 October can use the wedding shuttle.
+    </div>
+
+    <h3 class="subsection-heading fade-up">Paarl — Wedding Night</h3>
+    <div class="hotel-grid">
+      <div class="hotel-card fade-up"><div class="hotel-name">Adara Palmiet Valley</div><div class="hotel-location">📍 ~7 min from Brookdale</div><div class="hotel-desc">Luxurious boutique farm hotel in the Palmiet Valley — beautiful setting close to the venue.</div><a class="btn-hotel" href="https://www.adara.co.za" target="_blank" rel="noopener">View hotel ↗</a></div>
+      <div class="hotel-card fade-up d1"><div class="hotel-name">Grande Roche Hotel</div><div class="hotel-location">📍 ~14 min from Brookdale</div><div class="hotel-desc">Elegant Cape Dutch manor with award-winning gardens and excellent dining.</div><a class="btn-hotel" href="https://www.granderoche.com" target="_blank" rel="noopener">View hotel ↗</a></div>
+      <div class="hotel-card fade-up d2"><div class="hotel-name">Laborie Wine Estate</div><div class="hotel-location">📍 ~15 min from Brookdale</div><div class="hotel-desc">Charming stay on a working wine estate — tastings on your doorstep.</div><a class="btn-hotel" href="https://www.laborie.co.za" target="_blank" rel="noopener">View hotel ↗</a></div>
+      <div class="hotel-card fade-up"><div class="hotel-name">Du Kloof Lodge</div><div class="hotel-location">📍 ~21 min from Brookdale</div><div class="hotel-desc">Private lodge in the mountains above Paarl with spectacular views.</div><a class="btn-hotel" href="https://www.dukkloof.co.za" target="_blank" rel="noopener">View hotel ↗</a></div>
+      <div class="hotel-card fade-up d1"><div class="hotel-name">Madeliefie Guest House</div><div class="hotel-location">📍 ~15 min from Brookdale</div><div class="hotel-desc">Cosy, well-situated guesthouse on Paarl's main road.</div><a class="btn-hotel" href="https://www.madeliefie.co.za" target="_blank" rel="noopener">View hotel ↗</a></div>
+      <div class="hotel-card fade-up d2"><div class="hotel-name">Le Héritage</div><div class="hotel-location">📍 ~6 min from Brookdale</div><div class="hotel-desc">Intimate heritage property with a warm, personal feel.</div><a class="btn-hotel" href="https://www.leheritage.co.za" target="_blank" rel="noopener">View hotel ↗</a></div>
+      <div class="hotel-card fade-up"><div class="hotel-name">Oak Tree Lodge</div><div class="hotel-location">📍 ~13 min from Brookdale</div><div class="hotel-desc">Simple and comfortable — great value for the wedding night.</div><a class="btn-hotel" href="https://www.oaktreelodge.co.za" target="_blank" rel="noopener">View hotel ↗</a></div>
+      <div class="hotel-card fade-up d1"><div class="hotel-name">De Leeuwenhof Estate</div><div class="hotel-location">📍 ~6 min from Brookdale</div><div class="hotel-desc">Historic estate with beautiful gardens and elegant rooms.</div><a class="btn-hotel" href="https://www.deleeuwenhof.co.za" target="_blank" rel="noopener">View hotel ↗</a></div>
+    </div>
+
+    <h3 class="subsection-heading fade-up">For the Rest of Your Stay</h3>
+    <div class="hotel-grid">
+      <div class="hotel-card fade-up"><span class="hotel-badge stay">Winelands base</span><div class="hotel-name">Stellenbosch or Franschhoek</div><div class="hotel-location">📍 Winelands</div><div class="hotel-desc">World-class restaurants and wine tasting rooms on every street.</div></div>
+      <div class="hotel-card fade-up d1"><span class="hotel-badge stay">City base</span><div class="hotel-name">Cape Town Atlantic Seaboard</div><div class="hotel-location">📍 Sea Point · Green Point · Bantry Bay</div><div class="hotel-desc">Safe and walkable, close to beaches and great restaurants.</div></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- ── SAFARI SPLIT ── -->
+<div class="split reverse fade-up">
+  <!-- Replace src with your own photo -->
+  <img class="split-img" src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=900&q=80" alt="Safari landscape">
+  <div class="split-content">
+    <div class="ed-heading-title" style="text-align:left;font-size:clamp(28px,4vw,52px);margin-bottom:0.6rem;"><em>Don't miss</em> <strong>A SAFARI</strong></div>
+    <div class="ed-heading-sub" style="text-align:left;margin-bottom:1.5rem;">One of the best Big Five destinations on earth</div>
+    <p>One of the best places on earth for Big Five game drives. A guided lodge makes all the difference — rangers know exactly where to find the animals.</p>
+    <p>🦁 <strong>Kruger Area</strong> — the gold standard. Fly into Skukuza or Hoedspruit.<br>
+    🐘 <strong>Pilanesberg</strong> — malaria-free, 3 hrs from Jo'burg, no internal flight needed.</p>
+    <p style="font-size:12px;color:var(--ink-soft);">Recommended: <a href="https://www.experienceafrica.co.za" target="_blank" rel="noopener" style="color:var(--sage);">experienceafrica.co.za</a></p>
+  </div>
+</div>
+
+<div class="page">
+
+  <!-- ══ TRAVEL GUIDE ══ -->
+  <section class="section" id="travel">
+    <div class="ed-heading fade-up">
+      <div class="ed-heading-title"><em>The</em> <strong>TRAVEL GUIDE</strong></div>
+      <div class="ed-heading-sub">Flights, itineraries & everything you need to know</div>
+    </div>
+
+    <h3 class="subsection-heading fade-up">✈️ Flights</h3>
     <div class="flight-list">
-      <div class="flight-row">
-        <div>
-          <div class="flight-from">From Amsterdam / Netherlands</div>
-          <div class="flight-option">KLM direct to Cape Town</div>
-          <div class="flight-note">Or via Emirates (one stop)</div>
-        </div>
-        <div class="flight-price">~€1,100 return</div>
-      </div>
-      <div class="flight-row">
-        <div>
-          <div class="flight-from">From Germany / Sweden</div>
-          <div class="flight-option">Kenya Airways, British Airways, Lufthansa</div>
-          <div class="flight-note">One stop, typically via Nairobi or London</div>
-        </div>
-        <div class="flight-price">~€750 return</div>
-      </div>
-      <div class="flight-row">
-        <div>
-          <div class="flight-from">From San Diego / USA</div>
-          <div class="flight-option">Connect via London, Amsterdam, or Dubai</div>
-          <div class="flight-note">Flying into Jo'burg + a domestic FlySafair hop to Cape Town is often cheapest</div>
-        </div>
-        <div class="flight-price">~$1,400–1,900 return</div>
-      </div>
-      <div class="flight-row">
-        <div>
-          <div class="flight-from">From Johannesburg</div>
-          <div class="flight-option">FlySafair or Lift — domestic to Cape Town</div>
-          <div class="flight-note">Very affordable; book early</div>
-        </div>
-        <div class="flight-price">~€80 return</div>
-      </div>
-      <div class="flight-row">
-        <div>
-          <div class="flight-from">From Cape Town</div>
-          <div class="flight-option">You're already here!</div>
-          <div class="flight-note">Just arrange a car hire or Uber to the Winelands</div>
-        </div>
-        <div class="flight-price">Local only</div>
-      </div>
+      <div class="flight-row fade-up"><div><div class="flight-from">From Amsterdam / Netherlands</div><div class="flight-option">KLM direct to Cape Town</div><div class="flight-note">Or via Emirates (one stop)</div></div><div class="flight-price">~€1,100 return</div></div>
+      <div class="flight-row fade-up"><div><div class="flight-from">From Germany / Sweden</div><div class="flight-option">Kenya Airways, British Airways, Lufthansa</div><div class="flight-note">One stop via Nairobi or London</div></div><div class="flight-price">~€750 return</div></div>
+      <div class="flight-row fade-up"><div><div class="flight-from">From San Diego / USA</div><div class="flight-option">Connect via London, Amsterdam or Dubai</div><div class="flight-note">Jo'burg + domestic FlySafair hop is often cheapest</div></div><div class="flight-price">~$1,400–1,900</div></div>
+      <div class="flight-row fade-up"><div><div class="flight-from">From Johannesburg</div><div class="flight-option">FlySafair or Lift — domestic to Cape Town</div><div class="flight-note">Very affordable; book early</div></div><div class="flight-price">~€80 return</div></div>
     </div>
-    <div class="tip-box"><span class="tip-icon">🌿</span> Book flights first — prices shift quickly. Long-haul to Jo'burg is often cheaper than flying directly into Cape Town; add a short FlySafair hop for around €80.</div>
-  </section>
+    <div class="tip-box fade-up">🌿 Book flights early — prices shift quickly. Long-haul to Jo'burg is often cheaper than flying directly into Cape Town.</div>
 
-  <div class="floral-divider" aria-hidden="true">
-    <img src="FloralUI.svg" alt="" style="width:100px;max-width:100%;opacity:0.8;">
-  </div>
-
-  <!-- ── BLUEPRINT ── -->
-  <section class="section" id="blueprint">
-    <div class="section-header">
-      <span class="section-label">Making the most of your trip</span>
-      <h2 class="section-title">Suggested 2-Week Blueprint</h2>
+    <h3 class="subsection-heading fade-up">🗺️ Suggested Blueprint</h3>
+    <div class="itin-row fade-up">
+      <div class="itin-block"><div class="itin-nights">3 nights</div><div class="itin-dest">Safari</div><div class="itin-desc">Big Five game drives. Kruger or malaria-free Pilanesberg — no internal flight needed.</div></div>
+      <div class="itin-block"><div class="itin-nights">7 nights</div><div class="itin-dest">Cape Town</div><div class="itin-desc">Table Mountain, Lion's Head, Robben Island, Clifton beaches, world-class restaurants.</div></div>
+      <div class="itin-block"><div class="itin-nights">3–4 nights</div><div class="itin-dest">Winelands</div><div class="itin-desc">Stellenbosch or Franschhoek as your base. Wine tasting, farm lunches — and our wedding!</div></div>
     </div>
-    <div class="itin-row">
-      <div class="itin-block">
-        <div class="itin-nights">3 nights</div>
-        <div class="itin-dest">Safari</div>
-        <div class="itin-desc">Big Five game drives. Fly into Skukuza, Nelspruit, or Hoedspruit. A guided lodge makes a huge difference. Pilanesberg is a great alternative — 3 hrs from Jo'burg, malaria-free, no internal flight needed.</div>
-      </div>
-      <div class="itin-block">
-        <div class="itin-nights">7 nights</div>
-        <div class="itin-dest">Cape Town</div>
-        <div class="itin-desc">Table Mountain, Lion's Head hike, Robben Island, Clifton beaches, Bo Kaap, world-class restaurants. One of the greatest cities in the world.</div>
-      </div>
-      <div class="itin-block">
-        <div class="itin-nights">3–4 nights</div>
-        <div class="itin-dest">Winelands</div>
-        <div class="itin-desc">Stellenbosch or Franschhoek as your base. Wine tasting, farm lunches, the Wine Tram — and our wedding!</div>
-      </div>
-    </div>
-    <a class="zola-pointer" href="https://www.zola.com/wedding/georginaanddavid2026/poi" target="_blank" rel="noopener" style="margin-top:14px;">
-      <div class="zola-pointer-text">
-        <div class="label">On our wedding website</div>
-        <div class="title">Things To Do</div>
-        <div class="desc">Our hand-picked places and activities in the region</div>
-      </div>
-      <div class="zola-arrow">↗</div>
-    </a>
-  </section>
 
-  <div class="floral-divider" aria-hidden="true">
-    <img src="FloralUI.svg" alt="" style="width:100px;max-width:100%;opacity:0.8;">
-  </div>
-
-  <!-- ── WHERE TO STAY ── -->
-  <section class="section" id="stay">
-    <div class="section-header">
-      <span class="section-label">Accommodation</span>
-      <h2 class="section-title">Where to Stay</h2>
-    </div>
-    <div class="zone-grid">
-      <div class="zone-card">
-        <div class="zone-name">Paarl</div>
-        <span class="zone-badge badge-night">Wedding night only</span>
-        <div class="zone-desc">Stay here on the night of 29 October to use the wedding shuttle. Otherwise base yourself in Stellenbosch or Franschhoek for the Winelands portion of your trip.</div>
-      </div>
-      <div class="zone-card">
-        <div class="zone-name">Stellenbosch or Franschhoek</div>
-        <span class="zone-badge badge-wine">Winelands base</span>
-        <div class="zone-desc">The best towns for wine, food, art, and atmosphere. Walkable, with world-class restaurants and tasting rooms on every street.</div>
-      </div>
-      <div class="zone-card">
-        <div class="zone-name">Cape Town Atlantic Seaboard</div>
-        <span class="zone-badge badge-city">City base</span>
-        <div class="zone-desc">Sea Point, Green Point, Bantry Bay, or the Waterfront — safe and walkable, close to beaches and great restaurants.</div>
-      </div>
-    </div>
-    <a class="zola-pointer" href="https://www.zola.com/wedding/georginaanddavid2026/travel" target="_blank" rel="noopener" style="margin-top:14px;">
-      <div class="zola-pointer-text">
-        <div class="label">On our wedding website</div>
-        <div class="title">Hotel Recommendations</div>
-        <div class="desc">Our curated list of nearby places to stay</div>
-      </div>
-      <div class="zola-arrow">↗</div>
-    </a>
-  </section>
-
-  <div class="floral-divider" aria-hidden="true">
-    <img src="FloralUI.svg" alt="" style="width:100px;max-width:100%;opacity:0.8;">
-  </div>
-
-  <!-- ── PRACTICALITIES ── -->
-  <section class="section" id="practicalities">
-    <div class="section-header">
-      <span class="section-label">Before you go</span>
-      <h2 class="section-title">Practicalities</h2>
-    </div>
+    <h3 class="subsection-heading fade-up">🧳 Practicalities</h3>
     <div class="info-grid">
-      <div class="info-card">
+      <div class="info-card fade-up">
         <div class="info-card-title">💸 Money &amp; Tipping</div>
-        <div class="info-row"><span class="info-label">Exchange rate</span>€1 ≈ R20 — divide Rand by 20 for a quick estimate</div>
-        <div class="info-row"><span class="info-label">Cards</span>Visa &amp; Mastercard accepted almost everywhere</div>
-        <div class="info-row"><span class="info-label">Cash</span>Keep R200–500 on you for tips &amp; car guards</div>
-        <div class="info-row"><span class="info-label">Restaurants</span>Tip 12.5–15% — service charge rarely included</div>
+        <div class="info-row"><span class="info-label">Exchange rate</span>€1 ≈ R20 — divide Rand by 20</div>
+        <div class="info-row"><span class="info-label">Cards</span>Visa &amp; Mastercard accepted everywhere</div>
+        <div class="info-row"><span class="info-label">Restaurants</span>Tip 12.5–15% — rarely included</div>
         <div class="info-row"><span class="info-label">Car guards</span>R5–10 when you return to your car</div>
-        <div class="info-row"><span class="info-label">Petrol attendants</span>R5–10 — you don't pump your own in SA</div>
-        <div class="info-row"><span class="info-label">Safari</span>R100–250 per couple per night for ranger &amp; tracker</div>
       </div>
-      <div class="info-card">
+      <div class="info-card fade-up d1">
         <div class="info-card-title">🔌 Logistics</div>
-        <div class="info-row"><span class="info-label">Plug type</span>Type M — large 3-pin, unique to SA. Bring a dedicated adapter.</div>
-        <div class="info-row"><span class="info-label">Data</span>Get an eSIM before you land, or buy a Vodacom SIM at the airport</div>
+        <div class="info-row"><span class="info-label">Plug type</span>Type M — bring a dedicated adapter</div>
+        <div class="info-row"><span class="info-label">Data</span>eSIM before landing, or Vodacom at airport</div>
         <div class="info-row"><span class="info-label">Navigation</span>Waze or Google Maps</div>
-        <div class="info-row"><span class="info-label">EskomSePush</span>Free app — alerts you to local power outages ("loadshedding") so you're not surprised</div>
-        <div class="info-row"><span class="info-label">Water</span>Tap water is safe in Cape Town and the Winelands</div>
+        <div class="info-row"><span class="info-label">Water</span>Tap water safe in Cape Town &amp; Winelands</div>
       </div>
-      <div class="info-card">
-        <div class="info-card-title">🛂 Entry</div>
-        <div class="info-row"><span class="info-label">Visas</span>EU, UK, USA &amp; Sweden are visa-exempt up to 90 days</div>
-        <div class="info-row"><span class="info-label">Passport validity</span>Valid 30+ days after departure date</div>
-        <div class="info-row"><span class="info-label">Blank pages</span>At least 2 blank pages required</div>
+      <div class="info-card fade-up d2">
+        <div class="info-card-title">🛂 Entry &amp; Weather</div>
+        <div class="info-row"><span class="info-label">Visas</span>EU, UK, USA &amp; Sweden — visa-exempt 90 days</div>
+        <div class="info-row"><span class="info-label">Passport</span>Valid 30+ days after departure</div>
+        <div class="info-row"><span class="info-label">October days</span>Warm &amp; sunny, 20–26°C</div>
+        <div class="info-row"><span class="info-label">Evenings</span>Cool ~10°C — bring a light jacket</div>
       </div>
-      <div class="info-card">
-        <div class="info-card-title">☀️ October Weather</div>
-        <div class="info-row"><span class="info-label">Daytime</span>Warm &amp; sunny, 20–26°C</div>
-        <div class="info-row"><span class="info-label">Evenings</span>Cool, ~10°C — bring a light jacket</div>
-        <div class="info-row"><span class="info-label">UV</span>Extreme — sunscreen even on cloudy days</div>
-        <div class="info-row"><span class="info-label">Safari</span>Mornings brisk, afternoons warm</div>
-      </div>
-      <div class="info-card">
+      <div class="info-card fade-up d3">
         <div class="info-card-title">🔒 Safety</div>
         <div class="info-row"><span class="info-label">After dark</span>Use Uber or Bolt — even short distances</div>
-        <div class="info-row"><span class="info-label">Valuables</span>Keep phones &amp; wallets out of sight in cars and cafés</div>
-        <div class="info-row"><span class="info-label">Getting around</span>Rent a car for the Winelands; Uber for city evenings</div>
-        <div class="info-row"><span class="info-label">Sun</span>UV is extreme — sunscreen even on overcast days</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── SAFARI ── -->
-  <section class="section" id="safari">
-    <div class="section-header">
-      <span class="section-label">Bucket list</span>
-      <h2 class="section-title">Safari Guide</h2>
-    </div>
-    <div>
-      <div class="region">
-        <div class="region-name">Kruger Area</div>
-        <div class="region-desc">The gold standard. Fly into Skukuza, Nelspruit, or Hoedspruit. A <strong>guided lodge</strong> is worth every cent — rangers know exactly where to find the animals. Check whether game drives are included when booking.</div>
-        <div class="region-picks"><strong>Recommended:</strong> Experience Africa — <a href="https://www.experienceafrica.co.za" target="_blank" rel="noopener" style="color:var(--sage);">experienceafrica.co.za</a> — great for custom packages with drives included.</div>
-      </div>
-      <div class="region">
-        <div class="region-name">Pilanesberg (great alternative)</div>
-        <div class="region-desc">Big Five, malaria-free, just 3 hours from Jo'burg by car. No internal flight needed — great if you're short on time or budget.</div>
-      </div>
-    </div>
-    <div class="tip-box" style="margin-top:1rem;"><span class="tip-icon">🌿</span> Safari tipping: R100–250 (€5–12) per couple per night for your ranger and tracker is customary and greatly appreciated.</div>
-  </section>
-
-  <div class="floral-divider" aria-hidden="true">
-    <img src="FloralUI.svg" alt="" style="width:100px;max-width:100%;opacity:0.8;">
-  </div>
-
-  <!-- ── WESTERN CAPE REGION ── -->
-  <section class="section" id="western-cape">
-    <div class="section-header">
-      <span class="section-label">Explore the region</span>
-      <h2 class="section-title">Western Cape Region</h2>
-    </div>
-
-    <!-- Wine Farms -->
-    <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin-bottom:1rem;">Wine Farms</h3>
-    <div>
-      <div class="region">
-        <div class="region-name">Franschhoek</div>
-        <div class="region-desc">The "French Corner" — tiny, beautiful, and home to the <strong>Franschhoek Wine Tram</strong>, a hop-on-hop-off service to different estates. A perfect full day without needing to drive.</div>
-        <div class="region-picks"><strong>Estates:</strong> Haute Cabrière · Vrede en Lust · La Motte · Rickety Bridge · Boschendal · Zorgvliet</div>
-      </div>
-      <div class="region">
-        <div class="region-name">Stellenbosch</div>
-        <div class="region-desc">A vibrant university town with oak-lined streets and world-class estates. Great for a night out or a morning walk through the botanical gardens.</div>
-        <div class="region-picks"><strong>Estates:</strong> Waterford (chocolate &amp; wine) · Warwick (David's favourite!) · Tokara (great restaurant) · Delaire Graff (luxurious) · Thelema · Spier · Babylonstoren (book Babel for lunch)</div>
-      </div>
-      <div class="region">
-        <div class="region-name">Constantia (Cape Town)</div>
-        <div class="region-desc">A half-day wine visit without leaving the city. Groot Constantia (historic, great food), Klein Constantia (famous dessert wine), Beau Constantia (spectacular views + Chefs Warehouse).</div>
-      </div>
-      <div class="region">
-        <div class="region-name">Paarl — near the venue</div>
-        <div class="region-desc">While you're here for the wedding — Spice Route Destination or Fairview: chocolate, beer, cheese, and wine all in one spot.</div>
-      </div>
-      <div class="region">
-        <div class="region-name">Somerset West</div>
-        <div class="region-desc">Meerlust (one of SA's best reds) · Vergelegen (beautiful grounds) · Lourensford (coffee roastery, multiple restaurants, lovely wines).</div>
+        <div class="info-row"><span class="info-label">Valuables</span>Keep phones &amp; wallets out of sight</div>
+        <div class="info-row"><span class="info-label">Getting around</span>Rent a car for the Winelands</div>
+        <div class="info-row"><span class="info-label">Sun</span>UV is extreme — sunscreen always</div>
       </div>
     </div>
 
-    <!-- Cape Town -->
-    <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin:2.5rem 0 1rem;">Cape Town</h3>
-    <div>
-      <div class="region">
-        <div class="region-name">Beaches</div>
-        <div class="region-desc"><strong>Scenic, colder (Atlantic side):</strong> Clifton, Camps Bay, Hout Bay<br><strong>Warmer water (False Bay):</strong> Muizenberg, Strand, Fish Hoek</div>
-      </div>
-      <div class="region">
-        <div class="region-name">Must-Dos</div>
-        <ul class="tips-list" style="margin-top:8px;">
-          <li><span>⛰️</span><span><strong>Table Mountain</strong> — hike or cable car. Check wind; it closes when too windy.</span></li>
-          <li><span>🌅</span><span><strong>Lion's Head</strong> — sunset hike, ~1 hour up. Bring a headlamp for the descent!</span></li>
-          <li><span>⚓</span><span><strong>Robben Island</strong> — historic and moving. Worth the boat trip.</span></li>
-          <li><span>🎨</span><span><strong>Bo Kaap</strong> — colourful neighbourhood, Cape Malay food. Try Faeeza's Home Kitchen.</span></li>
-          <li><span>🦭</span><span><strong>The Waterfront</strong> — markets, restaurants, seals, a great afternoon.</span></li>
-        </ul>
-      </div>
-      <div class="region">
-        <div class="region-name">Day Trips</div>
-        <ul class="tips-list" style="margin-top:8px;">
-          <li><span>🐧</span><span><strong>Simonstown / Kalk Bay (45 min)</strong> — penguins at Boulders Beach, charming harbour, Kalkys fish &amp; chips.</span></li>
-          <li><span>🐋</span><span><strong>Hermanus (2 hrs)</strong> — whale watching. October is a great time for sightings.</span></li>
-          <li><span>🪁</span><span><strong>Langebaan / Paternoster (2 hrs)</strong> — kite surfing, incredible seafood, beautiful west coast.</span></li>
-        </ul>
-      </div>
-    </div>
-
-    <!-- Food -->
-    <h3 style="font-family:var(--serif);font-size:22px;font-weight:400;color:var(--ink);margin:2.5rem 0 1rem;">Food &amp; Drink</h3>
-    <div>
-      <div class="region">
-        <div class="region-name">South African Foods to Try</div>
-        <ul class="tips-list" style="margin-top:8px;">
-          <li><span>🥩</span><span><strong>Biltong &amp; droëwors</strong> — dried cured meat, at any petrol station. Far better than jerky.</span></li>
-          <li><span>🌭</span><span><strong>Boerewors roll</strong> — grilled sausage in a roll. Classic SA street food.</span></li>
-          <li><span>🍛</span><span><strong>Bobotie &amp; bunny chow</strong> — spiced mince bake and a bread bowl of curry.</span></li>
-          <li><span>🍮</span><span><strong>Milk tart, malva pudding, koeksisters</strong> — order any of these whenever you see them.</span></li>
-          <li><span>🥂</span><span><strong>MCC (Méthode Cap Classique)</strong> — SA's answer to Champagne. JC le Roux does a lovely nougat pairing.</span></li>
-          <li><span>🍹</span><span><strong>Amarula</strong> — creamy marula fruit liqueur. Over ice.</span></li>
-        </ul>
+    <h3 class="subsection-heading fade-up">🍽️ Top Restaurants</h3>
+    <div class="food-tier" style="margin-top:0;">
+      <div class="food-tier-label">Cape Town</div>
+      <div class="food-grid">
+        <div class="food-card fade-up"><span class="price-pill pill-special">Must-book</span><div class="food-name">Fyn ⭐</div><div class="food-desc">Our favourite. Michelin-worthy tasting menu. ~R2,200 (€110). Book weeks ahead.</div></div>
+        <div class="food-card fade-up d1"><span class="price-pill pill-special">Special occasion</span><div class="food-name">Chefs Warehouse, Beau Constantia</div><div class="food-desc">Incredible food and views on a wine farm.</div></div>
+        <div class="food-card fade-up d2"><span class="price-pill pill-mid">Mid-range</span><div class="food-name">Grand Cafe, Sea Point</div><div class="food-desc">Food, drinks and atmosphere. ~R300 (€15).</div></div>
+        <div class="food-card fade-up d3"><span class="price-pill pill-budget">Budget</span><div class="food-name">Nando's</div><div class="food-desc">SA's iconic peri peri chicken. ~R75 (€4).</div></div>
       </div>
     </div>
     <div class="food-tier">
-      <div class="food-tier-label">Cape Town restaurants</div>
+      <div class="food-tier-label">Winelands</div>
       <div class="food-grid">
-        <div class="food-card"><span class="price-pill pill-special">Must-book</span><div class="food-name">Fyn ⭐</div><div class="food-desc">Our favourite. Michelin-worthy tasting menu. ~R2,200 (€110). Book weeks ahead.</div></div>
-        <div class="food-card"><span class="price-pill pill-special">Special occasion</span><div class="food-name">Chefs Warehouse, Beau Constantia</div><div class="food-desc">Incredible food and views on a wine farm. Book ahead.</div></div>
-        <div class="food-card"><span class="price-pill pill-mid">Mid-range</span><div class="food-name">Tashas</div><div class="food-desc">Great bistro chain for breakfast or lunch. ~R150–220 (€8–11).</div></div>
-        <div class="food-card"><span class="price-pill pill-mid">Mid-range</span><div class="food-name">Grand Cafe, Sea Point</div><div class="food-desc">Food, drinks and atmosphere. ~R300 per meal (€15).</div></div>
-        <div class="food-card"><span class="price-pill pill-mid">Mid-range</span><div class="food-name">The Brass Bell, Kalk Bay</div><div class="food-desc">Great seafood on the water. ~R250 (€12).</div></div>
-        <div class="food-card"><span class="price-pill pill-budget">Budget</span><div class="food-name">Nando's</div><div class="food-desc">SA's iconic peri peri chicken. ~R75 (€4). Lemon &amp; herb = mild; peri peri = spicy.</div></div>
-        <div class="food-card"><span class="price-pill pill-mid">Market</span><div class="food-name">Time Out Market, Waterfront</div><div class="food-desc">Excellent food hall, great wine selection.</div></div>
-        <div class="food-card"><span class="price-pill pill-budget">Budget</span><div class="food-name">Kalkys, Kalk Bay</div><div class="food-desc">Classic fish and chips by the water. ~R60 (€3).</div></div>
-      </div>
-    </div>
-    <div class="food-tier">
-      <div class="food-tier-label">Winelands restaurants</div>
-      <div class="food-grid">
-        <div class="food-card"><span class="price-pill pill-special">Must-book</span><div class="food-name">Babel at Babylonstoren ⭐</div><div class="food-desc">One of our favourites. Garden-to-table perfection. ~R800 (€40). Book ahead.</div></div>
-        <div class="food-card"><span class="price-pill pill-special">Fine dining</span><div class="food-name">Le Petite Colombe, Franschhoek</div><div class="food-desc">Michelin-level multi-course. ~R2,400 (€120).</div></div>
-        <div class="food-card"><span class="price-pill pill-special">Fine dining</span><div class="food-name">Rust en Vrede</div><div class="food-desc">Stunning venue, incredible wine pairing. Six-course ~R1,400 (€70).</div></div>
-        <div class="food-card"><span class="price-pill pill-mid">Mid-range</span><div class="food-name">Tokara, Stellenbosch</div><div class="food-desc">Beautiful views, great wine pairing, excellent lunch. ~R400 (€20).</div></div>
-        <div class="food-card"><span class="price-pill pill-mid">Mid-range</span><div class="food-name">The Fat Butcher, Stellenbosch</div><div class="food-desc">Great steakhouse. 250g rump ~R250 (€13).</div></div>
-        <div class="food-card"><span class="price-pill pill-mid">Café</span><div class="food-name">Pyjamas and Jam, Somerset West</div><div class="food-desc">Wonderful for breakfast, brunch, and cakes.</div></div>
+        <div class="food-card fade-up"><span class="price-pill pill-special">Must-book</span><div class="food-name">Babel at Babylonstoren ⭐</div><div class="food-desc">Garden-to-table perfection. ~R800 (€40). Book ahead.</div></div>
+        <div class="food-card fade-up d1"><span class="price-pill pill-special">Fine dining</span><div class="food-name">Le Petite Colombe</div><div class="food-desc">Michelin-level multi-course. ~R2,400 (€120).</div></div>
+        <div class="food-card fade-up d2"><span class="price-pill pill-mid">Mid-range</span><div class="food-name">Tokara, Stellenbosch</div><div class="food-desc">Beautiful views, great wine pairing. ~R400 (€20).</div></div>
+        <div class="food-card fade-up d3"><span class="price-pill pill-mid">Café</span><div class="food-name">Pyjamas and Jam</div><div class="food-desc">Wonderful for breakfast and brunch.</div></div>
       </div>
     </div>
   </section>
 
 </div>
 
+<!-- ── PHOTO GRID ── -->
+<div class="photo-grid-3">
+  <!-- Replace src values with your own photos -->
+  <img src="https://images.unsplash.com/photo-1548625149-720754874918?w=600&q=80" alt="Cape Town">
+  <img src="https://images.unsplash.com/photo-1563789031959-4eba9fcfe485?w=600&q=80" alt="Wine farm">
+  <img src="https://images.unsplash.com/photo-1560969184-10fe8719e047?w=600&q=80" alt="South Africa">
+</div>
+
+<div class="page">
+
+  <!-- ══ EXPLORE THE REGION ══ -->
+  <section class="section" id="explore">
+    <div class="ed-heading fade-up">
+      <div class="ed-heading-title"><em>Explore</em> <strong>THE REGION</strong></div>
+      <div class="ed-heading-sub">Wine farms, beaches, safaris & things to do in the Western Cape</div>
+    </div>
+
+    <h3 class="subsection-heading fade-up">🍷 Wine Farms</h3>
+    <div>
+      <div class="region fade-up"><div class="region-name">Franschhoek</div><div class="region-desc">The "French Corner" — home to the <strong>Franschhoek Wine Tram</strong>, a hop-on-hop-off service to different estates. A perfect full day without needing to drive.</div><div class="region-picks"><strong>Estates:</strong> Haute Cabrière · Vrede en Lust · La Motte · Rickety Bridge · Boschendal · Zorgvliet</div></div>
+      <div class="region fade-up"><div class="region-name">Stellenbosch</div><div class="region-desc">A vibrant university town with oak-lined streets and world-class estates.</div><div class="region-picks"><strong>Estates:</strong> Waterford · Warwick (David's favourite!) · Tokara · Delaire Graff · Babylonstoren</div></div>
+      <div class="region fade-up"><div class="region-name">Constantia</div><div class="region-desc">A half-day wine visit without leaving Cape Town. Groot Constantia, Klein Constantia, Beau Constantia.</div></div>
+      <div class="region fade-up"><div class="region-name">Paarl — near the venue</div><div class="region-desc">Spice Route Destination or Fairview: chocolate, beer, cheese, and wine all in one spot.</div></div>
+    </div>
+
+    <h3 class="subsection-heading fade-up">🌊 Cape Town</h3>
+    <ul class="tips-list">
+      <li class="fade-up"><span>⛰️</span><span><strong>Table Mountain</strong> — hike or cable car. Check wind forecasts; it closes when too windy.</span></li>
+      <li class="fade-up"><span>🌅</span><span><strong>Lion's Head</strong> — sunset hike, ~1 hour up. Bring a headlamp for the descent!</span></li>
+      <li class="fade-up"><span>⚓</span><span><strong>Robben Island</strong> — historic and moving. Worth the boat trip.</span></li>
+      <li class="fade-up"><span>🎨</span><span><strong>Bo Kaap</strong> — colourful neighbourhood, Cape Malay food.</span></li>
+      <li class="fade-up"><span>🏖️</span><span><strong>Beaches</strong> — Clifton &amp; Camps Bay (scenic, cooler) · Muizenberg &amp; Strand (warmer water)</span></li>
+    </ul>
+
+    <h3 class="subsection-heading fade-up">🚗 Day Trips</h3>
+    <ul class="tips-list">
+      <li class="fade-up"><span>🐧</span><span><strong>Simonstown / Kalk Bay (45 min)</strong> — penguins at Boulders Beach, charming harbour, Kalkys fish &amp; chips.</span></li>
+      <li class="fade-up"><span>🐋</span><span><strong>Hermanus (2 hrs)</strong> — whale watching. October is peak season for sightings.</span></li>
+      <li class="fade-up"><span>🪁</span><span><strong>Langebaan / Paternoster (2 hrs)</strong> — kite surfing, incredible seafood, beautiful west coast.</span></li>
+    </ul>
+
+    <h3 class="subsection-heading fade-up">🍴 SA Foods to Try</h3>
+    <ul class="tips-list">
+      <li class="fade-up"><span>🥩</span><span><strong>Biltong &amp; droëwors</strong> — dried cured meat at any petrol station. Far better than jerky.</span></li>
+      <li class="fade-up"><span>🌭</span><span><strong>Boerewors roll</strong> — grilled sausage in a roll. Classic SA street food.</span></li>
+      <li class="fade-up"><span>🍛</span><span><strong>Bobotie &amp; bunny chow</strong> — spiced mince bake and a bread bowl of curry.</span></li>
+      <li class="fade-up"><span>🍮</span><span><strong>Milk tart, malva pudding, koeksisters</strong> — order any of these whenever you see them.</span></li>
+      <li class="fade-up"><span>🥂</span><span><strong>MCC (Méthode Cap Classique)</strong> — SA's answer to Champagne.</span></li>
+    </ul>
+  </section>
+
+</div>
+
+<!-- ── REGISTRY SPLIT ── -->
+<div class="split fade-up" id="registry">
+  <!-- Replace src with your own photo -->
+  <img class="split-img" src="https://images.unsplash.com/photo-1478131143081-80f7f84ca84d?w=900&q=80" alt="Celebration">
+  <div class="split-content">
+    <div class="ed-heading-title" style="text-align:left;font-size:clamp(28px,4vw,52px);margin-bottom:0.6rem;"><em>The</em> <strong>REGISTRY</strong></div>
+    <div class="ed-heading-sub" style="text-align:left;margin-bottom:1.5rem;">A little wishlist, if you'd like to give a gift</div>
+    <div class="registry-content">
+      <p>Your presence at our wedding is the greatest gift of all. If you'd like to give a little something, we've put together a small registry — thank you so much for your generosity. 💛</p>
+      <a class="registry-btn" href="https://www.zola.com/wedding/georginaanddavid2026/registry" target="_blank" rel="noopener">View Registry ↗</a>
+    </div>
+  </div>
+</div>
+
 <!-- ── FOOTER ── -->
 <footer class="site-footer">
-  <svg width="120" height="60" viewBox="0 0 120 60" fill="none" style="margin-bottom:1rem;" aria-hidden="true">
-    <path d="M60 55 C40 40 15 38 5 20 C18 28 38 25 60 10 C82 25 102 28 115 20 C105 38 80 40 60 55Z" fill="#B8CBB0" opacity="0.5"/>
-    <circle cx="60" cy="10" r="5" fill="#D4A8A0" opacity="0.8"/>
-    <circle cx="28" cy="22" r="3" fill="#9AAD8A" opacity="0.6"/>
-    <circle cx="92" cy="22" r="3" fill="#9AAD8A" opacity="0.6"/>
-    <circle cx="20" cy="32" r="2.5" fill="#C9A070" opacity="0.5"/>
-    <circle cx="100" cy="32" r="2.5" fill="#C9A070" opacity="0.5"/>
-  </svg>
   <div class="footer-names">Georgina &amp; David</div>
   <p class="footer-date">29 October 2026 · Brookdale Estate, Paarl · Western Cape</p>
-  <a class="footer-link" href="https://www.zola.com/wedding/georginaanddavid2026" target="_blank" rel="noopener">
-    Visit our wedding website ↗
-  </a>
+  <div class="footer-divider"></div>
+  <a class="footer-link" href="https://tally.so/#placeholder-rsvp" target="_blank" rel="noopener">RSVP ↗</a>
 </footer>
+
+<script>
+  // Event column expand/collapse
+  function toggleEvent(btn) {
+    const col = btn.closest('.event-col');
+    const cols = document.getElementById('event-cols');
+    const isExpanded = col.classList.contains('expanded');
+    const isMobile = window.innerWidth <= 700;
+
+    if (isMobile) {
+      // Mobile: just toggle this column in place, leave others untouched
+      col.classList.toggle('expanded');
+    } else {
+      // Desktop: collapse all, then expand the clicked one (or collapse if already open)
+      document.querySelectorAll('.event-col').forEach(c => c.classList.remove('expanded'));
+      cols.classList.remove('has-expanded');
+      if (!isExpanded) {
+        col.classList.add('expanded');
+        cols.classList.add('has-expanded');
+      }
+    }
+  }
+
+  // Fade-in on scroll
+  const fadeEls = document.querySelectorAll('.fade-up');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+    });
+  }, { threshold: 0.1 });
+  fadeEls.forEach(el => observer.observe(el));
+</script>
 
 </body>
 </html>
