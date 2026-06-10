@@ -124,20 +124,25 @@
       white-space: nowrap;
       max-width: 1100px;
       margin: 0 auto;
+      padding: 0 1rem;
     }
     .nav-inner::-webkit-scrollbar { display: none; }
     .nav-inner a {
       display: inline-block;
-      padding: 1rem 1.1rem;
+      padding: 1rem 0.85rem;
       font-size: 11px;
       font-weight: 500;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: var(--ink);
       text-decoration: none;
       border-bottom: 2px solid transparent;
       transition: color 0.2s, border-color 0.2s;
       flex-shrink: 0;
+    }
+    @media (max-width: 480px) {
+      .nav-inner a { padding: 1rem 0.65rem; font-size: 10px; letter-spacing: 0.06em; }
+      .nav-rsvp-link { padding: 0.45rem 0.9rem !important; font-size: 10px !important; }
     }
     .nav-inner a:hover { color: var(--sage); border-bottom-color: var(--sage); }
     .nav-rsvp-link {
