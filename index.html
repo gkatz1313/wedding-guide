@@ -395,14 +395,32 @@
       }
     }
 
+    .event-col-photo-wrap {
+      position: relative;
+      margin-bottom: 1.25rem;
+    }
     .event-col-photo {
       width: 100%;
       aspect-ratio: 3 / 4;
       object-fit: cover;
       display: block;
-      margin-bottom: 1.25rem;
+      margin-bottom: 0;
       transition: aspect-ratio 0.5s ease;
       border-radius: 4px;
+    }
+    .event-col-ribbon {
+      position: absolute;
+      top: 14px;
+      left: 0;
+      background: #000;
+      color: #fff;
+      font-family: var(--sans);
+      font-size: 9px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 5px 12px 5px 10px;
+      border-radius: 0 3px 3px 0;
     }
     /* On desktop: shrink photo when expanded to make room */
     @media (min-width: 701px) {
@@ -957,7 +975,10 @@
 
       <!-- Col 3: Farewell Picnic -->
       <div class="event-col fade-up d2">
-        <img class="event-col-photo" src="event-03-farewell.jpg" alt="Farewell picnic">
+        <div class="event-col-photo-wrap">
+          <img class="event-col-photo" src="event-03-farewell.jpg" alt="Farewell picnic">
+          <span class="event-col-ribbon">Optional</span>
+        </div>
         <div class="event-col-label">30 October · Friday</div>
         <div class="event-col-name">Farewell Sunset Picnic <span style="font-size:14px;font-style:normal;font-weight:300;color:var(--ink-soft);">(optional)</span></div>
         <div class="event-col-meta">📍 Boschendal Wine Estate, Franschhoek · 18:00–22:00</div>
