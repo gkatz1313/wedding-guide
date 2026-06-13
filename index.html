@@ -834,7 +834,7 @@
       flex-shrink: 0;
     }
     .legend-heart { color: #680a29; font-size: 14px; line-height: 1; flex-shrink: 0; }
-    .legend-diamond.place   { background: #f97316; border: 1.5px solid rgba(0,0,0,0.15); }
+    .legend-diamond.place   { background: #000; border: 1.5px solid rgba(0,0,0,0.15); }
     .legend-route {
       width: 24px; height: 3px; flex-shrink: 0;
       background: repeating-linear-gradient(90deg, #84cc16 0, #84cc16 6px, transparent 6px, transparent 11px);
@@ -1336,7 +1336,7 @@
   }
 
   var weddingIcon = heart(24);
-  var placeIcon   = diamond('#f97316', 13, 'rgba(249,115,22,0.4)');
+  var placeIcon   = diamond('#000', 13, 'rgba(0,0,0,0.3)');
 
   function popup(title, sub, type) {
     var label = type === 'wedding'
