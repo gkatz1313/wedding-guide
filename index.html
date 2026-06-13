@@ -887,8 +887,12 @@
     .map-popup-sub { font-size: 11.5px; color: #8a6068; line-height: 1.55; }
 
     /* ── REGISTRY ── */
-    .registry-content { text-align: left; max-width: 100%; }
-    .registry-content p { font-size: 14px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.75rem; font-weight: 300; }
+    .registry-section { background: var(--parchment); padding: 5rem 5vw; text-align: center; }
+    .registry-section .ed-heading-title { font-size: clamp(32px,5vw,64px); margin-bottom: 0.5rem; }
+    .registry-section .ed-heading-sub { margin-bottom: 2rem; }
+    .registry-divider { width: 48px; height: 1px; background: var(--ink-soft); margin: 0 auto 2rem; opacity: 0.4; }
+    .registry-content { text-align: center; max-width: 100%; }
+    .registry-content p { font-size: 15px; color: var(--ink-mid); line-height: 1.9; margin-bottom: 2rem; font-weight: 300; max-width: 520px; margin-left: auto; margin-right: auto; }
     .registry-btn {
       display: inline-flex; align-items: center; gap: 6px;
       border: 1px solid var(--ink);
@@ -1301,17 +1305,14 @@
 </div>
 
 <!-- ── REGISTRY ── -->
-<div class="page" id="registry">
-  <section class="section">
-  <div class="split-content" style="max-width:640px;margin:0 auto;">
-    <div class="ed-heading-title" style="text-align:left;font-size:clamp(28px,4vw,52px);margin-bottom:0.6rem;"><em>The</em> <strong>REGISTRY</strong></div>
-    <div class="ed-heading-sub" style="text-align:left;margin-bottom:1.5rem;">A little wishlist, if you'd like to give a gift</div>
-    <div class="registry-content">
-      <p>Your presence at our wedding is the greatest gift of all. If you'd like to give a little something, we've put together a small registry — thank you so much for your generosity. 💛</p>
-      <a class="registry-btn" href="https://www.myregistry.com/giftlist/georginadavid" target="_blank" rel="noopener">View Registry ↗</a>
-    </div>
+<div class="registry-section fade-up" id="registry">
+  <div class="ed-heading-title"><em>The</em> <strong>REGISTRY</strong></div>
+  <div class="ed-heading-sub">A little wishlist, if you'd like to give a gift</div>
+  <div class="registry-divider"></div>
+  <div class="registry-content">
+    <p>Your presence at our wedding is the greatest gift of all. If you'd like to give a little something, we've put together a small registry — thank you so much for your generosity. 💛</p>
+    <a class="registry-btn" href="https://www.myregistry.com/giftlist/georginadavid" target="_blank" rel="noopener">View Registry ↗</a>
   </div>
-  </section>
 </div>
 
 <!-- ── FOOTER ── -->
