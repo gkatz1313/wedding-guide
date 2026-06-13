@@ -795,10 +795,6 @@
       height: 480px;
     }
     @media (max-width: 700px) { #region-map { height: 320px; } }
-    /* Warm illustrated feel */
-    #region-map .leaflet-tile-pane {
-      filter: sepia(0.45) saturate(0.75) brightness(1.08) contrast(0.92);
-    }
     .map-legend {
       display: flex;
       flex-wrap: wrap;
@@ -815,7 +811,7 @@
       border-radius: 2px;
       flex-shrink: 0;
     }
-    .legend-diamond.wedding { background: #f9a8c9; border: 1.5px solid rgba(0,0,0,0.15); }
+    .legend-diamond.wedding { background: #680a29; border: 1.5px solid rgba(0,0,0,0.15); }
     .legend-diamond.place   { background: #f97316; border: 1.5px solid rgba(0,0,0,0.15); }
     .legend-route {
       width: 24px; height: 3px; flex-shrink: 0;
@@ -838,7 +834,7 @@
       letter-spacing: 0.1em; text-transform: uppercase;
       padding: 2px 8px; border-radius: 20px; margin-bottom: 6px;
     }
-    .map-popup-label.wedding { background: #fce7f3; color: #be185d; }
+    .map-popup-label.wedding { background: #f0dada; color: #680a29; }
     .map-popup-label.place   { background: #fff7ed; color: #c2410c; }
     .map-popup-label.route   { background: #f7fee7; color: #4d7c0f; }
     .map-popup-title { font-weight: 600; font-size: 13px; color: #2a1520; margin-bottom: 3px; }
@@ -1281,10 +1277,11 @@
     scrollWheelZoom: false
   });
 
-  // ESRI World Shaded Relief — illustrated terrain feel
-  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
-    attribution: 'Tiles &copy; Esri',
-    maxZoom: 13
+  // CartoDB Positron — clean, minimal, no API key
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
   }).addTo(map);
 
   // Diamond marker
@@ -1300,7 +1297,7 @@
     });
   }
 
-  var weddingIcon = diamond('#f9a8c9', 18, 'rgba(249,168,201,0.5)');
+  var weddingIcon = diamond('#680a29', 18, 'rgba(104,10,41,0.4)');
   var placeIcon   = diamond('#f97316', 13, 'rgba(249,115,22,0.4)');
 
   function popup(title, sub, type) {
