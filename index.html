@@ -7,6 +7,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -780,6 +782,58 @@
     /* ── TIP BOX ── */
     .tip-box { background: var(--sage-faint); border: 1px solid var(--sage-light); border-radius: 8px; padding: 0.85rem 1.1rem; font-size: 13px; color: var(--ink-mid); margin-top: 12px; display: flex; gap: 8px; align-items: flex-start; line-height: 1.6; }
 
+    /* ── INTERACTIVE MAP ── */
+    .map-wrap {
+      border-radius: 8px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      margin-bottom: 3rem;
+      position: relative;
+    }
+    #region-map {
+      width: 100%;
+      height: 520px;
+    }
+    @media (max-width: 700px) {
+      #region-map { height: 380px; }
+    }
+    .map-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem 1.2rem;
+      margin-top: 0.85rem;
+      margin-bottom: 2rem;
+      font-size: 12px;
+      color: var(--ink-mid);
+    }
+    .map-legend-item { display: flex; align-items: center; gap: 5px; }
+    .legend-dot {
+      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    }
+    .legend-dot.wedding { background: #680a29; }
+    .legend-dot.town { background: #2a1520; }
+    .legend-dot.route { background: #ac747c; border-radius: 2px; width: 18px; height: 4px; }
+    /* Leaflet popup styling */
+    .leaflet-popup-content-wrapper {
+      border-radius: 8px !important;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
+      font-family: 'Jost', sans-serif !important;
+      padding: 0 !important;
+    }
+    .leaflet-popup-content {
+      margin: 0 !important;
+      font-family: 'Jost', sans-serif !important;
+    }
+    .map-popup { padding: 12px 15px; min-width: 160px; }
+    .map-popup-title { font-weight: 600; font-size: 13px; color: #2a1520; margin-bottom: 2px; }
+    .map-popup-sub { font-size: 11.5px; color: #8a6068; line-height: 1.5; }
+    .map-popup-tag {
+      display: inline-block; font-size: 9.5px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      background: #680a29; color: white;
+      padding: 2px 7px; border-radius: 20px; margin-bottom: 5px;
+    }
+
     /* ── REGISTRY ── */
     .registry-content { text-align: left; max-width: 100%; }
     .registry-content p { font-size: 14px; color: var(--ink-mid); line-height: 1.85; margin-bottom: 1.75rem; font-weight: 300; }
@@ -1109,6 +1163,16 @@
       <div class="ed-heading-sub">Wine farms, beaches, safaris & things to do in the Western Cape</div>
     </div>
 
+    <!-- Interactive Map -->
+    <div class="map-wrap fade-up">
+      <div id="region-map"></div>
+    </div>
+    <div class="map-legend fade-up">
+      <div class="map-legend-item"><span class="legend-dot wedding"></span> Wedding venue &amp; nearby towns</div>
+      <div class="map-legend-item"><span class="legend-dot town"></span> Places to explore</div>
+      <div class="map-legend-item"><span class="legend-dot route"></span> Garden Route</div>
+    </div>
+
     <h3 class="subsection-heading fade-up">🍷 Wine Farms</h3>
     <div>
       <div class="region fade-up"><div class="region-name">Franschhoek</div><div class="region-desc">The "French Corner" — home to the <strong>Franschhoek Wine Tram</strong>, a hop-on-hop-off service to different estates. A perfect full day without needing to drive.</div><div class="region-picks"><strong>Estates:</strong> Haute Cabrière · Vrede en Lust · La Motte · Rickety Bridge · Boschendal · Zorgvliet</div></div>
@@ -1197,6 +1261,94 @@
     });
   }, { threshold: 0.1 });
   fadeEls.forEach(el => observer.observe(el));
+
+/* ── REGION MAP ── */
+(function() {
+  var map = L.map('region-map', {
+    center: [-33.95, 19.2],
+    zoom: 8,
+    zoomControl: true,
+    scrollWheelZoom: false  // prevent page hijack on scroll; pinch-zoom still works
+  });
+
+  // CartoDB Positron — clean, minimal, no API key
+  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
+    subdomains: 'abcd',
+    maxZoom: 19
+  }).addTo(map);
+
+  // Custom marker icons
+  function makeIcon(color, size) {
+    size = size || 12;
+    return L.divIcon({
+      className: '',
+      html: '<div style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + color + ';border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.35);"></div>',
+      iconAnchor: [size/2, size/2],
+      popupAnchor: [0, -(size/2 + 4)]
+    });
+  }
+
+  var weddingIcon = makeIcon('#680a29', 16);
+  var townIcon    = makeIcon('#2a1520', 11);
+
+  function popup(title, sub, isWedding) {
+    var tag = isWedding ? '<div class="map-popup-tag">Wedding Venue</div><br>' : '';
+    return '<div class="map-popup">' + tag + '<div class="map-popup-title">' + title + '</div><div class="map-popup-sub">' + sub + '</div></div>';
+  }
+
+  // Wedding venue
+  L.marker([-33.7312, 18.9711], { icon: weddingIcon })
+    .addTo(map)
+    .bindPopup(popup('Brookdale Estate, Paarl', '29 October 2026 · Your wedding venue', true));
+
+  // Towns to explore
+  var places = [
+    { latlng: [-33.9249, 18.4241], name: 'Cape Town',         sub: 'Table Mountain, V&A Waterfront, Clifton beaches' },
+    { latlng: [-33.9321, 18.8602], name: 'Stellenbosch',      sub: 'Oak-lined streets & world-class wine estates' },
+    { latlng: [-33.9100, 19.1180], name: 'Franschhoek',       sub: 'The French Corner — Wine Tram & fine dining' },
+    { latlng: [-33.9214, 18.4139], name: 'Bo-Kaap',           sub: 'Cape Town\'s iconic colourful quarter' },
+    { latlng: [-34.0307, 18.4370], name: 'Constantia',        sub: 'Wine farms within Cape Town — Groot &amp; Beau Constantia' },
+    { latlng: [-34.1924, 18.4369], name: 'Simon\'s Town',     sub: 'Penguins at Boulders Beach &amp; naval heritage' },
+    { latlng: [-34.1289, 18.4428], name: 'Kalk Bay',          sub: 'Charming fishing village, antiques &amp; the best fish &amp; chips' },
+    { latlng: [-33.2833, 19.1333], name: 'Tulbagh',           sub: 'Peaceful historic village surrounded by mountains' },
+    { latlng: [-34.4187, 19.2345], name: 'Hermanus',          sub: 'World-famous whale watching (Aug–Nov)' },
+  ];
+
+  places.forEach(function(p) {
+    L.marker(p.latlng, { icon: townIcon }).addTo(map).bindPopup(popup(p.name, p.sub, false));
+  });
+
+  // Garden Route — dashed line from Mossel Bay to Plettenberg Bay
+  var gardenRoute = [
+    [-34.1826, 22.1442], // Mossel Bay
+    [-33.9608, 22.4617], // George
+    [-33.9978, 23.0530], // Wilderness
+    [-33.9806, 23.3792], // Sedgefield
+    [-33.9806, 23.5494], // Knysna
+    [-34.0527, 23.8794], // Plettenberg Bay
+  ];
+
+  L.polyline(gardenRoute, {
+    color: '#ac747c',
+    weight: 3,
+    dashArray: '6 5',
+    opacity: 0.85
+  }).addTo(map).bindPopup('<div class="map-popup"><div class="map-popup-title">The Garden Route</div><div class="map-popup-sub">Mossel Bay → Plettenberg Bay<br>A stunning coastal drive worth adding to your trip</div></div>');
+
+  // Garden Route label marker
+  L.marker([-33.98, 23.05], {
+    icon: L.divIcon({
+      className: '',
+      html: '<div style="background:#ac747c;color:white;font-family:Jost,sans-serif;font-size:9.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.2);">Garden Route</div>',
+      iconAnchor: [45, 10]
+    })
+  }).addTo(map);
+
+  // Enable scroll wheel zoom on click/tap
+  map.once('focus', function() { map.scrollWheelZoom.enable(); });
+  map.getContainer().addEventListener('click', function() { map.scrollWheelZoom.enable(); });
+})();
 </script>
 
 </body>
