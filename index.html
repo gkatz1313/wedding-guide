@@ -765,6 +765,22 @@
     .itin-dest { font-family: var(--serif); font-size: 21px; font-style: italic; font-weight: 300; color: var(--ink); margin-bottom: 6px; }
     .itin-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
 
+    /* ── SAFARI CARDS ── */
+    .safari-section { padding: 4rem 5vw 4.5rem; max-width: 1100px; margin: 0 auto; }
+    .safari-heading { margin-bottom: 0.5rem; }
+    .safari-sub { font-size: 14px; color: var(--ink-soft); margin-bottom: 2.5rem; }
+    .safari-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: 14px; }
+    @media (max-width: 500px) { .safari-grid { grid-template-columns: 1fr; } }
+    .safari-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1.4rem 1.5rem; display: flex; flex-direction: column; gap: 0; }
+    .safari-card-icon { font-size: 22px; margin-bottom: 0.7rem; }
+    .safari-card-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 600; color: var(--ink); margin-bottom: 4px; line-height: 1.2; }
+    .safari-card-region { font-size: 10px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 12px; }
+    .safari-card-desc { font-size: 13px; color: var(--ink); line-height: 1.65; flex: 1; }
+    .safari-card-tip { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--border); font-size: 11.5px; color: var(--ink-soft); line-height: 1.55; }
+    .safari-card-tip strong { color: var(--terra); }
+    .safari-recommend { margin-top: 2rem; font-size: 12px; color: var(--ink-soft); }
+    .safari-recommend a { color: var(--ink); text-underline-offset: 2px; }
+
     /* ── INFO GRID ── */
     .info-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: 10px; }
     @media (max-width: 500px) { .info-grid { grid-template-columns: 1fr; } }
@@ -1144,18 +1160,46 @@
 
 </div>
 
-<!-- ── SAFARI SPLIT ── -->
-<div class="split reverse fade-up">
-  <img class="split-img" src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=900&q=80" alt="Safari landscape">
-  <div class="split-content">
-    <div class="ed-heading-title" style="text-align:left;font-size:clamp(28px,4vw,52px);margin-bottom:0.6rem;"><em>Recommended</em> <strong>SAFARI DESTINATIONS</strong></div>
-    <div class="ed-heading-sub" style="text-align:left;margin-bottom:1.5rem;">One of the best Big Five destinations on earth</div>
-    <p>One of the best places on earth for Big Five game drives. A guided lodge makes all the difference — rangers know exactly where to find the animals.</p>
-    <p>🦁 <strong>Kruger Area</strong> — the gold standard. Fly into Skukuza or Hoedspruit.<br>
-    🐘 <strong>Pilanesberg</strong> — malaria-free, 3 hrs from Joburg, no internal flight needed. <em>Top tip: stay on the Bakubung Gate side of the park for the best access.</em><br>
-    🌿 <strong>Honeybush Lodge, Waterberg</strong> — a smaller, more private alternative to Pilanesberg, also malaria-free and around 2.5–3 hrs from Joburg. The Waterberg is a UNESCO Biosphere Reserve with a wonderfully remote, unhurried feel — ideal if you want to avoid the crowds.<br>
-    🏕️ <strong>Mabula Game Lodge, Waterberg</strong> — a well-established Big Five reserve also in the malaria-free Waterberg, around 2.5 hrs from Joburg. Mabula offers a classic bush lodge experience with game drives twice daily, a lovely spa, and a relaxed family-friendly atmosphere. It strikes a great balance between comfort and authenticity — not too rough, not too resort-y.</p>
-    <p style="font-size:12px;color:var(--ink-soft);">Recommended: <a href="https://www.experienceafrica.co.za" target="_blank" rel="noopener" style="color:var(--sage);">experienceafrica.co.za</a></p>
+<!-- ── SAFARI SECTION ── -->
+<div style="background:var(--terra-faint);border-top:1px solid var(--border);border-bottom:1px solid var(--border);">
+  <div class="safari-section">
+    <div class="ed-heading fade-up" style="text-align:left;margin-bottom:0.5rem;">
+      <div class="ed-heading-title" style="font-size:clamp(28px,4vw,52px);"><em>Recommended</em> <strong>SAFARI DESTINATIONS</strong></div>
+    </div>
+    <p class="safari-sub fade-up">South Africa is one of the best places on earth for Big Five game drives. A guided lodge makes all the difference — rangers know exactly where to find the animals.</p>
+    <div class="safari-grid">
+
+      <div class="safari-card fade-up">
+        <div class="safari-card-icon">🦁</div>
+        <div class="safari-card-name">Kruger Area</div>
+        <div class="safari-card-region">Mpumalanga · Fly-in</div>
+        <div class="safari-card-desc">The gold standard of South African safari. Vast, wild, and teeming with the Big Five. Fly into Skukuza or Hoedspruit for the most seamless experience — private lodges on the Kruger boundary offer exceptional game viewing.</div>
+      </div>
+
+      <div class="safari-card fade-up d1">
+        <div class="safari-card-icon">🐘</div>
+        <div class="safari-card-name">Pilanesberg</div>
+        <div class="safari-card-region">North West · ~3 hrs from Joburg · Malaria-free</div>
+        <div class="safari-card-desc">A fantastic malaria-free option set in an ancient volcanic crater. No internal flight needed — drive straight from Joburg. Great variety of game including all Big Five.</div>
+        <div class="safari-card-tip"><strong>Top tip:</strong> Stay on the Bakubung Gate side of the park for the best access to game-rich areas.</div>
+      </div>
+
+      <div class="safari-card fade-up d2">
+        <div class="safari-card-icon">🌿</div>
+        <div class="safari-card-name">Honeybush Lodge</div>
+        <div class="safari-card-region">Waterberg · ~2.5–3 hrs from Joburg · Malaria-free</div>
+        <div class="safari-card-desc">A smaller, more intimate alternative to Pilanesberg set in the UNESCO Waterberg Biosphere Reserve. Wonderfully remote and unhurried — ideal if you want a private bush experience away from the crowds.</div>
+      </div>
+
+      <div class="safari-card fade-up d3">
+        <div class="safari-card-icon">🏕️</div>
+        <div class="safari-card-name">Mabula Game Lodge</div>
+        <div class="safari-card-region">Waterberg · ~2.5 hrs from Joburg · Malaria-free</div>
+        <div class="safari-card-desc">A well-established Big Five reserve in the malaria-free Waterberg. Twice-daily game drives, a lovely spa, and a relaxed family-friendly atmosphere. The perfect balance of comfort and authenticity — not too rough, not too resort-y.</div>
+      </div>
+
+    </div>
+    <p class="safari-recommend fade-up">Recommended booking agent: <a href="https://www.experienceafrica.co.za" target="_blank" rel="noopener">experienceafrica.co.za</a></p>
   </div>
 </div>
 
