@@ -811,7 +811,7 @@
       border-radius: 2px;
       flex-shrink: 0;
     }
-    .legend-diamond.wedding { background: #680a29; border: 1.5px solid rgba(0,0,0,0.15); }
+    .legend-heart { color: #680a29; font-size: 14px; line-height: 1; flex-shrink: 0; }
     .legend-diamond.place   { background: #f97316; border: 1.5px solid rgba(0,0,0,0.15); }
     .legend-route {
       width: 24px; height: 3px; flex-shrink: 0;
@@ -1174,7 +1174,7 @@
       <div id="region-map"></div>
     </div>
     <div class="map-legend fade-up">
-      <div class="map-legend-item"><span class="legend-diamond wedding"></span> Wedding venue</div>
+      <div class="map-legend-item"><span class="legend-heart">♥</span> Wedding &amp; favourites</div>
       <div class="map-legend-item"><span class="legend-diamond place"></span> Places to explore</div>
       <div class="map-legend-item"><span class="legend-route"></span> Garden Route</div>
     </div>
@@ -1284,6 +1284,18 @@
     maxZoom: 19
   }).addTo(map);
 
+  // Heart marker
+  function heart(size) {
+    size = size || 22;
+    return L.divIcon({
+      className: '',
+      html: '<div style="font-size:' + size + 'px;line-height:1;color:#680a29;text-shadow:0 2px 6px rgba(104,10,41,0.35),0 0 0 1px rgba(255,255,255,0.6);">♥</div>',
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size],
+      popupAnchor: [0, -(size + 4)]
+    });
+  }
+
   // Diamond marker
   function diamond(color, size, shadow) {
     size = size || 13;
@@ -1297,7 +1309,7 @@
     });
   }
 
-  var weddingIcon = diamond('#680a29', 18, 'rgba(104,10,41,0.4)');
+  var weddingIcon = heart(24);
   var placeIcon   = diamond('#f97316', 13, 'rgba(249,115,22,0.4)');
 
   function popup(title, sub, type) {
@@ -1309,9 +1321,13 @@
     return '<div class="map-popup">' + label + '<div class="map-popup-title">' + title + '</div>' + (sub ? '<div class="map-popup-sub">' + sub + '</div>' : '') + '</div>';
   }
 
-  // Wedding venue
-  L.marker([-33.7312, 18.9711], { icon: weddingIcon }).addTo(map)
-    .bindPopup(popup('Brookdale Estate, Paarl', '29 October 2026', 'wedding'));
+  // Wedding venue — Brookdale Estate
+  L.marker([-33.7198, 19.0362], { icon: weddingIcon }).addTo(map)
+    .bindPopup(popup('Brookdale Estate, Paarl', '29 October 2026 · Your wedding venue', 'wedding'));
+
+  // The Table at De Meye
+  L.marker([-33.8165, 18.8301], { icon: weddingIcon }).addTo(map)
+    .bindPopup(popup('The Table at De Meye', 'Stellenbosch · Our favourite restaurant', 'wedding'));
 
   // Places to explore
   [
