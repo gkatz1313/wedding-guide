@@ -787,52 +787,62 @@
       border-radius: 8px;
       overflow: hidden;
       border: 1px solid var(--border);
-      margin-bottom: 3rem;
+      margin-bottom: 1.5rem;
       position: relative;
     }
     #region-map {
       width: 100%;
-      height: 520px;
+      height: 480px;
     }
-    @media (max-width: 700px) {
-      #region-map { height: 380px; }
+    @media (max-width: 700px) { #region-map { height: 320px; } }
+    /* Warm illustrated feel */
+    #region-map .leaflet-tile-pane {
+      filter: sepia(0.45) saturate(0.75) brightness(1.08) contrast(0.92);
     }
     .map-legend {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.6rem 1.2rem;
-      margin-top: 0.85rem;
-      margin-bottom: 2rem;
+      gap: 0.5rem 1.8rem;
+      margin-bottom: 2.5rem;
       font-size: 12px;
       color: var(--ink-mid);
+      font-weight: 400;
     }
-    .map-legend-item { display: flex; align-items: center; gap: 5px; }
-    .legend-dot {
-      width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+    .map-legend-item { display: flex; align-items: center; gap: 8px; }
+    .legend-diamond {
+      width: 11px; height: 11px;
+      transform: rotate(45deg);
+      border-radius: 2px;
+      flex-shrink: 0;
     }
-    .legend-dot.wedding { background: #680a29; }
-    .legend-dot.town { background: #2a1520; }
-    .legend-dot.route { background: #ac747c; border-radius: 2px; width: 18px; height: 4px; }
-    /* Leaflet popup styling */
+    .legend-diamond.wedding { background: #f9a8c9; border: 1.5px solid rgba(0,0,0,0.15); }
+    .legend-diamond.place   { background: #f97316; border: 1.5px solid rgba(0,0,0,0.15); }
+    .legend-route {
+      width: 24px; height: 3px; flex-shrink: 0;
+      background: repeating-linear-gradient(90deg, #84cc16 0, #84cc16 6px, transparent 6px, transparent 11px);
+      border-radius: 1px;
+    }
+    /* Popup styling */
     .leaflet-popup-content-wrapper {
       border-radius: 8px !important;
       box-shadow: 0 4px 20px rgba(0,0,0,0.15) !important;
       font-family: 'Jost', sans-serif !important;
       padding: 0 !important;
+      border: 1px solid var(--border) !important;
     }
-    .leaflet-popup-content {
-      margin: 0 !important;
-      font-family: 'Jost', sans-serif !important;
+    .leaflet-popup-content { margin: 0 !important; font-family: 'Jost', sans-serif !important; }
+    .leaflet-popup-tip { background: white !important; }
+    .map-popup { padding: 12px 16px; min-width: 170px; }
+    .map-popup-label {
+      display: inline-block; font-size: 9px; font-weight: 600;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 20px; margin-bottom: 6px;
     }
-    .map-popup { padding: 12px 15px; min-width: 160px; }
-    .map-popup-title { font-weight: 600; font-size: 13px; color: #2a1520; margin-bottom: 2px; }
-    .map-popup-sub { font-size: 11.5px; color: #8a6068; line-height: 1.5; }
-    .map-popup-tag {
-      display: inline-block; font-size: 9.5px; font-weight: 600;
-      letter-spacing: 0.08em; text-transform: uppercase;
-      background: #680a29; color: white;
-      padding: 2px 7px; border-radius: 20px; margin-bottom: 5px;
-    }
+    .map-popup-label.wedding { background: #fce7f3; color: #be185d; }
+    .map-popup-label.place   { background: #fff7ed; color: #c2410c; }
+    .map-popup-label.route   { background: #f7fee7; color: #4d7c0f; }
+    .map-popup-title { font-weight: 600; font-size: 13px; color: #2a1520; margin-bottom: 3px; }
+    .map-popup-sub { font-size: 11.5px; color: #8a6068; line-height: 1.55; }
 
     /* ── REGISTRY ── */
     .registry-content { text-align: left; max-width: 100%; }
@@ -1168,9 +1178,9 @@
       <div id="region-map"></div>
     </div>
     <div class="map-legend fade-up">
-      <div class="map-legend-item"><span class="legend-dot wedding"></span> Wedding venue &amp; nearby towns</div>
-      <div class="map-legend-item"><span class="legend-dot town"></span> Places to explore</div>
-      <div class="map-legend-item"><span class="legend-dot route"></span> Garden Route</div>
+      <div class="map-legend-item"><span class="legend-diamond wedding"></span> Wedding venue</div>
+      <div class="map-legend-item"><span class="legend-diamond place"></span> Places to explore</div>
+      <div class="map-legend-item"><span class="legend-route"></span> Garden Route</div>
     </div>
 
     <h3 class="subsection-heading fade-up">🍷 Wine Farms</h3>
@@ -1265,88 +1275,84 @@
 /* ── REGION MAP ── */
 (function() {
   var map = L.map('region-map', {
-    center: [-33.95, 19.2],
-    zoom: 8,
+    center: [-33.85, 20.4],
+    zoom: 7,
     zoomControl: true,
-    scrollWheelZoom: false  // prevent page hijack on scroll; pinch-zoom still works
+    scrollWheelZoom: false
   });
 
-  // CartoDB Positron — clean, minimal, no API key
-  L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> &copy; <a href="https://carto.com/">CARTO</a>',
-    subdomains: 'abcd',
-    maxZoom: 19
+  // ESRI World Shaded Relief — illustrated terrain feel
+  L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Shaded_Relief/MapServer/tile/{z}/{y}/{x}', {
+    attribution: 'Tiles &copy; Esri',
+    maxZoom: 13
   }).addTo(map);
 
-  // Custom marker icons
-  function makeIcon(color, size) {
-    size = size || 12;
+  // Diamond marker
+  function diamond(color, size, shadow) {
+    size = size || 13;
+    shadow = shadow || 'rgba(0,0,0,0.25)';
     return L.divIcon({
       className: '',
-      html: '<div style="width:' + size + 'px;height:' + size + 'px;border-radius:50%;background:' + color + ';border:2px solid white;box-shadow:0 1px 4px rgba(0,0,0,0.35);"></div>',
-      iconAnchor: [size/2, size/2],
-      popupAnchor: [0, -(size/2 + 4)]
+      html: '<div style="width:' + size + 'px;height:' + size + 'px;background:' + color + ';transform:rotate(45deg);border-radius:2px;border:2px solid rgba(255,255,255,0.85);box-shadow:0 2px 7px ' + shadow + ';"></div>',
+      iconSize: [size, size],
+      iconAnchor: [size / 2, size / 2],
+      popupAnchor: [0, -(size / 2 + 8)]
     });
   }
 
-  var weddingIcon = makeIcon('#680a29', 16);
-  var townIcon    = makeIcon('#2a1520', 11);
+  var weddingIcon = diamond('#f9a8c9', 18, 'rgba(249,168,201,0.5)');
+  var placeIcon   = diamond('#f97316', 13, 'rgba(249,115,22,0.4)');
 
-  function popup(title, sub, isWedding) {
-    var tag = isWedding ? '<div class="map-popup-tag">Wedding Venue</div><br>' : '';
-    return '<div class="map-popup">' + tag + '<div class="map-popup-title">' + title + '</div><div class="map-popup-sub">' + sub + '</div></div>';
+  function popup(title, sub, type) {
+    var label = type === 'wedding'
+      ? '<div class="map-popup-label wedding">Wedding Venue</div><br>'
+      : type === 'route'
+      ? '<div class="map-popup-label route">Garden Route</div><br>'
+      : '<div class="map-popup-label place">Explore</div><br>';
+    return '<div class="map-popup">' + label + '<div class="map-popup-title">' + title + '</div>' + (sub ? '<div class="map-popup-sub">' + sub + '</div>' : '') + '</div>';
   }
 
   // Wedding venue
-  L.marker([-33.7312, 18.9711], { icon: weddingIcon })
-    .addTo(map)
-    .bindPopup(popup('Brookdale Estate, Paarl', '29 October 2026 · Your wedding venue', true));
+  L.marker([-33.7312, 18.9711], { icon: weddingIcon }).addTo(map)
+    .bindPopup(popup('Brookdale Estate, Paarl', '29 October 2026', 'wedding'));
 
-  // Towns to explore
-  var places = [
-    { latlng: [-33.9249, 18.4241], name: 'Cape Town',         sub: 'Table Mountain, V&A Waterfront, Clifton beaches' },
-    { latlng: [-33.9321, 18.8602], name: 'Stellenbosch',      sub: 'Oak-lined streets & world-class wine estates' },
-    { latlng: [-33.9100, 19.1180], name: 'Franschhoek',       sub: 'The French Corner — Wine Tram & fine dining' },
-    { latlng: [-33.9214, 18.4139], name: 'Bo-Kaap',           sub: 'Cape Town\'s iconic colourful quarter' },
-    { latlng: [-34.0307, 18.4370], name: 'Constantia',        sub: 'Wine farms within Cape Town — Groot &amp; Beau Constantia' },
-    { latlng: [-34.1924, 18.4369], name: 'Simon\'s Town',     sub: 'Penguins at Boulders Beach &amp; naval heritage' },
-    { latlng: [-34.1289, 18.4428], name: 'Kalk Bay',          sub: 'Charming fishing village, antiques &amp; the best fish &amp; chips' },
-    { latlng: [-33.2833, 19.1333], name: 'Tulbagh',           sub: 'Peaceful historic village surrounded by mountains' },
-    { latlng: [-34.4187, 19.2345], name: 'Hermanus',          sub: 'World-famous whale watching (Aug–Nov)' },
-  ];
-
-  places.forEach(function(p) {
-    L.marker(p.latlng, { icon: townIcon }).addTo(map).bindPopup(popup(p.name, p.sub, false));
+  // Places to explore
+  [
+    { latlng: [-33.9249, 18.4241], name: 'Cape Town',      sub: 'Table Mountain, V&A Waterfront, Clifton beaches' },
+    { latlng: [-33.9321, 18.8602], name: 'Stellenbosch',   sub: 'Oak-lined streets & world-class wine estates' },
+    { latlng: [-33.9100, 19.1180], name: 'Franschhoek',    sub: 'The French Corner — Wine Tram & fine dining' },
+    { latlng: [-33.9214, 18.4139], name: 'Bo-Kaap',        sub: 'Cape Town\'s iconic colourful quarter' },
+    { latlng: [-34.0307, 18.4370], name: 'Constantia',     sub: 'Wine farms within Cape Town — Groot & Beau Constantia' },
+    { latlng: [-34.1924, 18.4369], name: "Simon's Town",   sub: 'Penguins at Boulders Beach & naval heritage' },
+    { latlng: [-34.1289, 18.4428], name: 'Kalk Bay',       sub: 'Fishing village, antiques & the best fish & chips' },
+    { latlng: [-33.2833, 19.1333], name: 'Tulbagh',        sub: 'Peaceful historic village surrounded by mountains' },
+    { latlng: [-34.4187, 19.2345], name: 'Hermanus',       sub: 'World-famous whale watching (Aug–Nov)' },
+  ].forEach(function(p) {
+    L.marker(p.latlng, { icon: placeIcon }).addTo(map)
+      .bindPopup(popup(p.name, p.sub, 'place'));
   });
 
-  // Garden Route — dashed line from Mossel Bay to Plettenberg Bay
-  var gardenRoute = [
-    [-34.1826, 22.1442], // Mossel Bay
-    [-33.9608, 22.4617], // George
-    [-33.9978, 23.0530], // Wilderness
-    [-33.9806, 23.3792], // Sedgefield
-    [-33.9806, 23.5494], // Knysna
-    [-34.0527, 23.8794], // Plettenberg Bay
-  ];
+  // Garden Route — lime dashed line
+  L.polyline([
+    [-34.1826, 22.1442],
+    [-33.9608, 22.4617],
+    [-33.9978, 23.0530],
+    [-33.9806, 23.5494],
+    [-34.0527, 23.8794],
+  ], { color: '#84cc16', weight: 3.5, dashArray: '8 6', opacity: 0.95 })
+    .addTo(map)
+    .bindPopup(popup('The Garden Route', 'Mossel Bay → Plettenberg Bay — a stunning coastal drive', 'route'));
 
-  L.polyline(gardenRoute, {
-    color: '#ac747c',
-    weight: 3,
-    dashArray: '6 5',
-    opacity: 0.85
-  }).addTo(map).bindPopup('<div class="map-popup"><div class="map-popup-title">The Garden Route</div><div class="map-popup-sub">Mossel Bay → Plettenberg Bay<br>A stunning coastal drive worth adding to your trip</div></div>');
-
-  // Garden Route label marker
-  L.marker([-33.98, 23.05], {
+  // Garden Route pill label
+  L.marker([-33.85, 23.0], {
     icon: L.divIcon({
       className: '',
-      html: '<div style="background:#ac747c;color:white;font-family:Jost,sans-serif;font-size:9.5px;font-weight:600;letter-spacing:0.08em;text-transform:uppercase;padding:3px 8px;border-radius:20px;white-space:nowrap;box-shadow:0 1px 4px rgba(0,0,0,0.2);">Garden Route</div>',
-      iconAnchor: [45, 10]
+      html: '<div style="background:#84cc16;color:#1a2e05;font-family:Jost,sans-serif;font-size:9px;font-weight:700;letter-spacing:0.1em;text-transform:uppercase;padding:3px 9px;border-radius:20px;white-space:nowrap;box-shadow:0 1px 5px rgba(0,0,0,0.2);">Garden Route</div>',
+      iconAnchor: [48, 10]
     })
   }).addTo(map);
 
-  // Enable scroll wheel zoom on click/tap
-  map.once('focus', function() { map.scrollWheelZoom.enable(); });
+  // Activate scroll zoom on tap
   map.getContainer().addEventListener('click', function() { map.scrollWheelZoom.enable(); });
 })();
 </script>
