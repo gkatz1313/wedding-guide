@@ -766,12 +766,11 @@
     .itin-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.6; }
 
     /* ── PHOTO STRIP ── */
-    .photo-strip { display: grid; grid-template-columns: 1fr 1fr 1fr; height: 38vh; min-height: 220px; max-height: 420px; }
+    .photo-strip { display: grid; grid-template-columns: 3fr 2fr; height: 38vh; min-height: 220px; max-height: 420px; }
     .photo-strip-item { position: relative; overflow: hidden; }
     .photo-strip-item img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
     .photo-strip-item:hover img { transform: scale(1.04); }
-    .photo-strip-caption { position: absolute; bottom: 0; left: 0; right: 0; padding: 8px 12px; background: linear-gradient(transparent, rgba(0,0,0,0.45)); color: #fff; font-size: 11px; letter-spacing: 0.07em; text-transform: uppercase; font-family: var(--sans); }
-    @media (max-width: 600px) { .photo-strip { grid-template-columns: 1fr; height: auto; max-height: none; } .photo-strip-item { height: 45vw; } }
+    @media (max-width: 600px) { .photo-strip { grid-template-columns: 1fr; height: auto; max-height: none; } .photo-strip-item { height: 55vw; } }
 
     /* ── SAFARI CARDS ── */
     .safari-section { padding: 4rem 5vw 4.5rem; max-width: 1100px; margin: 0 auto; }
@@ -1106,22 +1105,6 @@
 
 </div>
 
-<!-- ── PHOTO STRIP ── -->
-<div class="photo-strip">
-  <div class="photo-strip-item">
-    <img src="Safari-Kruger.webp" alt="Lion on safari">
-    <span class="photo-strip-caption">On safari</span>
-  </div>
-  <div class="photo-strip-item">
-    <img src="African-Boma.jpg" alt="Boma braai fire">
-    <span class="photo-strip-caption">Braai around the boma</span>
-  </div>
-  <div class="photo-strip-item">
-    <img src="https://images.unsplash.com/photo-1580060839134-75a5edca2e99?w=900&q=80" alt="Table Mountain Cape Town">
-    <span class="photo-strip-caption">Table Mountain, Cape Town</span>
-  </div>
-</div>
-
 <div class="page">
 
   <!-- ══ TRAVEL GUIDE ══ -->
@@ -1181,6 +1164,16 @@
 
   </section>
 
+</div>
+
+<!-- ── PHOTO STRIP ── -->
+<div class="photo-strip">
+  <div class="photo-strip-item">
+    <img src="Safari-Kruger.webp" alt="On safari">
+  </div>
+  <div class="photo-strip-item">
+    <img src="African-Boma.jpg" alt="Braai around the boma">
+  </div>
 </div>
 
 <!-- ── SAFARI SECTION ── -->
