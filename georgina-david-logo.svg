@@ -1,0 +1,64 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 220" width="500" height="220">
+  <defs>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&amp;display=swap');
+      .name { font-family: 'Bodoni Moda', Georgia, serif; fill: #680a29; }
+      .ampersand { font-family: 'Bodoni Moda', Georgia, serif; fill: #680a29; font-style: italic; }
+      .sub { font-family: 'Bodoni Moda', Georgia, serif; fill: #8a6068; letter-spacing: 0.18em; }
+      .line { stroke: #680a29; stroke-width: 0.75; opacity: 0.5; }
+    </style>
+  </defs>
+
+  <!-- Top decorative line -->
+  <line class="line" x1="80" y1="38" x2="420" y2="38"/>
+
+  <!-- Small diamond centre top -->
+  <rect x="246" y="30" width="8" height="8" fill="#680a29" opacity="0.4" transform="rotate(45 250 34)"/>
+
+  <!-- GEORGINA -->
+  <text
+    x="250" y="90"
+    text-anchor="middle"
+    class="name"
+    font-size="52"
+    font-weight="300"
+    font-style="italic"
+    letter-spacing="4">Georgina</text>
+
+  <!-- & -->
+  <text
+    x="250" y="128"
+    text-anchor="middle"
+    class="ampersand"
+    font-size="22"
+    font-weight="300"
+    letter-spacing="2">&amp;</text>
+
+  <!-- DAVID -->
+  <text
+    x="250" y="172"
+    text-anchor="middle"
+    class="name"
+    font-size="52"
+    font-weight="300"
+    font-style="italic"
+    letter-spacing="4">David</text>
+
+  <!-- Bottom thin line -->
+  <line class="line" x1="140" y1="190" x2="360" y2="190"/>
+
+  <!-- Date + venue -->
+  <text
+    x="250" y="210"
+    text-anchor="middle"
+    class="sub"
+    font-size="9"
+    font-weight="400">29 · OCTOBER · 2026 · BROOKDALE ESTATE · PAARL</text>
+
+  <!-- Bottom decorative line -->
+  <line class="line" x1="80" y1="218" x2="420" y2="218"/>
+
+  <!-- Small diamond centre bottom -->
+  <rect x="246" y="210" width="8" height="8" fill="#680a29" opacity="0.4" transform="rotate(45 250 214)"/>
+
+</svg>
