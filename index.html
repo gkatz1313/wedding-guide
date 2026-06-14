@@ -503,7 +503,9 @@
     .event-col-trigger .trigger-arrow {
       display: inline-block;
       font-style: normal;
+      transition: transform 0.3s ease;
     }
+    .event-col.expanded .event-col-trigger .trigger-arrow { transform: rotate(90deg); }
     .event-col.expanded .event-col-trigger { color: var(--ink-soft); border-color: var(--ink-soft); }
 
     /* Expandable detail panel */
