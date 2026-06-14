@@ -13,22 +13,22 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      /* ── Palette from muzli-colors ── */
-      /* #f3e3d3 blush · #680a29 burgundy · #ac747c dusty rose · #b48484 mauve · #be9196 rose-grey */
+      /* ── Palette from muzli-colors.svg ── */
+      /* #330000 · #660000 · #ff9999 · #ffe5e5 · #ffffff */
 
-      --sage:        #ac747c;   /* dusty rose — replaces sage for accents */
-      --sage-mid:    #b48484;   /* mauve */
-      --sage-light:  #e8cece;   /* light mauve tint */
-      --sage-faint:  #f9f1f1;   /* very pale blush */
-      --terra:       #680a29;   /* deep burgundy — replaces terracotta for CTAs */
-      --terra-light: #f0dada;   /* light burgundy tint */
-      --terra-faint: #fdf5f5;   /* near-white blush */
-      --cream:       #fdf8f5;   /* warm off-white background */
-      --parchment:   #f3e3d3;   /* blush linen — from palette */
-      --ink:         #2a1520;   /* very dark burgundy-black */
-      --ink-mid:     #4a2f38;   /* dark rose-brown */
-      --ink-soft:    #8a6068;   /* muted rose-grey */
-      --border:      #e8d4d4;   /* soft blush border */
+      --sage:        #cc6666;   /* mid rose — from #ff9999 darkened for UI */
+      --sage-mid:    #dd8888;   /* soft rose */
+      --sage-light:  #ffcccc;   /* light pink tint */
+      --sage-faint:  #fff0f0;   /* near-white blush */
+      --terra:       #660000;   /* deep burgundy — primary accent */
+      --terra-light: #ffcccc;   /* light pink tint */
+      --terra-faint: #ffe5e5;   /* palest blush background */
+      --cream:       #fff5f5;   /* warm off-white background */
+      --parchment:   #ffe5e5;   /* blush linen */
+      --ink:         #2a1520;   /* footer — unchanged */
+      --ink-mid:     #4d0000;   /* dark red-brown for mid text */
+      --ink-soft:    #994444;   /* muted rose for secondary text */
+      --border:      #ffcccc;   /* soft pink border */
       --white:       #FFFFFF;
       --serif: 'Cormorant Garamond', Georgia, serif;
       --sans:  'Jost', system-ui, sans-serif;
@@ -725,8 +725,8 @@
     .hotel-name { font-family: var(--serif); font-size: 17px; font-style: italic; font-weight: 300; color: var(--ink); margin-bottom: 3px; }
     .hotel-location { font-size: 11px; color: var(--ink-soft); margin-bottom: 7px; }
     .hotel-desc { font-size: 12.5px; color: var(--ink-mid); line-height: 1.55; }
-    .hotel-badge { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 9px; border-radius: 20px; margin-bottom: 8px; background: var(--terra-light); color: #7A3A1A; letter-spacing: 0.04em; text-transform: uppercase; }
-    .hotel-badge.stay { background: var(--sage-light); color: #2A4A20; }
+    .hotel-badge { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 9px; border-radius: 20px; margin-bottom: 8px; background: var(--terra-light); color: #660000; letter-spacing: 0.04em; text-transform: uppercase; }
+    .hotel-badge.stay { background: var(--sage-light); color: #330000; }
     .btn-hotel {
       display: inline-flex;
       align-items: center;
@@ -818,9 +818,9 @@
     @media (max-width: 500px) { .food-grid { grid-template-columns: 1fr 1fr; } }
     .food-card { background: var(--white); border: 1px solid var(--border); border-radius: 8px; padding: 1rem 1.1rem; }
     .price-pill { display: inline-block; font-size: 10px; font-weight: 500; padding: 2px 8px; border-radius: 20px; margin-bottom: 6px; }
-    .pill-budget  { background: var(--sage-light); color: #2A4A20; }
+    .pill-budget  { background: var(--sage-light); color: #330000; }
     .pill-mid     { background: var(--parchment); color: var(--ink-mid); }
-    .pill-special { background: var(--terra-light); color: #6A2A0A; }
+    .pill-special { background: var(--terra-light); color: #660000; }
     .food-name { font-weight: 500; font-size: 13.5px; color: var(--ink); margin-bottom: 3px; }
     .food-desc { font-size: 12px; color: var(--ink-soft); line-height: 1.5; }
 
@@ -856,7 +856,7 @@
       border-radius: 2px;
       flex-shrink: 0;
     }
-    .legend-heart { color: #680a29; font-size: 14px; line-height: 1; flex-shrink: 0; }
+    .legend-heart { color: #660000; font-size: 14px; line-height: 1; flex-shrink: 0; }
     .legend-diamond.place   { background: #000; border: 1.5px solid rgba(0,0,0,0.15); }
     .legend-route {
       width: 24px; height: 3px; flex-shrink: 0;
@@ -879,7 +879,7 @@
       letter-spacing: 0.1em; text-transform: uppercase;
       padding: 2px 8px; border-radius: 20px; margin-bottom: 6px;
     }
-    .map-popup-label.wedding { background: #f0dada; color: #680a29; }
+    .map-popup-label.wedding { background: #ffcccc; color: #660000; }
     .map-popup-label.place   { background: #fff7ed; color: #c2410c; }
     .map-popup-label.route   { background: #f7fee7; color: #4d7c0f; }
     .map-popup-title { font-weight: 600; font-size: 13px; color: #2a1520; margin-bottom: 3px; }
@@ -1471,7 +1471,7 @@
     size = size || 22;
     return L.divIcon({
       className: '',
-      html: '<div style="font-size:' + size + 'px;line-height:1;color:#680a29;">♥</div>',
+      html: '<div style="font-size:' + size + 'px;line-height:1;color:#660000;">♥</div>',
       iconSize: [size, size],
       iconAnchor: [size / 2, size],
       popupAnchor: [0, -(size + 4)]
