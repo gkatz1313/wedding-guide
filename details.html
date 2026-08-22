@@ -190,6 +190,26 @@
     .df-main { padding: 1.25rem 1.15rem 7rem; }
     .df-choice-btn { min-width: 80px; }
   }
+
+  /* Accommodation autocomplete dropdown (Places API New) */
+  .df-suggest-wrap { position: relative; }
+  .df-suggest-list {
+    display: none;
+    position: absolute;
+    left: 0; right: 0; top: calc(100% + 4px);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    z-index: 60;
+    max-height: 260px;
+    overflow-y: auto;
+  }
+  .df-suggest-item { padding: 0.7rem 1rem; cursor: pointer; border-bottom: 1px solid var(--border); }
+  .df-suggest-item:last-child { border-bottom: none; }
+  .df-suggest-item:hover, .df-suggest-item.active { background: var(--sage-faint); }
+  .df-suggest-item-main { font-size: 13.5px; color: var(--ink); font-weight: 500; }
+  .df-suggest-item-secondary { font-size: 12px; color: var(--ink-soft); margin-top: 1px; }
 </style>
 </head>
 <body>
@@ -251,6 +271,9 @@ let state = {
   shuttleRequired: null,
   accommodationName: '',
   accommodationAddress: '',
+  accommodationLat: null,
+  accommodationLng: null,
+  googlePlaceId: null,
 
   song1: '',
   song2: '',
@@ -511,11 +534,14 @@ const RENDERERS = {
       <div class="df-reveal-inner"><div class="df-reveal-pad">
         <div class="df-fieldset">
           <label class="df-label" for="df-accom-name">Where are you staying?</label>
-          <input class="df-input" id="df-accom-name" type="text" placeholder="e.g. Grande Roche Hotel" value="${escapeAttr(state.accommodationName)}" oninput="state.accommodationName = this.value">
+          <div class="df-suggest-wrap">
+            <input class="df-input" id="df-accom-name" type="text" placeholder="Start typing a hotel name or address" value="${escapeAttr(state.accommodationName)}" autocomplete="off">
+            <div class="df-suggest-list" id="df-accom-suggestions"></div>
+          </div>
         </div>
         <div class="df-fieldset">
           <label class="df-label" for="df-accom-address">Address <span style="text-transform:none;letter-spacing:normal;">(optional)</span></label>
-          <input class="df-input" id="df-accom-address" type="text" placeholder="e.g. Plantasie St, Paarl" value="${escapeAttr(state.accommodationAddress)}" oninput="state.accommodationAddress = this.value">
+          <input class="df-input" id="df-accom-address" type="text" placeholder="e.g. Plantasie St, Paarl" value="${escapeAttr(state.accommodationAddress)}" autocomplete="off" oninput="state.accommodationAddress = this.value; state.accommodationLat = null; state.accommodationLng = null; state.googlePlaceId = null;">
         </div>
       </div></div>
     </div>
@@ -673,6 +699,104 @@ function attachHandlers(stepId) {
       input.onkeydown = (e) => { if (e.key === 'Enter') doSearch(); };
     }
   }
+  if (stepId === 'shuttle') {
+    loadGoogleMaps();
+    attachAccommodationInput();
+  }
+}
+
+/* ───────── GOOGLE PLACES AUTOCOMPLETE (Places API New) ───────── */
+
+const GOOGLE_PLACES_API_KEY = 'AIzaSyDBic0rB2l7M47hq29lclqQGM4gzv7087E';
+
+let acSessionToken = null;
+let acDebounceTimer = null;
+let acCurrentSuggestions = [];
+
+function loadGoogleMaps() {
+  if (window.__gmapsLoadStarted) return;
+  window.__gmapsLoadStarted = true;
+  const script = document.createElement('script');
+  script.src = 'https://maps.googleapis.com/maps/api/js?key=' + GOOGLE_PLACES_API_KEY + '&libraries=places&callback=onGoogleMapsLoaded&loading=async';
+  script.async = true;
+  document.head.appendChild(script);
+}
+
+function onGoogleMapsLoaded() {
+  window.__gmapsReady = true;
+}
+
+function attachAccommodationInput() {
+  const input = document.getElementById('df-accom-name');
+  if (!input) return;
+  input.oninput = (e) => {
+    state.accommodationName = e.target.value;
+    state.accommodationLat = null; state.accommodationLng = null; state.googlePlaceId = null;
+    scheduleAccommodationSearch(e.target.value);
+  };
+  input.onblur = () => { setTimeout(hideAccommodationSuggestions, 150); };
+  input.onfocus = () => { if (acCurrentSuggestions.length) renderAccommodationSuggestions(); };
+}
+
+function scheduleAccommodationSearch(value) {
+  clearTimeout(acDebounceTimer);
+  const q = value.trim();
+  if (q.length < 3) { hideAccommodationSuggestions(); return; }
+  acDebounceTimer = setTimeout(() => fetchAccommodationSuggestions(q), 250);
+}
+
+async function fetchAccommodationSuggestions(query) {
+  if (!window.__gmapsReady || !google.maps.places || !google.maps.places.AutocompleteSuggestion) return;
+  if (!acSessionToken) acSessionToken = new google.maps.places.AutocompleteSessionToken();
+  try {
+    const { suggestions } = await google.maps.places.AutocompleteSuggestion.fetchAutocompleteSuggestions({
+      input: query,
+      includedRegionCodes: ['za'],
+      sessionToken: acSessionToken,
+    });
+    acCurrentSuggestions = suggestions || [];
+    renderAccommodationSuggestions();
+  } catch (e) {
+    acCurrentSuggestions = [];
+    hideAccommodationSuggestions();
+  }
+}
+
+function renderAccommodationSuggestions() {
+  const box = document.getElementById('df-accom-suggestions');
+  if (!box) return;
+  if (!acCurrentSuggestions.length) { box.style.display = 'none'; box.innerHTML = ''; return; }
+  box.innerHTML = acCurrentSuggestions.map((s, i) => {
+    const pred = s.placePrediction;
+    const main = pred.mainText ? pred.mainText.text : pred.text.text;
+    const secondary = pred.secondaryText ? pred.secondaryText.text : '';
+    return `<div class="df-suggest-item" onmousedown="event.preventDefault()" onclick="selectAccommodationSuggestion(${i})">
+      <div class="df-suggest-item-main">${escapeHtml(main)}</div>
+      ${secondary ? `<div class="df-suggest-item-secondary">${escapeHtml(secondary)}</div>` : ''}
+    </div>`;
+  }).join('');
+  box.style.display = 'block';
+}
+
+function hideAccommodationSuggestions() {
+  acCurrentSuggestions = [];
+  const box = document.getElementById('df-accom-suggestions');
+  if (box) { box.style.display = 'none'; box.innerHTML = ''; }
+}
+
+async function selectAccommodationSuggestion(i) {
+  const s = acCurrentSuggestions[i];
+  if (!s) return;
+  const place = s.placePrediction.toPlace();
+  await place.fetchFields({ fields: ['displayName', 'formattedAddress', 'location', 'id'] });
+  state.accommodationName = place.displayName || (s.placePrediction.mainText ? s.placePrediction.mainText.text : '');
+  state.accommodationAddress = place.formattedAddress || '';
+  state.accommodationLat = place.location ? place.location.lat() : null;
+  state.accommodationLng = place.location ? place.location.lng() : null;
+  state.googlePlaceId = place.id || null;
+  acSessionToken = null;
+  hideAccommodationSuggestions();
+  render();
 }
 
 function setWedAttending(val) {
@@ -703,7 +827,7 @@ function restart() {
     query: '', searching: false, searchError: '', party: null, guests: [], invitationType: null,
     hasExisting: false, wedAttending: null, childrenHave: null, childrenCount: 1, childrenAges: '',
     wedDietary: '', mealChoices: {}, plusOneMeal: '', plusOneName: '', plusOneEmail: '', weddingDietary: '',
-    shuttleRequired: null, accommodationName: '', accommodationAddress: '', song1: '', song2: '',
+    shuttleRequired: null, accommodationName: '', accommodationAddress: '', accommodationLat: null, accommodationLng: null, googlePlaceId: null, song1: '', song2: '',
     emails: {}, editSection: null, submitting: false, submitError: '', submitted: false,
   });
   currentIndex = indexOfId('search');
@@ -780,6 +904,9 @@ async function doSearch() {
       state.shuttleRequired = er.shuttle_required;
       state.accommodationName = er.accommodation_name || '';
       state.accommodationAddress = er.accommodation_address || '';
+      state.accommodationLat = er.accommodation_latitude ?? null;
+      state.accommodationLng = er.accommodation_longitude ?? null;
+      state.googlePlaceId = er.google_place_id || null;
       state.song1 = er.song_request_1 || '';
       state.song2 = er.song_request_2 || '';
       (er.meal_choice || []).forEach(mc => { state.mealChoices[mc.guest_id] = mc.meal_choice; });
@@ -827,9 +954,9 @@ async function submitResponse() {
     shuttle_required: !!state.shuttleRequired,
     accommodation_name: (state.shuttleRequired && state.accommodationName.trim()) ? state.accommodationName.trim() : null,
     accommodation_address: (state.shuttleRequired && state.accommodationAddress.trim()) ? state.accommodationAddress.trim() : null,
-    accommodation_latitude: null,
-    accommodation_longitude: null,
-    google_place_id: null,
+    accommodation_latitude: (state.shuttleRequired && state.accommodationLat != null) ? state.accommodationLat : null,
+    accommodation_longitude: (state.shuttleRequired && state.accommodationLng != null) ? state.accommodationLng : null,
+    google_place_id: (state.shuttleRequired && state.googlePlaceId) ? state.googlePlaceId : null,
     song_request_1: state.song1.trim() ? state.song1.trim() : null,
     song_request_2: state.song2.trim() ? state.song2.trim() : null,
     meal_choices: mealChoicesPayload,
