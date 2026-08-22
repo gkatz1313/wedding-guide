@@ -541,7 +541,7 @@ const RENDERERS = {
           <div class="df-hint">Can't find your place? No problem — just type the name here and add the address below.</div>
         </div>
         <div class="df-fieldset">
-          <label class="df-label" for="df-accom-address">Address <span style="text-transform:none;letter-spacing:normal;">(optional)</span></label>
+          <label class="df-label" for="df-accom-address">Address</label>
           <input class="df-input" id="df-accom-address" type="text" placeholder="e.g. Plantasie St, Paarl" value="${escapeAttr(state.accommodationAddress)}" autocomplete="off" oninput="state.accommodationAddress = this.value; state.accommodationLat = null; state.accommodationLng = null; state.googlePlaceId = null;">
         </div>
       </div></div>
