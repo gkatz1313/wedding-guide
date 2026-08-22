@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Final Details · Georgina &amp; David</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --sage:        #ac747c;
+    --sage-mid:    #b48484;
+    --sage-light:  #e8cece;
+    --sage-faint:  #f9f1f1;
+    --terra:       #680a29;
+    --terra-light: #f0dada;
+    --terra-faint: #fdf5f5;
+    --cream:       #fdf8f5;
+    --parchment:   #f3e3d3;
+    --ink:         #2a1520;
+    --ink-mid:     #4a2f38;
+    --ink-soft:    #8a6068;
+    --border:      #ffe5e5;
+    --white:       #FFFFFF;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans:  'Jost', system-ui, sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--cream);
+    color: var(--ink);
+    font-size: 15px;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  /* ── SHELL ── */
+  .df-shell { max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+
+  .df-header { text-align: center; padding: 1.75rem 1.5rem 0.5rem; position: relative; }
+  .df-logo { display: inline-block; font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 20px; color: var(--ink); text-decoration: none; }
+
+  .df-progress-wrap { padding: 0 1.5rem; margin-top: 1rem; }
+  .df-progress { height: 3px; background: var(--border); border-radius: 3px; overflow: hidden; }
+  .df-progress-fill { height: 100%; width: 0%; background: var(--terra); transition: width 0.4s ease; border-radius: 3px; }
+  .df-step-label { text-align: center; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin: 0.65rem 0 0; }
+
+  .df-main { flex: 1; padding: 1.75rem 1.5rem 7rem; display: flex; flex-direction: column; }
+  .df-card { max-width: 480px; margin: 0 auto; width: 100%; }
+
+  .df-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); font-weight: 500; display: block; margin-bottom: 0.6rem; text-align: center; }
+  .df-title { font-family: var(--serif); font-size: clamp(28px, 6vw, 38px); font-weight: 300; font-style: italic; color: var(--ink); line-height: 1.15; text-align: center; margin-bottom: 0.75rem; }
+  .df-sub { font-size: 14px; color: var(--ink-mid); line-height: 1.75; text-align: center; margin-bottom: 2rem; font-weight: 300; }
+
+  .df-fieldset { margin-bottom: 1.75rem; }
+  .df-label { display: block; font-size: 11px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-soft); font-weight: 500; margin-bottom: 0.6rem; }
+  .df-hint { font-size: 12px; color: var(--ink-soft); margin-top: 0.5rem; line-height: 1.6; }
+
+  .df-input, .df-textarea {
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 15px;
+    color: var(--ink);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 0.85rem 1rem;
+    transition: border-color 0.15s;
+  }
+  .df-input:focus, .df-textarea:focus { outline: none; border-color: var(--sage); }
+  .df-textarea { resize: vertical; min-height: 80px; }
+
+  .df-choice-group { display: flex; gap: 0.6rem; flex-wrap: wrap; }
+  .df-choice-btn {
+    flex: 1 1 0;
+    min-width: 100px;
+    padding: 0.95rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--white);
+    font-family: var(--sans);
+    font-size: 14px;
+    font-weight: 400;
+    color: var(--ink);
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.15s, background 0.15s, color 0.15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .df-choice-btn:hover { border-color: var(--sage); }
+  .df-choice-btn.selected { border-color: var(--terra); background: var(--terra-faint); color: var(--terra); font-weight: 500; }
+
+  .df-stepper { display: flex; align-items: center; gap: 1rem; justify-content: center; }
+  .df-stepper-btn {
+    width: 40px; height: 40px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--white);
+    font-size: 18px; color: var(--ink); cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: border-color 0.15s;
+  }
+  .df-stepper-btn:hover { border-color: var(--sage); }
+  .df-stepper-btn:disabled { opacity: 0.35; cursor: default; }
+  .df-stepper-val { font-family: var(--serif); font-size: 30px; font-style: italic; color: var(--ink); min-width: 40px; text-align: center; }
+
+  .df-reveal { display: grid; grid-template-rows: 0fr; transition: grid-template-rows 0.35s ease; }
+  .df-reveal.open { grid-template-rows: 1fr; }
+  .df-reveal-inner { overflow: hidden; }
+  .df-reveal-pad { padding-top: 1.5rem; }
+
+  /* Meal cards */
+  .df-guest-block { margin-bottom: 2rem; }
+  .df-guest-name { font-family: var(--serif); font-size: 18px; font-style: italic; font-weight: 600; color: var(--ink); margin-bottom: 0.9rem; text-align: center; }
+  .df-meal-grid { display: flex; flex-direction: column; gap: 0.7rem; }
+  .df-meal-card {
+    display: flex; flex-direction: column; gap: 4px;
+    border: 1px solid var(--border); border-radius: 10px;
+    background: var(--white); padding: 0.9rem 1.1rem;
+    cursor: pointer; transition: border-color 0.15s, background 0.15s;
+    text-align: left;
+  }
+  .df-meal-card:hover { border-color: var(--sage); }
+  .df-meal-card.selected { border-color: var(--terra); background: var(--terra-faint); }
+  .df-meal-name { font-family: var(--serif); font-size: 17px; font-style: italic; font-weight: 600; color: var(--ink); }
+  .df-meal-desc { font-size: 12.5px; color: var(--ink-soft); line-height: 1.55; }
+  .df-meal-check { font-size: 11px; font-weight: 500; letter-spacing: 0.06em; text-transform: uppercase; color: var(--terra); margin-top: 2px; display: none; }
+  .df-meal-card.selected .df-meal-check { display: block; }
+
+  .df-plusone-name { margin-top: 0.9rem; }
+
+  /* Bottom action bar */
+  .df-actions {
+    position: fixed; left: 0; right: 0; bottom: 0;
+    background: var(--cream);
+    border-top: 1px solid var(--border);
+    padding: 0.9rem 1.5rem;
+    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+    z-index: 50;
+  }
+  .df-actions-inner { max-width: 480px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .df-back-link {
+    background: none; border: none; cursor: pointer;
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft);
+    padding: 0.6rem 0.2rem;
+  }
+  .df-back-link:hover { color: var(--ink); }
+  .df-continue-btn {
+    background: var(--terra); color: var(--white);
+    font-family: var(--sans); font-size: 12px; font-weight: 500;
+    letter-spacing: 0.1em; text-transform: uppercase;
+    border: none; border-radius: 40px; padding: 0.85rem 2.1rem;
+    cursor: pointer; transition: background 0.2s;
+    margin-left: auto;
+  }
+  .df-continue-btn:hover { background: #4a0619; }
+  .df-continue-btn:disabled { background: var(--sage-light); color: var(--ink-soft); cursor: default; }
+
+  .df-error { color: var(--terra); font-size: 12.5px; margin-top: 0.85rem; text-align: center; }
+
+  /* Review screen */
+  .df-review-group { border: 1px solid var(--border); border-radius: 10px; background: var(--white); padding: 1.1rem 1.3rem; margin-bottom: 0.85rem; }
+  .df-review-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.6rem; }
+  .df-review-title { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--sage); font-weight: 500; }
+  .df-review-edit { font-size: 11px; font-weight: 500; letter-spacing: 0.05em; text-transform: uppercase; color: var(--ink-soft); background: none; border: none; cursor: pointer; border-bottom: 1px solid var(--ink-soft); }
+  .df-review-edit:hover { color: var(--ink); border-color: var(--ink); }
+  .df-review-row { font-size: 13.5px; color: var(--ink-mid); line-height: 1.7; }
+  .df-review-row strong { color: var(--ink); font-weight: 500; }
+
+  /* Recognition */
+  .df-party-list { text-align: center; font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--ink); margin-bottom: 1.25rem; }
+  .df-not-you { text-align: center; margin-top: 1.25rem; }
+  .df-not-you button { background: none; border: none; font-size: 12px; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+
+  .df-spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--terra-light); border-top-color: var(--terra); border-radius: 50%; animation: df-spin 0.7s linear infinite; vertical-align: middle; margin-right: 8px; }
+  @keyframes df-spin { to { transform: rotate(360deg); } }
+
+  /* Confirmation */
+  .df-done-icon { text-align: center; font-size: 40px; margin-bottom: 1rem; }
+  .df-done-actions { text-align: center; margin-top: 2rem; }
+  .df-home-link { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; text-decoration: none; }
+
+  @media (max-width: 480px) {
+    .df-main { padding: 1.25rem 1.15rem 7rem; }
+    .df-choice-btn { min-width: 80px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="df-shell">
+  <div class="df-header">
+    <a class="df-logo" href="index.html">Georgina &amp; David</a>
+  </div>
+
+  <div class="df-progress-wrap" id="df-progress-wrap">
+    <div class="df-progress"><div class="df-progress-fill" id="df-progress-fill"></div></div>
+    <div class="df-step-label" id="df-step-label"></div>
+  </div>
+
+  <main class="df-main">
+    <div class="df-card" id="df-card"><!-- rendered by JS --></div>
+  </main>
+
+  <div class="df-actions" id="df-actions" style="display:none;">
+    <div class="df-actions-inner">
+      <button class="df-back-link" id="df-back-btn" onclick="goBack()">Back</button>
+      <button class="df-continue-btn" id="df-continue-btn" onclick="goNext()">Continue</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const SEARCH_URL = 'https://gjcufowghnqaxwlcswfo.supabase.co/functions/v1/search-guest';
+const SUBMIT_URL = 'https://gjcufowghnqaxwlcswfo.supabase.co/functions/v1/submit-response';
+
+const MEALS = [
+  { key: 'beef', name: 'Char-grilled fillet of beef', desc: 'Potato pavé, soubise & Mason Road Syrah jus' },
+  { key: 'fish', name: 'Pan-seared fish du jour', desc: 'Potato purée with lemon, caper, gherkin & parsley beurre noisette, toasted almond & kale' },
+  { key: 'aubergine', name: 'Miso-glazed aubergine', desc: 'Carrot & cashew nut purée, kimchi, sorghum salad & sweet potato crisp' },
+];
+
+let state = {
+  query: '',
+  searching: false,
+  searchError: '',
+  party: null,
+  guests: [],
+  invitationType: null,
+  hasExisting: false,
+  existingUpdatedAt: null,
+
+  wedAttending: null,
+  childrenHave: null,
+  childrenCount: 1,
+  childrenAges: '',
+  wedDietary: '',
+
+  mealChoices: {},
+  plusOneMeal: '',
+  plusOneName: '',
+
+  weddingDietary: '',
+
+  shuttleRequired: null,
+  accommodationName: '',
+  accommodationAddress: '',
+
+  song1: '',
+  song2: '',
+
+  emails: {},
+
+  editSection: null,
+  submitting: false,
+  submitError: '',
+  submitted: false,
+};
+
+const STEPS = [
+  { id: 'search', section: 'search', applicable: () => true },
+  { id: 'recognize', section: 'recognize', applicable: () => true },
+  { id: 'wed-attendance', section: 'wednesday', applicable: () => true },
+  { id: 'wed-children', section: 'wednesday', applicable: (s) => s.wedAttending === true },
+  { id: 'wed-dietary', section: 'wednesday', applicable: (s) => s.wedAttending === true },
+  { id: 'dinner', section: 'dinner', applicable: () => true },
+  { id: 'kitchen-note', section: 'kitchen', applicable: () => true },
+  { id: 'shuttle', section: 'shuttle', applicable: () => true },
+  { id: 'songs', section: 'songs', applicable: () => true },
+  { id: 'emails', section: 'emails', applicable: () => true },
+  { id: 'review', section: 'review', applicable: () => true },
+  { id: 'done', section: 'done', applicable: () => true },
+];
+
+let currentIndex = 0;
+
+function applicableSteps() {
+  return STEPS.filter(st => st.applicable(state));
+}
+
+function currentStep() {
+  return STEPS[currentIndex];
+}
+
+function indexOfId(id) {
+  return STEPS.findIndex(s => s.id === id);
+}
+
+function nextApplicableIndex(fromIndex, dir) {
+  let i = fromIndex + dir;
+  while (i >= 0 && i < STEPS.length) {
+    if (STEPS[i].applicable(state)) return i;
+    i += dir;
+  }
+  return -1;
+}
+
+function render() {
+  const step = currentStep();
+  const card = document.getElementById('df-card');
+  const actions = document.getElementById('df-actions');
+  const progressWrap = document.getElementById('df-progress-wrap');
+
+  card.innerHTML = RENDERERS[step.id]();
+
+  // progress
+  const appSteps = applicableSteps().filter(s => s.section !== 'search' && s.section !== 'recognize' && s.section !== 'review' && s.section !== 'done');
+  const sectionOrder = ['wednesday', 'dinner', 'kitchen', 'shuttle', 'songs', 'emails'];
+  const sectionLabels = { wednesday: 'Wednesday Lunch', dinner: 'Thursday Dinner', kitchen: 'Kitchen Note', shuttle: 'Shuttle', songs: 'Songs', emails: 'Your Emails' };
+
+  if (['search', 'recognize', 'done'].includes(step.section)) {
+    progressWrap.style.display = 'none';
+  } else if (step.section === 'review') {
+    progressWrap.style.display = 'block';
+    document.getElementById('df-progress-fill').style.width = '100%';
+    document.getElementById('df-step-label').textContent = 'Review';
+  } else {
+    progressWrap.style.display = 'block';
+    const presentSections = sectionOrder.filter(sec => appSteps.some(s => s.section === sec));
+    const curSecIdx = presentSections.indexOf(step.section);
+    const pct = ((curSecIdx + 1) / (presentSections.length + 1)) * 100;
+    document.getElementById('df-progress-fill').style.width = pct + '%';
+    document.getElementById('df-step-label').textContent = sectionLabels[step.section] || '';
+  }
+
+  if (['search', 'done'].includes(step.id)) {
+    actions.style.display = 'none';
+  } else {
+    actions.style.display = 'flex';
+    document.getElementById('df-back-btn').style.visibility = (step.id === 'recognize') ? 'hidden' : 'visible';
+    const contBtn = document.getElementById('df-continue-btn');
+    contBtn.textContent = step.id === 'review' ? (state.submitting ? 'Submitting…' : 'Confirm & Submit') : 'Continue';
+    contBtn.disabled = !!state.submitting;
+  }
+
+  attachHandlers(step.id);
+  window.scrollTo({ top: 0, behavior: 'instant' in window ? 'instant' : 'auto' });
+}
+
+function goBack() {
+  const step = currentStep();
+  if (step.id === 'search') return;
+  const prevIdx = nextApplicableIndex(currentIndex, -1);
+  if (prevIdx === -1) return;
+  currentIndex = prevIdx;
+  render();
+}
+
+function goNext() {
+  const step = currentStep();
+  const err = VALIDATORS[step.id] ? VALIDATORS[step.id]() : '';
+  if (err) {
+    showStepError(err);
+    return;
+  }
+
+  if (step.id === 'review') {
+    submitResponse();
+    return;
+  }
+
+  // Handle "jump back to review after editing one section"
+  const nextIdx = nextApplicableIndex(currentIndex, 1);
+  if (state.editSection) {
+    const nextStep = nextIdx !== -1 ? STEPS[nextIdx] : null;
+    if (!nextStep || nextStep.section !== state.editSection) {
+      state.editSection = null;
+      currentIndex = indexOfId('review');
+      render();
+      return;
+    }
+  }
+
+  if (nextIdx === -1) return;
+  currentIndex = nextIdx;
+  render();
+}
+
+function showStepError(msg) {
+  let el = document.getElementById('df-inline-error');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'df-inline-error';
+    el.className = 'df-error';
+    document.getElementById('df-card').appendChild(el);
+  }
+  el.textContent = msg;
+}
+
+function jumpToEdit(section) {
+  state.editSection = section;
+  const idx = STEPS.findIndex(s => s.section === section && s.applicable(state));
+  currentIndex = idx !== -1 ? idx : indexOfId('review');
+  render();
+}
+
+/* ───────── RENDERERS ───────── */
+
+const RENDERERS = {
+
+  search: () => `
+    <div class="df-eyebrow">Final Details</div>
+    <div class="df-title">Find your invitation</div>
+    <p class="df-sub">Just a couple of quick questions before the big day — meals, the lunch, a shuttle if you need one. About 2 minutes. This isn't another RSVP — we already know you're coming! Please reply by 1 September 2026.</p>
+    <div class="df-fieldset">
+      <label class="df-label" for="df-search-input">Your first name</label>
+      <input class="df-input" id="df-search-input" type="text" placeholder="e.g. Zoe" value="${escapeAttr(state.query)}" autocomplete="given-name" autofocus>
+    </div>
+    <button class="df-continue-btn" style="width:100%;" id="df-search-btn" onclick="doSearch()">
+      ${state.searching ? '<span class="df-spinner"></span>Searching…' : 'Find my invitation'}
+    </button>
+    ${state.searchError ? `<div class="df-error">${state.searchError}</div>` : ''}
+  `,
+
+  recognize: () => {
+    const names = state.guests.map(g => g.first_name).join(' &amp; ');
+    return `
+    <div class="df-eyebrow">Hello there</div>
+    <div class="df-title">Hi, ${escapeHtml(state.guests.map(g => g.first_name).join(' & '))}!</div>
+    <div class="df-party-list">${escapeHtml(state.party.display_name)}</div>
+    <p class="df-sub">
+      ${state.hasExisting
+        ? `Looks like you've already sent us your details — you're welcome to review or update them below.`
+        : `This isn't another RSVP — we already know you're joining us! We just need a few final details to make the day run smoothly: meals, the pre-wedding lunch, and a shuttle if you need one.`}
+    </p>
+    <div class="df-not-you"><button onclick="restart()">Not you? Search again</button></div>
+    `;
+  },
+
+  'wed-attendance': () => `
+    <div class="df-eyebrow">Wednesday 28 October</div>
+    <div class="df-title">The pre-wedding lunch</div>
+    <p class="df-sub">A relaxed family lunch at The Table at De Meye, Stellenbosch — children very welcome. Will you be joining us?</p>
+    <div class="df-choice-group">
+      <div class="df-choice-btn ${state.wedAttending === true ? 'selected' : ''}" onclick="setWedAttending(true)">Yes, we'll be there</div>
+      <div class="df-choice-btn ${state.wedAttending === false ? 'selected' : ''}" onclick="setWedAttending(false)">Can't make it</div>
+    </div>
+  `,
+
+  'wed-children': () => `
+    <div class="df-eyebrow">Wednesday 28 October</div>
+    <div class="df-title">Bringing any children?</div>
+    <p class="df-sub">Just so we can plan the table for the lunch.</p>
+    <div class="df-choice-group">
+      <div class="df-choice-btn ${state.childrenHave === true ? 'selected' : ''}" onclick="setChildrenHave(true)">Yes</div>
+      <div class="df-choice-btn ${state.childrenHave === false ? 'selected' : ''}" onclick="setChildrenHave(false)">No</div>
+    </div>
+    <div class="df-reveal ${state.childrenHave === true ? 'open' : ''}">
+      <div class="df-reveal-inner"><div class="df-reveal-pad">
+        <div class="df-fieldset">
+          <label class="df-label">How many children</label>
+          <div class="df-stepper">
+            <button class="df-stepper-btn" onclick="stepChildren(-1)" ${state.childrenCount <= 1 ? 'disabled' : ''}>−</button>
+            <div class="df-stepper-val">${state.childrenCount}</div>
+            <button class="df-stepper-btn" onclick="stepChildren(1)" ${state.childrenCount >= 10 ? 'disabled' : ''}>+</button>
+          </div>
+        </div>
+        <div class="df-fieldset">
+          <label class="df-label" for="df-ages-input">Their ages</label>
+          <input class="df-input" id="df-ages-input" type="text" placeholder="e.g. 3 and 7" value="${escapeAttr(state.childrenAges)}" oninput="state.childrenAges = this.value">
+        </div>
+      </div></div>
+    </div>
+  `,
+
+  'wed-dietary': () => `
+    <div class="df-eyebrow">Wednesday 28 October</div>
+    <div class="df-title">Any dietary requirements?</div>
+    <p class="df-sub">For the lunch — let us know if anyone in your party needs something specific. Leave blank if not.</p>
+    <div class="df-fieldset">
+      <textarea class="df-textarea" id="df-wed-dietary-input" placeholder="e.g. one vegetarian, one nut allergy" oninput="state.wedDietary = this.value">${escapeHtml(state.wedDietary)}</textarea>
+    </div>
+  `,
+
+  dinner: () => {
+    const blocks = state.guests.map(g => renderGuestMealBlock(g)).join('');
+    const plusOneBlock = state.invitationType === 'plus_one' ? renderPlusOneMealBlock() : '';
+    return `
+      <div class="df-eyebrow">Thursday 29 October</div>
+      <div class="df-title">Choose your dinner</div>
+      <p class="df-sub">Brookdale's menu for the evening — one dish per person.</p>
+      ${blocks}
+      ${plusOneBlock}
+    `;
+  },
+
+  'kitchen-note': () => `
+    <div class="df-eyebrow">Thursday 29 October</div>
+    <div class="df-title">A note for the kitchen</div>
+    <p class="df-sub">Any allergies or intolerances we should flag for the wedding dinner? Leave blank if none.</p>
+    <div class="df-fieldset">
+      <textarea class="df-textarea" id="df-wedding-dietary-input" placeholder="e.g. shellfish allergy" oninput="state.weddingDietary = this.value">${escapeHtml(state.weddingDietary)}</textarea>
+    </div>
+  `,
+
+  shuttle: () => `
+    <div class="df-eyebrow">Thursday 29 October</div>
+    <div class="df-title">Need a shuttle?</div>
+    <p class="df-sub">We're running a shuttle to Brookdale Estate for guests staying in Paarl on the wedding night.</p>
+    <div class="df-choice-group">
+      <div class="df-choice-btn ${state.shuttleRequired === true ? 'selected' : ''}" onclick="setShuttle(true)">Yes please</div>
+      <div class="df-choice-btn ${state.shuttleRequired === false ? 'selected' : ''}" onclick="setShuttle(false)">No thanks</div>
+    </div>
+    <div class="df-reveal ${state.shuttleRequired === true ? 'open' : ''}">
+      <div class="df-reveal-inner"><div class="df-reveal-pad">
+        <div class="df-fieldset">
+          <label class="df-label" for="df-accom-name">Where are you staying?</label>
+          <input class="df-input" id="df-accom-name" type="text" placeholder="e.g. Grande Roche Hotel" value="${escapeAttr(state.accommodationName)}" oninput="state.accommodationName = this.value">
+        </div>
+        <div class="df-fieldset">
+          <label class="df-label" for="df-accom-address">Address <span style="text-transform:none;letter-spacing:normal;">(optional)</span></label>
+          <input class="df-input" id="df-accom-address" type="text" placeholder="e.g. Plantasie St, Paarl" value="${escapeAttr(state.accommodationAddress)}" oninput="state.accommodationAddress = this.value">
+        </div>
+      </div></div>
+    </div>
+  `,
+
+  songs: () => `
+    <div class="df-eyebrow">Thursday 29 October</div>
+    <div class="df-title">Get us on the dance floor</div>
+    <p class="df-sub">Up to two song requests — entirely optional.</p>
+    <div class="df-fieldset">
+      <label class="df-label" for="df-song1">Song request 1</label>
+      <input class="df-input" id="df-song1" type="text" placeholder="Song and artist" value="${escapeAttr(state.song1)}" oninput="state.song1 = this.value">
+    </div>
+    <div class="df-fieldset">
+      <label class="df-label" for="df-song2">Song request 2</label>
+      <input class="df-input" id="df-song2" type="text" placeholder="Song and artist" value="${escapeAttr(state.song2)}" oninput="state.song2 = this.value">
+    </div>
+  `,
+
+  emails: () => {
+    const rows = state.guests.map(g => `
+      <div class="df-fieldset">
+        <label class="df-label" for="df-email-${g.id}">${escapeHtml(g.first_name)}'s email</label>
+        <input class="df-input" id="df-email-${g.id}" type="email" placeholder="name@email.com" value="${escapeAttr(state.emails[g.id] || '')}" oninput="state.emails['${g.id}'] = this.value">
+      </div>
+    `).join('');
+    const plusOneRow = (state.invitationType === 'plus_one' && state.plusOneName.trim()) ? `
+      <div class="df-fieldset">
+        <label class="df-label" for="df-email-plusone">${escapeHtml(state.plusOneName.trim())}'s email <span style="text-transform:none;letter-spacing:normal;">(optional)</span></label>
+        <input class="df-input" id="df-email-plusone" type="email" placeholder="name@email.com" value="${escapeAttr(state.plusOneEmail || '')}" oninput="state.plusOneEmail = this.value">
+      </div>
+    ` : '';
+    return `
+      <div class="df-eyebrow">Almost done</div>
+      <div class="df-title">Your email addresses</div>
+      <p class="df-sub">So we can send photos and any pre-wedding updates.</p>
+      ${rows}${plusOneRow}
+    `;
+  },
+
+  review: () => renderReview(),
+
+  done: () => `
+    <div class="df-done-icon">💛</div>
+    <div class="df-title" style="text-align:center;">All set, thank you!</div>
+    <p class="df-sub" style="text-align:center;">We've got your final details — we can't wait to celebrate with you.</p>
+    <div class="df-done-actions"><a class="df-home-link" href="index.html">Back to the site</a></div>
+  `,
+};
+
+function renderGuestMealBlock(g) {
+  const selected = state.mealChoices[g.id];
+  return `
+    <div class="df-guest-block">
+      <div class="df-guest-name">${escapeHtml(g.first_name)}</div>
+      <div class="df-meal-grid">
+        ${MEALS.map(m => `
+          <div class="df-meal-card ${selected === m.key ? 'selected' : ''}" onclick="chooseMeal('${g.id}', '${m.key}')">
+            <div class="df-meal-name">${m.name}</div>
+            <div class="df-meal-desc">${m.desc}</div>
+            <div class="df-meal-check">✓ Selected</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function renderPlusOneMealBlock() {
+  const selected = state.plusOneMeal;
+  return `
+    <div class="df-guest-block">
+      <div class="df-guest-name">Your +1</div>
+      <div class="df-meal-grid">
+        ${MEALS.map(m => `
+          <div class="df-meal-card ${selected === m.key ? 'selected' : ''}" onclick="choosePlusOneMeal('${m.key}')">
+            <div class="df-meal-name">${m.name}</div>
+            <div class="df-meal-desc">${m.desc}</div>
+            <div class="df-meal-check">✓ Selected</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="df-plusone-name">
+        <label class="df-label" for="df-plusone-name">Their name <span style="text-transform:none;letter-spacing:normal;">(optional)</span></label>
+        <input class="df-input" id="df-plusone-name" type="text" placeholder="If you'd like to tell us" value="${escapeAttr(state.plusOneName)}" oninput="state.plusOneName = this.value">
+      </div>
+    </div>
+  `;
+}
+
+function mealName(key) { const m = MEALS.find(x => x.key === key); return m ? m.name : ''; }
+
+function renderReview() {
+  const wed = state.wedAttending
+    ? `Attending${state.childrenHave && state.childrenCount > 0 ? ` · ${state.childrenCount} ${state.childrenCount === 1 ? 'child' : 'children'} (${escapeHtml(state.childrenAges) || 'ages not given'})` : ''}${state.wedDietary ? ` · Dietary: ${escapeHtml(state.wedDietary)}` : ''}`
+    : `Not attending`;
+
+  const dinnerRows = state.guests.map(g => `<div class="df-review-row"><strong>${escapeHtml(g.first_name)}:</strong> ${mealName(state.mealChoices[g.id]) || '<em>not chosen</em>'}</div>`).join('');
+  const plusOneRow = state.invitationType === 'plus_one'
+    ? `<div class="df-review-row"><strong>+1${state.plusOneName ? ' (' + escapeHtml(state.plusOneName) + ')' : ''}:</strong> ${mealName(state.plusOneMeal) || '<em>not chosen</em>'}</div>`
+    : '';
+
+  const shuttle = state.shuttleRequired
+    ? `Needed — staying at ${escapeHtml(state.accommodationName) || '(not given)'}${state.accommodationAddress ? ', ' + escapeHtml(state.accommodationAddress) : ''}`
+    : 'Not needed';
+
+  const emailRows = state.guests.map(g => `<div class="df-review-row"><strong>${escapeHtml(g.first_name)}:</strong> ${escapeHtml(state.emails[g.id] || '') || '<em>not given</em>'}</div>`).join('');
+
+  return `
+    <div class="df-eyebrow">Last look</div>
+    <div class="df-title">Review your details</div>
+    <p class="df-sub">Everything look right? You can edit any section below.</p>
+
+    <div class="df-review-group">
+      <div class="df-review-head"><span class="df-review-title">Wednesday Lunch</span><button class="df-review-edit" onclick="jumpToEdit('wednesday')">Edit</button></div>
+      <div class="df-review-row">${wed}</div>
+    </div>
+
+    <div class="df-review-group">
+      <div class="df-review-head"><span class="df-review-title">Thursday Dinner</span><button class="df-review-edit" onclick="jumpToEdit('dinner')">Edit</button></div>
+      ${dinnerRows}${plusOneRow}
+    </div>
+
+    <div class="df-review-group">
+      <div class="df-review-head"><span class="df-review-title">Kitchen Note</span><button class="df-review-edit" onclick="jumpToEdit('kitchen')">Edit</button></div>
+      <div class="df-review-row">${state.weddingDietary ? escapeHtml(state.weddingDietary) : 'Nothing noted'}</div>
+    </div>
+
+    <div class="df-review-group">
+      <div class="df-review-head"><span class="df-review-title">Shuttle</span><button class="df-review-edit" onclick="jumpToEdit('shuttle')">Edit</button></div>
+      <div class="df-review-row">${shuttle}</div>
+    </div>
+
+    <div class="df-review-group">
+      <div class="df-review-head"><span class="df-review-title">Songs</span><button class="df-review-edit" onclick="jumpToEdit('songs')">Edit</button></div>
+      <div class="df-review-row">${state.song1 ? escapeHtml(state.song1) : '<em>none</em>'}${state.song2 ? ' · ' + escapeHtml(state.song2) : ''}</div>
+    </div>
+
+    <div class="df-review-group">
+      <div class="df-review-head"><span class="df-review-title">Emails</span><button class="df-review-edit" onclick="jumpToEdit('emails')">Edit</button></div>
+      ${emailRows}
+    </div>
+
+    ${state.submitError ? `<div class="df-error">${escapeHtml(state.submitError)}</div>` : ''}
+  `;
+}
+
+/* ───────── HANDLERS / STATE MUTATORS ───────── */
+
+function attachHandlers(stepId) {
+  if (stepId === 'search') {
+    const input = document.getElementById('df-search-input');
+    if (input) {
+      input.oninput = (e) => { state.query = e.target.value; };
+      input.onkeydown = (e) => { if (e.key === 'Enter') doSearch(); };
+    }
+  }
+}
+
+function setWedAttending(val) {
+  state.wedAttending = val;
+  if (!val) { state.childrenHave = null; state.childrenCount = 1; state.childrenAges = ''; state.wedDietary = ''; }
+  render();
+}
+function setChildrenHave(val) {
+  state.childrenHave = val;
+  if (!val) { state.childrenCount = 1; state.childrenAges = ''; }
+  render();
+}
+function stepChildren(delta) {
+  state.childrenCount = Math.max(1, Math.min(10, state.childrenCount + delta));
+  render();
+}
+function chooseMeal(guestId, key) { state.mealChoices[guestId] = key; render(); }
+function choosePlusOneMeal(key) { state.plusOneMeal = key; render(); }
+function setShuttle(val) {
+  state.shuttleRequired = val;
+  if (!val) { state.accommodationName = ''; state.accommodationAddress = ''; }
+  render();
+}
+
+function restart() {
+  const query = '';
+  state = Object.assign({}, state, {
+    query: '', searching: false, searchError: '', party: null, guests: [], invitationType: null,
+    hasExisting: false, wedAttending: null, childrenHave: null, childrenCount: 1, childrenAges: '',
+    wedDietary: '', mealChoices: {}, plusOneMeal: '', plusOneName: '', plusOneEmail: '', weddingDietary: '',
+    shuttleRequired: null, accommodationName: '', accommodationAddress: '', song1: '', song2: '',
+    emails: {}, editSection: null, submitting: false, submitError: '', submitted: false,
+  });
+  currentIndex = indexOfId('search');
+  render();
+}
+
+/* ───────── VALIDATORS ───────── */
+
+const VALIDATORS = {
+  'wed-attendance': () => state.wedAttending === null ? 'Please choose an option to continue.' : '',
+  'wed-children': () => {
+    if (state.childrenHave === null) return 'Please choose an option to continue.';
+    return '';
+  },
+  'dinner': () => {
+    const missing = state.guests.some(g => !state.mealChoices[g.id]);
+    if (missing) return 'Please choose a dinner for everyone in your party.';
+    if (state.invitationType === 'plus_one' && !state.plusOneMeal) return "Please choose a dinner for your +1.";
+    return '';
+  },
+  'shuttle': () => {
+    if (state.shuttleRequired === null) return 'Please choose an option to continue.';
+    if (state.shuttleRequired === true && !state.accommodationName.trim()) return 'Let us know where you\'re staying so we can add you to the pick-up list.';
+    return '';
+  },
+  'emails': () => {
+    const invalid = state.guests.some(g => {
+      const v = (state.emails[g.id] || '').trim();
+      return !v || !isValidEmail(v);
+    });
+    if (invalid) return 'Please add a valid email for everyone in your party.';
+    return '';
+  },
+};
+
+function isValidEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+/* ───────── API ───────── */
+
+async function doSearch() {
+  const nameInput = document.getElementById('df-search-input');
+  const name = nameInput ? nameInput.value.trim() : state.query.trim();
+  if (name.length < 2) { state.searchError = 'Please enter your first name.'; render(); return; }
+
+  state.searching = true; state.searchError = ''; render();
+  try {
+    const res = await fetch(SEARCH_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name }),
+    });
+    const data = await res.json();
+    state.searching = false;
+
+    if (!data.found) {
+      state.searchError = "We couldn't find that name — try your full first name, or check with us if you think this is a mistake.";
+      render();
+      return;
+    }
+
+    state.party = data.party;
+    state.guests = data.guests || [];
+    state.invitationType = data.party.invitation_type;
+    state.hasExisting = !!data.existing_response;
+
+    if (data.existing_response) {
+      const er = data.existing_response;
+      state.wedAttending = er.wednesday_attending;
+      state.childrenHave = (er.wednesday_children_count || 0) > 0;
+      state.childrenCount = er.wednesday_children_count || 1;
+      state.childrenAges = er.wednesday_children_ages || '';
+      state.wedDietary = er.wednesday_dietary || '';
+      state.weddingDietary = er.wedding_dietary || '';
+      state.shuttleRequired = er.shuttle_required;
+      state.accommodationName = er.accommodation_name || '';
+      state.accommodationAddress = er.accommodation_address || '';
+      state.song1 = er.song_request_1 || '';
+      state.song2 = er.song_request_2 || '';
+      (er.meal_choice || []).forEach(mc => { state.mealChoices[mc.guest_id] = mc.meal_choice; });
+    }
+    state.guests.forEach(g => { if (g.email) state.emails[g.id] = g.email; });
+
+    currentIndex = indexOfId('recognize');
+    render();
+  } catch (e) {
+    state.searching = false;
+    state.searchError = 'Something went wrong reaching our server — please try again in a moment.';
+    render();
+  }
+}
+
+async function submitResponse() {
+  state.submitting = true; state.submitError = ''; render();
+
+  const mealChoicesPayload = state.guests
+    .map(g => ({ guest_id: g.id, meal_choice: state.mealChoices[g.id] }))
+    .filter(m => m.meal_choice);
+
+  const guestEmails = {};
+  state.guests.forEach(g => {
+    const v = (state.emails[g.id] || '').trim();
+    if (v) guestEmails[g.id] = v;
+  });
+
+  let notes = null;
+  if (state.invitationType === 'plus_one') {
+    const parts = [];
+    if (state.plusOneName.trim()) parts.push(`Plus-one name: ${state.plusOneName.trim()}`);
+    if (state.plusOneMeal) parts.push(`Plus-one dinner: ${mealName(state.plusOneMeal)}`);
+    if (state.plusOneEmail && state.plusOneEmail.trim()) parts.push(`Plus-one email: ${state.plusOneEmail.trim()}`);
+    if (parts.length) notes = parts.join(' · ');
+  }
+
+  const payload = {
+    party_id: state.party.id,
+    wednesday_attending: !!state.wedAttending,
+    wednesday_children_count: (state.wedAttending && state.childrenHave) ? state.childrenCount : null,
+    wednesday_children_ages: (state.wedAttending && state.childrenHave && state.childrenAges.trim()) ? state.childrenAges.trim() : null,
+    wednesday_dietary: (state.wedAttending && state.wedDietary.trim()) ? state.wedDietary.trim() : null,
+    wedding_dietary: state.weddingDietary.trim() ? state.weddingDietary.trim() : null,
+    shuttle_required: !!state.shuttleRequired,
+    accommodation_name: (state.shuttleRequired && state.accommodationName.trim()) ? state.accommodationName.trim() : null,
+    accommodation_address: (state.shuttleRequired && state.accommodationAddress.trim()) ? state.accommodationAddress.trim() : null,
+    accommodation_latitude: null,
+    accommodation_longitude: null,
+    google_place_id: null,
+    song_request_1: state.song1.trim() ? state.song1.trim() : null,
+    song_request_2: state.song2.trim() ? state.song2.trim() : null,
+    meal_choices: mealChoicesPayload,
+    guest_emails: guestEmails,
+  };
+  if (notes) payload.notes = notes;
+
+  try {
+    const res = await fetch(SUBMIT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    state.submitting = false;
+
+    if (data.error) {
+      state.submitError = data.error;
+      render();
+      return;
+    }
+
+    state.submitted = true;
+    currentIndex = indexOfId('done');
+    render();
+  } catch (e) {
+    state.submitting = false;
+    state.submitError = 'Something went wrong submitting your details — please try again.';
+    render();
+  }
+}
+
+/* ───────── UTIL ───────── */
+
+function escapeHtml(str) {
+  if (str === null || str === undefined) return '';
+  return String(str).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+}
+function escapeAttr(str) { return escapeHtml(str); }
+
+render();
+</script>
+
+</body>
+</html>
