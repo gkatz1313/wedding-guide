@@ -388,6 +388,12 @@ function goNext() {
     return;
   }
 
+  if (step.id === 'recognize' && state.hasExisting) {
+    currentIndex = indexOfId('review');
+    render();
+    return;
+  }
+
   // Handle "jump back to review after editing one section"
   const nextIdx = nextApplicableIndex(currentIndex, 1);
   if (state.editSection) {
@@ -449,7 +455,7 @@ const RENDERERS = {
     <div class="df-party-list">${escapeHtml(state.party.display_name)}</div>
     <p class="df-sub">
       ${state.hasExisting
-        ? `Looks like you've already sent us your details — you're welcome to review or update them below.`
+        ? `Looks like you've already sent us your details — hit continue to see a summary of what you told us, and change anything you need to.`
         : `This isn't another RSVP — we already know you're joining us! We just need a few final details to make the day run smoothly: meals, the pre-wedding lunch, and a shuttle if you need one.`}
     </p>
     <div class="df-not-you"><button onclick="restart()">Not you? Search again</button></div>
