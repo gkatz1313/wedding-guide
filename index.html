@@ -128,12 +128,14 @@
       left: 0; right: 0; bottom: 18px;
       display: flex;
       justify-content: center;
-      gap: 10px;
+      gap: 0;
       z-index: 3;
     }
+    /* The button carries a comfortable tap area; the visible rule
+       inside it is deliberately short and fine. */
     .hero-tick {
       width: 30px;
-      height: 14px;
+      height: 18px;
       padding: 0;
       border: none;
       background: none;
@@ -143,7 +145,10 @@
     .hero-tick::before {
       content: '';
       position: absolute;
-      left: 0; right: 0; top: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 16px;
       height: 1px;
       background: rgba(255,255,255,0.5);
       box-shadow: 0 0 2px rgba(0,0,0,0.28);
@@ -154,7 +159,8 @@
 
     @media (max-width: 600px) {
       .hero-slider { height: 75vw; min-height: 300px; }
-      .hero-tick { width: 24px; }
+      .hero-tick { width: 26px; }
+      .hero-tick::before { width: 13px; }
     }
     @media (prefers-reduced-motion: reduce) {
       .hero-track { transition: none; }
