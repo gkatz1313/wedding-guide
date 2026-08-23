@@ -173,7 +173,7 @@
   .df-review-row strong { color: var(--ink); font-weight: 500; }
 
   /* Recognition */
-  .df-party-list { text-align: center; font-family: var(--serif); font-size: 22px; font-style: italic; color: var(--ink); margin-bottom: 1.25rem; }
+  .df-party-list { text-align: center; font-family: var(--sans); font-size: 15px; font-weight: 500; letter-spacing: 0.02em; color: var(--ink); margin-bottom: 1.25rem; }
   .df-not-you { text-align: center; margin-top: 1.25rem; }
   .df-not-you button { background: none; border: none; font-size: 12px; color: var(--ink-soft); text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
 
@@ -470,12 +470,12 @@ const RENDERERS = {
     const names = state.guests.map(g => g.first_name).join(' &amp; ');
     return `
     <div class="df-eyebrow">Hello there</div>
-    <div class="df-title">Hi, ${escapeHtml(state.guests.map(g => g.first_name).join(' & '))}!</div>
+    <div class="df-title">${escapeHtml(state.guests.map(g => g.first_name).join(' & '))}!</div>
     <div class="df-party-list">${escapeHtml(state.party.display_name)}</div>
     <p class="df-sub">
       ${state.hasExisting
         ? `Looks like you've already sent us your details — hit continue to see a summary of what you told us, and change anything you need to.`
-        : `We just need to know your meal preferences, any allergies and if you'll need the shuttle for the wedding. Oh and let us know if you have a song request for the DJ!`}
+        : `Let us know your meal preferences, any food allergies, if you'll need to use the shuttle and if you're bringing children along for the lunch event.`}
     </p>
     <div class="df-not-you"><button onclick="restart()">Not you? Search again</button></div>
     `;
