@@ -43,7 +43,7 @@
   a { color: inherit; }
 
   /* ── SHELL ── */
-  .df-shell { max-width: 600px; margin: 0 auto; min-height: 100vh; display: flex; flex-direction: column; }
+  .df-shell { max-width: 600px; margin: 0 auto; min-height: 100dvh; display: flex; flex-direction: column; }
 
   .df-header { text-align: center; padding: 1.75rem 1.5rem 0.5rem; position: relative; }
   .df-logo { display: inline-block; font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 20px; color: var(--ink); text-decoration: none; }
@@ -53,7 +53,7 @@
   .df-progress-fill { height: 100%; width: 0%; background: var(--terra); transition: width 0.4s ease; border-radius: 3px; }
   .df-step-label { text-align: center; font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); margin: 0.65rem 0 0; }
 
-  .df-main { flex: 1; padding: 1.75rem 1.5rem 7rem; display: flex; flex-direction: column; }
+  .df-main { padding: 1.75rem 1.5rem 0; display: flex; flex-direction: column; }
   .df-card { max-width: 480px; margin: 0 auto; width: 100%; }
 
   .df-eyebrow { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--sage); font-weight: 500; display: block; margin-bottom: 0.6rem; text-align: center; }
@@ -135,30 +135,28 @@
 
   .df-plusone-name { margin-top: 0.9rem; }
 
-  /* Bottom action bar */
+  /* Action row — flows with the content so mobile browser
+     toolbars can never overlap it */
   .df-actions {
-    position: fixed; left: 0; right: 0; bottom: 0;
-    background: var(--cream);
-    border-top: 1px solid var(--border);
-    padding: 0.9rem 1.5rem;
-    display: flex; align-items: center; justify-content: space-between; gap: 1rem;
-    z-index: 50;
+    padding: 5rem 1.5rem calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    display: flex; align-items: center; justify-content: center;
   }
-  .df-actions-inner { max-width: 480px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+  .df-actions-inner { max-width: 480px; width: 100%; margin: 0 auto; display: flex; align-items: center; justify-content: center; gap: 0.75rem; }
   .df-back-link {
-    background: none; border: none; cursor: pointer;
+    background: var(--white); cursor: pointer;
     font-family: var(--sans); font-size: 12px; font-weight: 500;
-    letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink-soft);
-    padding: 0.6rem 0.2rem;
+    letter-spacing: 0.1em; text-transform: uppercase; color: var(--terra);
+    border: 1px solid var(--terra); border-radius: 40px;
+    padding: 0.85rem 1.5rem;
+    transition: background 0.2s;
   }
-  .df-back-link:hover { color: var(--ink); }
+  .df-back-link:hover { background: var(--terra-faint); }
   .df-continue-btn {
     background: var(--terra); color: var(--white);
     font-family: var(--sans); font-size: 12px; font-weight: 500;
     letter-spacing: 0.1em; text-transform: uppercase;
-    border: none; border-radius: 40px; padding: 0.85rem 2.1rem;
+    border: 1px solid var(--terra); border-radius: 40px; padding: 0.85rem 2.1rem;
     cursor: pointer; transition: background 0.2s;
-    margin-left: auto;
   }
   .df-continue-btn:hover { background: #4a0619; }
   .df-continue-btn:disabled { background: var(--sage-light); color: var(--ink-soft); cursor: default; }
@@ -188,7 +186,7 @@
   .df-home-link { display: inline-block; font-size: 11px; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink); border-bottom: 1px solid var(--ink); padding-bottom: 2px; text-decoration: none; }
 
   @media (max-width: 480px) {
-    .df-main { padding: 1.25rem 1.15rem 7rem; }
+    .df-main { padding: 1.25rem 1.15rem 0; }
     .df-choice-btn { min-width: 80px; }
   }
 
@@ -231,7 +229,7 @@
 
   <div class="df-actions" id="df-actions" style="display:none;">
     <div class="df-actions-inner">
-      <button class="df-back-link" id="df-back-btn" onclick="goBack()">Back</button>
+      <button class="df-back-link" id="df-back-btn">Back</button>
       <button class="df-continue-btn" id="df-continue-btn" onclick="goNext()">Continue</button>
     </div>
   </div>
@@ -370,7 +368,15 @@ function render() {
     actions.style.display = 'none';
   } else {
     actions.style.display = 'flex';
-    document.getElementById('df-back-btn').style.visibility = (step.id === 'recognize') ? 'hidden' : 'visible';
+    const backBtn = document.getElementById('df-back-btn');
+    if (step.id === 'recognize') {
+      // No earlier step to return to — offer a way back to the main site instead
+      backBtn.textContent = '← Wedding site';
+      backBtn.onclick = () => { window.location.href = 'index.html'; };
+    } else {
+      backBtn.textContent = '← Back';
+      backBtn.onclick = goBack;
+    }
     const contBtn = document.getElementById('df-continue-btn');
     contBtn.textContent = step.id === 'review' ? (state.submitting ? 'Submitting…' : 'Confirm & Submit') : 'Continue';
     contBtn.disabled = !!state.submitting;
