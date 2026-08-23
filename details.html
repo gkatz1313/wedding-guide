@@ -241,6 +241,19 @@
 const SEARCH_URL = 'https://gjcufowghnqaxwlcswfo.supabase.co/functions/v1/search-guest';
 const SUBMIT_URL = 'https://gjcufowghnqaxwlcswfo.supabase.co/functions/v1/submit-response';
 
+async function fetchJSON(url, opts, retries = 1) {
+  try {
+    const res = await fetch(url, opts);
+    return await res.json();
+  } catch (e) {
+    if (retries > 0) {
+      await new Promise(r => setTimeout(r, 1000));
+      return fetchJSON(url, opts, retries - 1);
+    }
+    throw e;
+  }
+}
+
 const MEALS = [
   { key: 'beef', name: 'Char-grilled fillet of beef', desc: 'Potato pavé, soubise & Mason Road Syrah jus' },
   { key: 'fish', name: 'Pan-seared fish du jour', desc: 'Potato purée with lemon, caper, gherkin & parsley beurre noisette, toasted almond & kale' },
@@ -882,12 +895,11 @@ async function doSearch() {
 
   state.searching = true; state.searchError = ''; render();
   try {
-    const res = await fetch(SEARCH_URL, {
+    const data = await fetchJSON(SEARCH_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ name }),
     });
-    const data = await res.json();
     state.searching = false;
 
     if (!data.found) {
@@ -925,7 +937,7 @@ async function doSearch() {
     render();
   } catch (e) {
     state.searching = false;
-    state.searchError = 'Something went wrong reaching our server — please try again in a moment.';
+    state.searchError = "We couldn't reach our server — check your signal or wifi and try again.";
     render();
   }
 }
@@ -973,12 +985,11 @@ async function submitResponse() {
   if (notes) payload.notes = notes;
 
   try {
-    const res = await fetch(SUBMIT_URL, {
+    const data = await fetchJSON(SUBMIT_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify(payload),
     });
-    const data = await res.json();
     state.submitting = false;
 
     if (data.error) {
@@ -992,7 +1003,7 @@ async function submitResponse() {
     render();
   } catch (e) {
     state.submitting = false;
-    state.submitError = 'Something went wrong submitting your details — please try again.';
+    state.submitError = "We couldn't reach our server — check your signal or wifi and try again.";
     render();
   }
 }
