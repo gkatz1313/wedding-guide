@@ -481,7 +481,7 @@ const RENDERERS = {
     <div class="df-title">The pre-wedding lunch</div>
     <p class="df-sub">A relaxed family lunch at The Table at De Meye, Stellenbosch — children very welcome. Will you be joining us?</p>
     <div class="df-choice-group">
-      <div class="df-choice-btn ${state.wedAttending === true ? 'selected' : ''}" onclick="setWedAttending(true)">Yes, we'll be there</div>
+      <div class="df-choice-btn ${state.wedAttending === true ? 'selected' : ''}" onclick="setWedAttending(true)">Yes, ${isSoloGuest() ? "I'll" : "we'll"} be there</div>
       <div class="df-choice-btn ${state.wedAttending === false ? 'selected' : ''}" onclick="setWedAttending(false)">Can't make it</div>
     </div>
   `,
@@ -655,6 +655,7 @@ function renderPlusOneMealBlock() {
 }
 
 function mealName(key) { const m = MEALS.find(x => x.key === key); return m ? m.name : ''; }
+function isSoloGuest() { return state.guests.length === 1 && state.invitationType !== 'plus_one'; }
 
 function renderReview() {
   const wed = state.wedAttending
