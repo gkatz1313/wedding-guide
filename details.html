@@ -467,10 +467,9 @@ const RENDERERS = {
   `,
 
   recognize: () => {
-    const names = state.guests.map(g => g.first_name).join(' &amp; ');
     return `
     <div class="df-eyebrow">Hello there</div>
-    <div class="df-title">${escapeHtml(state.guests.map(g => g.first_name).join(' & '))}!</div>
+    <div class="df-title">${escapeHtml(greetingNames())}!</div>
     <div class="df-party-list">${escapeHtml(state.party.display_name)}</div>
     <p class="df-sub">
       ${state.hasExisting
@@ -661,6 +660,16 @@ function renderPlusOneMealBlock() {
 
 function mealName(key) { const m = MEALS.find(x => x.key === key); return m ? m.name : ''; }
 function isSoloGuest() { return state.guests.length === 1 && state.invitationType !== 'plus_one'; }
+
+// First names for the greeting. A plus-one is included once we know
+// their name, so the welcome covers everyone on the invitation.
+function greetingNames() {
+  const names = state.guests.map(g => g.first_name);
+  if (state.invitationType === 'plus_one' && state.plusOneName.trim()) {
+    names.push(state.plusOneName.trim());
+  }
+  return names.join(' & ');
+}
 
 function renderReview() {
   const wed = state.wedAttending
@@ -931,6 +940,7 @@ async function doSearch() {
     if (state.party.id === 'b5f2bd4c-b6d7-4a6f-b7d1-a963cb2317bf') {
       state.invitationType = 'plus_one';
       if (!state.plusOneName) state.plusOneName = 'Nicky';
+      state.party.display_name = 'Marc Lubner & Nicky';
     }
     // ── END TEMPORARY ──────────────────────────────────────────
 
