@@ -641,7 +641,7 @@ function renderPlusOneMealBlock() {
   const selected = state.plusOneMeal;
   return `
     <div class="df-guest-block">
-      <div class="df-guest-name">Your +1</div>
+      <div class="df-guest-name">${state.plusOneName.trim() ? escapeHtml(state.plusOneName.trim()) : 'Your +1'}</div>
       <div class="df-meal-grid">
         ${MEALS.map(m => `
           <div class="df-meal-card ${selected === m.key ? 'selected' : ''}" onclick="choosePlusOneMeal('${m.key}')">
@@ -919,6 +919,20 @@ async function doSearch() {
     state.guests = data.guests || [];
     state.invitationType = data.party.invitation_type;
     state.hasExisting = !!data.existing_response;
+
+    // ── TEMPORARY ──────────────────────────────────────────────
+    // Marc's partner Nicky isn't in the guest list yet, so his
+    // invitation still reads as a single. Until she's added as a
+    // proper guest, treat his party as a plus-one so he can pick a
+    // main course and give an email for her. Her details ride along
+    // in the response's notes field.
+    // REMOVE THIS once Nicky exists as a guest on his party and its
+    // invitation_type is set to 'couple'.
+    if (state.party.id === 'b5f2bd4c-b6d7-4a6f-b7d1-a963cb2317bf') {
+      state.invitationType = 'plus_one';
+      if (!state.plusOneName) state.plusOneName = 'Nicky';
+    }
+    // ── END TEMPORARY ──────────────────────────────────────────
 
     if (data.existing_response) {
       const er = data.existing_response;
